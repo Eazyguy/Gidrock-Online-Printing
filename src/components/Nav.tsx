@@ -1,6 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { navLinks } from "@/constants";
+import Link from "next/link";
 
 const Nav = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -86,7 +88,16 @@ const Nav = () => {
           isOpen ? "flex" : "hidden"
         } absolute left-1/2 top-full z-10 mt-2 w-[calc(100%-2rem)] -translate-x-1/2 list-none flex-col rounded-[16px] border border-white/30 bg-green-800 p-4 shadow-lg transition-all md:static md:mt-0 md:w-auto md:translate-x-1 md:flex md:flex-row md:items-center md:justify-center md:gap-x-4 md:gap-x-8 md:border-0 md:bg-transparent md:p-0 md:shadow-none md:mx-auto`}
       >
-        <li className="w-full md:w-auto">
+        {
+          navLinks.map((item)=>(
+            <li key={item.label} className="w-full md:w-auto">
+          <Link href={item.href} onClick={closeMenu} className="block text-[clamp(1rem,calc(2vw_+_0.1rem),1.3rem)] text-white transition hover:text-emerald-200 md:text-inherit mt-2">
+            {item.label}
+          </Link>
+        </li>
+          ))
+        }
+        {/* <li className="w-full md:w-auto">
           <a href="#top" onClick={closeMenu} className="block text-[clamp(1rem,calc(2vw_+_0.1rem),1.3rem)] text-white transition hover:text-emerald-200 md:text-inherit">
             Home
           </a>
@@ -105,7 +116,7 @@ const Nav = () => {
           <a href="#contact" onClick={closeMenu} className="mt-4 block text-[clamp(1rem,calc(2vw_+_0.1rem),1.3rem)] text-white transition hover:text-emerald-200 md:mt-0 md:text-inherit">
             Contact
           </a>
-        </li>
+        </li> */}
       </ul>
     </nav>
   );

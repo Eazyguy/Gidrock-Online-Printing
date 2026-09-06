@@ -2,7 +2,7 @@ import { testimony } from '@/constants'
 
 const Testimony = () => {
   return (
-    <div className='mt-10 bg-green-300 -mx-5 pt-5 pb-20 px-5'>
+    <div id="testimony" className='mt-10 bg-green-300 -mx-5 pt-5 pb-20 px-5'>
         <h2 className='text-black text-3xl text-center font-bold my-5 '>What our clients say</h2>
         <div className='flex flex-col md:flex-row gap-4'>
         {

@@ -6,7 +6,7 @@ import { FaWhatsapp } from 'react-icons/fa6'
 
 const Footer = () => {
   return (
-    <div className='bg-green-900 px-5 py-8 z-10 -mt-10'>
+    <div id="footer" className='bg-green-900 px-5 py-8 z-10 -mt-10'>
         <div className='grid md:grid-cols-2 lg:grid-cols-4 gap-5 mb-5'>
         <div>
             <div className='font-bold text-lg'>

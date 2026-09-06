@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const Hero = () => {
   return (
-    <div className="mt-30  md:flex md:flex-row">
+    <div id="home" className="mt-30  md:flex md:flex-row">
         <div>
         <div className="mt-10 bg-white text-black rounded-full md:text-sm  text-xs font-bold p-2 w-fit flex gap-2">
             <SparklesIcon className="w-4"/> NATIONWIDE PRINTING ON DEMAND</div>

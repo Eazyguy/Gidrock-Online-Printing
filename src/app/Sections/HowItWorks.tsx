@@ -2,7 +2,7 @@ import { howItWorks } from "@/constants"
 
 const HowItWorks = () => {
   return (
-    <div className='mt-8'>
+    <div id="how-it-works" className='mt-8'>
         <h2 className='text-3xl md:text-4xl text-black font-bold text-center'>How it Works</h2>
         <p className='text-gray-700 font-bold text-center md:text-lg'>From upload to doorstep in four simple steps.</p>
         <div className="grid grid-cols-1 md:grid-cols-2

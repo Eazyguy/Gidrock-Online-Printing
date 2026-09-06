@@ -4,9 +4,24 @@ import { CursorArrowRaysIcon, ArrowUpOnSquareStackIcon,
     SparklesIcon,ClockIcon, TruckIcon, ShieldCheckIcon
  } from "@heroicons/react/24/outline"
 
-export const navLinks = {
-
-}
+export const navLinks = [
+{
+    label: "Home",
+    href:"/"
+},
+{
+    label: "Services",
+    href:"#service"
+},
+{
+    label: "How it works",
+    href:"#how-it-works"
+},
+{
+    label: "Contact Us",
+    href:"#footer"
+},
+]
 
 export const services = [
     {   title: "Card", 
