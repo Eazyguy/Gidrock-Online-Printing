@@ -20,7 +20,7 @@ const Footer = () => {
             </div>
             <p className='text-sm text-white'>High-quality printing delivered anywhere in Nigeria. Fast, affordable, professional.</p>
 
-            <div id="socials" className='mt-2'>
+            <div id="socials" className='mt-2 text-white'>
                     <ul className='flex gap-4 '>
                         <li><a href="#"><FiFacebook size={35}/></a></li>
                         <li><a href="#"><FiTwitter size={35}/></a></li>

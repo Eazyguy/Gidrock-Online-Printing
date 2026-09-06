@@ -21,7 +21,7 @@ const Testimony = () => {
             <p className='text-gray-300'>Configure your job, upload your design and check out — all in under 5 minutes.</p>
             </div>
             <div className='flex gap-3 mt-5 items-center'>
-                <button className='p-3 bg-gray-900 rounded-lg hover:outline hover:bg-green-900 h-fit'>Start an order</button> <button className='p-3 rounded-lg outline outline-2 hover:bg-gray-900 h-fit'>Talk to us</button>
+                <button className='p-3 bg-gray-900 rounded-lg hover:outline hover:bg-green-800 hover:outline-white h-fit text-white'>Start an order</button> <button className='p-3 rounded-lg outline outline-2 outline-white-500 hover:bg-gray-900 h-fit text-white'>Talk to us</button>
             </div>
         </div>
     </div>

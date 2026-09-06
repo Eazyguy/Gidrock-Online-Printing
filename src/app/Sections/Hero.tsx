@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const Hero = () => {
   return (
-    <div className="mt-20  md:flex md:flex-row">
+    <div className="mt-30  md:flex md:flex-row">
         <div>
         <div className="mt-10 bg-white text-black rounded-full md:text-sm  text-xs font-bold p-2 w-fit flex gap-2">
             <SparklesIcon className="w-4"/> NATIONWIDE PRINTING ON DEMAND</div>
@@ -19,9 +19,9 @@ const Hero = () => {
             <button className='py-3 px-4 bg-white text-black rounded-lg shadow shadow-xs shadow-gray-900'>Browse Products</button>
         </div>
 
-        <div className="mt-5 text-gray-700 font-bold flex flex-wrap  ">
-            <span className="me-5"><ClockIcon className="w-5 inline"/> Fast Delivery</span> 
-            <span className="me-5"><TruckIcon className="w-5 inline"/> Delivery Nationwide</span>
+        <div className="mt-5 gap-3 text-gray-700 font-bold flex flex-wrap  ">
+            <span className=""><ClockIcon className="w-5 inline"/> Fast Delivery</span> 
+            <span className=""><TruckIcon className="w-5 inline"/> Delivery Nationwide</span>
 
             <span><ShieldCheckIcon className="w-5 inline"/> Secure Payment</span>
         </div>
