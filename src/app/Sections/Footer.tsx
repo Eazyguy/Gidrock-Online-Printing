@@ -18,10 +18,10 @@ const Footer = () => {
                 />
                 
             </div>
-            <p className='text-sm'>High-quality printing delivered anywhere in Nigeria. Fast, affordable, professional.</p>
+            <p className='text-sm text-white'>High-quality printing delivered anywhere in Nigeria. Fast, affordable, professional.</p>
 
             <div id="socials" className='mt-2'>
-                    <ul className='flex gap-4'>
+                    <ul className='flex gap-4 '>
                         <li><a href="#"><FiFacebook size={35}/></a></li>
                         <li><a href="#"><FiTwitter size={35}/></a></li>
                         <li><a href=""><FiInstagram size={35}/></a></li>
@@ -31,7 +31,7 @@ const Footer = () => {
             </div>
             <div>
             <p className='text-gray-400'>COMPANY</p>
-            <ul>
+            <ul className='text-white'>
                 <li>About</li>
                 <li>Products</li>
                 <li>Contact</li>
@@ -39,7 +39,7 @@ const Footer = () => {
             </div>
             <div>
             <p className='text-gray-400'>SUPPORT</p>
-            <ul>
+            <ul className='text-white'>
                 <li>Track Order</li>
                 <li>FAQ</li>
                 <li>Privacy Policy</li>
@@ -48,7 +48,7 @@ const Footer = () => {
             </div>
             <div>
             <p className="text-gray-400" >CONTACT</p>
-            <ul>
+            <ul className='text-white'>
                 <li>07017897866, 09133532790, 07070647836</li>
                 <li>hello@gidrockprint.ng</li>
                 <li>Lagos, Nigeria</li>
@@ -56,7 +56,7 @@ const Footer = () => {
             </div>
         </div>
         <div className='border border-x-0 border-b-0 -mx-5 -mb-7 p-2'>
-            <p className='text-sm'>© 2026 Gidrock Printing Service. All rights reserved.</p>
+            <p className='text-sm text-gray-200'>© 2026 Gidrock Printing Service. All rights reserved.</p>
         </div>
     </div>
   )

@@ -2,12 +2,6 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/Nav";
-import Hero from "./Sections/Hero";
-import Services from "./Sections/Services";
-import Stats from "./Sections/Stats";
-import HowItWorks from "./Sections/HowItWorks";
-import WhyChooseUs from "./Sections/WhyChooseUs";
-import Testimony from "./Sections/Testimony";
 import Footer from "./Sections/Footer";
 
 const geistSans = Geist({
@@ -35,16 +29,10 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col px-5">
+      <body className="min-h-full flex flex-col px-1 md:px-5">
         <Nav/>
-        <main className="bg-gradient-to-br from-green-500 via-green-100 to-green-400 border-2 rounded text-dark p-5">
-          <Hero />
-          <Services />
-          <Stats />
-          <HowItWorks />
-          <WhyChooseUs />
-          <Testimony />
-          {children}</main> 
+        
+          {children}
           <Footer />
         </body>
     </html>

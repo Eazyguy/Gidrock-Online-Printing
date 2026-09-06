@@ -22,7 +22,7 @@ const Nav = () => {
     <nav
       data-text-bright
       data-bg="green"
-      className="fixed left-1/2 top-0 z-50 mx-0 mt-2 h-16 w-[95vw] max-w-[1440px] -translate-x-1/2 rounded-full border border-white/50 bg-gradient-to-r from-green-400 to-green-600 p-4 shadow-[0_10px_20px_-10px_black] backdrop-blur-md shadow-black/20 dark:bg-gradient-to-r dark:from-green-800 dark:via-green-700 dark:to-green-900 md:flex md:items-center"
+      className="fixed left-1/2 top-0 z-50 mx-0 mt-2 h-16 w-[95vw] max-w-[1440px] -translate-x-1/2 rounded-full border border-white/50 bg-gradient-to-r from-green-800 to-green-900 p-4 shadow-[0_10px_20px_-10px_black] backdrop-blur-md shadow-black/20 dark:bg-gradient-to-r dark:from-green-800 dark:via-green-700 dark:to-green-900 md:flex md:items-center"
     >
       <button
         type="button"
