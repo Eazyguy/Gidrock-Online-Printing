@@ -17,10 +17,10 @@ const Testimony = () => {
         </div>
         <div className='bg-green-900 p-10 mt-10 rounded-xl flex flex-col gap-5 md:flex-row justify-between'>
         <div className='lg:w-[50%]'>
-            <p className='text-2xl font-bold md:text-3xl lg:text-4xl'>Ready to print something great?</p>
+            <p className='text-2xl font-bold md:text-3xl lg:text-4xl text-white'>Ready to print something great?</p>
             <p className='text-gray-300'>Configure your job, upload your design and check out — all in under 5 minutes.</p>
             </div>
-            <div className='flex gap-3 mt-5 items-center'>
+            <div className='flex gap-3 mt-5 w-fit flex-col md:flex-row'>
                 <button className='p-3 bg-gray-900 rounded-lg hover:outline hover:bg-green-800 hover:outline-white h-fit text-white'>Start an order</button> <button className='p-3 rounded-lg outline outline-2 outline-white-500 hover:bg-gray-900 h-fit text-white'>Talk to us</button>
             </div>
         </div>
