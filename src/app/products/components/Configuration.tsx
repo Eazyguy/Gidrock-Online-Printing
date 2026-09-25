@@ -215,7 +215,7 @@ const Configuration = ({
         border-2
         rounded-lg
         fixed
-        z-50
+        z-45
         bottom-0
         w-[90%]
         md:w-[500px]

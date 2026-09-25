@@ -101,7 +101,7 @@ const Products = () => {
         Choose how you want your design to be printed
       </p>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mt-4">
+      <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-4 mt-4">
         {services.map((item) => (
           <div
             key={item.title}
