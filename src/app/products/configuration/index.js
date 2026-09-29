@@ -1,169 +1,136 @@
 export const DATA = {
-    card: {  
-    type: "options",    
-        
-    thickness:{
-    "200gsm":{ 
-            A4:100, 
-            A3:200, 
-            BussinessCard:10, 
-            A5:50, 
-            A6:25, 
-            custom:null,
-        },
-    "250gsm":{ 
-            A4:100, 
-            A3:200, 
-            BussinessCard:10, 
-            A5:50, 
-            A6:25, 
-            custom:null,
-        },
-    "300gsm":{ 
-            A4:100, 
-            A3:200, 
-            BussinessCard:10, 
-            A5:50, 
-            A6:25, 
-            custom:null,
-        },
+	card: {
+		type: "options",
 
-        "Custom": {}
+		thickness: {
+			"200gsm": {
+				A4: 100,
+				A3: 200,
+				BussinessCard: 10,
+				A5: 50,
+				A6: 25,
+				custom: null,
+			},
+			"250gsm": {
+				A4: 100,
+				A3: 200,
+				BussinessCard: 10,
+				A5: 50,
+				A6: 25,
+				custom: null,
+			},
+			"300gsm": {
+				A4: 100,
+				A3: 200,
+				BussinessCard: 10,
+				A5: 50,
+				A6: 25,
+				custom: null,
+			},
 
-        },
-        
-        finishing: {
-          gloss:{
-            A4:50, 
-            A3:100, 
-            BussinessCard:10, 
-            A5:30, 
-            A6:25, 
-            custom:null
-          }, 
-          "star-gloss":{
-            A4:100, 
-            A3:200, 
-            BussinessCard:50, 
-            A5:50, 
-            A6:40, 
-            custom:null
-          }, 
-          stone:{
-            A4:100, 
-            A3:200, 
-            BussinessCard:50, 
-            A5:50, 
-            A6:40, 
-            custom:null
-          }, 
-        }
-    },
+			Custom: {},
+		},
 
-    fliers:{
-    type: "options",    
+		finishing: {
+			gloss: {
+				A4: 50,
+				A3: 100,
+				BussinessCard: 10,
+				A5: 30,
+				A6: 25,
+				custom: null,
+			},
+			"star-gloss": {
+				A4: 100,
+				A3: 200,
+				BussinessCard: 50,
+				A5: 50,
+				A6: 40,
+				custom: null,
+			},
+			stone: {
+				A4: 100,
+				A3: 200,
+				BussinessCard: 50,
+				A5: 50,
+				A6: 40,
+				custom: null,
+			},
+		},
+	},
 
-        thickness:{
-    "ArtPaper":{ 
-            A4:80, 
-            A3:160,  
-            A5:40, 
-            A6:20, 
-            custom:null,
-        },
-    "200gsm":{ 
-            A4:100, 
-            A3:200, 
-            BussinessCard:10, 
-            A5:50, 
-            A6:25, 
-            custom:null,
-        },
-    "250gsm":{ 
-            A4:100, 
-            A3:200, 
-            BussinessCard:10, 
-            A5:50, 
-            A6:25, 
-            custom:null,
-        },
-    "300gsm":{ 
-            A4:100, 
-            A3:200, 
-            BussinessCard:10, 
-            A5:50, 
-            A6:25, 
-            custom:null,
-        },
-    "Custom":{}
+	fliers: {
+		type: "options",
 
-        },
+		thickness: {
+			ArtPaper: {
+				A4: 80,
+				A3: 160,
+				A5: 40,
+				A6: 20,
+				custom: null,
+			},
+			"200gsm": {
+				A4: 100,
+				A3: 200,
+				BussinessCard: 10,
+				A5: 50,
+				A6: 25,
+				custom: null,
+			},
+			"250gsm": {
+				A4: 100,
+				A3: 200,
+				BussinessCard: 10,
+				A5: 50,
+				A6: 25,
+				custom: null,
+			},
+			"300gsm": {
+				A4: 100,
+				A3: 200,
+				BussinessCard: 10,
+				A5: 50,
+				A6: 25,
+				custom: null,
+			},
+			Custom: {},
+		},
+	},
 
+	Banner: {
+		type: "measurement",
 
-     },
-     
-    "Banner": {
-    type: "measurement",
+		pricePerSqFt: 500,
 
-    pricePerSqFt: 500,
+		finishing: ["Eyelet", "Hemmed", "None"],
+	},
 
-    finishing: [
-      "Eyelet",
-      "Hemmed",
-      "None"
-    ]
-  },
+	"Stickers & Labels": {
+		type: "measurement",
 
-  "Stickers & Labels": {
-    type: "measurement",
+		pricePerSqFt: 500,
+	},
 
-    pricePerSqFt: 500,
+	"Shirt Printing": {
+		type: "shirt",
 
-  },
+		shirtType: ["Round Neck", "Polo", "Hoodie"],
+	},
 
-  "Shirt Printing": {
-    type: "shirt",
+	Award: {
+		type: "award",
 
-    shirtType: [
-      "Round Neck",
-      "Polo",
-      "Hoodie"
-    ]
-  }, 
+		awardType: ["Plaque", "Medal", "Trophy"],
+	},
 
-   "Award": {
-    type: "award",
+	Brochure: {
+		type: "brochure",
 
-    awardType: [
-      "Plaque",
-      "Medal",
-      "Trophy"
-    ]
-  },
+		size: ["A4", "A5", "A6"],
 
-  "Brochure": {
-    type: "brochure",
+		pages: [4, 8, 12, 16],
 
-    size: [
-      "A4",
-      "A5",
-      "A6"
-    ],
-
-    pages: [
-      4,
-      8,
-      12,
-      16
-    ],
-
-    lamination: [
-      "Matt",
-      "Gloss",
-      "None"
-    ]
-  }
-    
-}  
-
-
+		lamination: ["Matt", "Gloss", "None"],
+	},
+};

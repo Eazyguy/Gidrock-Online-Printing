@@ -3,30 +3,10 @@
 import { services } from "@/constants"
 import Image from "next/image"
 import { useState } from "react"
-import Configuration, {
-  type Config,
-  type ProductConfiguration,
-} from "@/app/products/components/Configuration"
+import Configuration from "@/app/products/components/Configuration"
 import { DATA } from "@/app/products/configuration"
-
-const defaultConfig: Config = {
-  thickness: null,
-  size: null,
-  lamination: null,
-
-  widthFt: 0,
-  heightFt: 0,
-
-  shirtType: null,
-
-  qty: 1,
-
-  file: null,
-  fileName: "",
-
-  extraNote: "",
-  customNote: "",
-}
+import { defaultConfig } from "@/app/products/configuration/defaultConfig"
+import type { Config, ProductConfiguration } from "@/app/products/configuration/types"
 
 const resolveSettings = (
   productName: string
@@ -76,7 +56,7 @@ const Products = () => {
 
     setSelectedProduct(productName)
     setSettings(productSettings)
-    setConfig({ ...defaultConfig })
+    setConfig(defaultConfig())
     setVisibility(true)
   }
 

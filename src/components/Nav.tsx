@@ -3,9 +3,14 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { navLinks } from "@/constants";
 import Link from "next/link";
+import { ShoppingCartIcon } from "@heroicons/react/24/outline";
+import Cart from "./Cart";
+import { useCart } from "./CartContext";
 
 const Nav = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isCartOpen, setisCartOpen] = useState(false)
+  const { cartItems } = useCart()
 
   useEffect(() => {
     const handleResize = () => {
@@ -117,6 +122,12 @@ const Nav = () => {
             Contact
           </a>
         </li> */}
+      </ul>
+      <button className=" absolute right-10 border border-white border-2 rounded-full p-1 hover:bg-white hover:text-green-700" onClick={()=>setisCartOpen(!isCartOpen)}><ShoppingCartIcon width={25}/> </button>
+      <ul className={`${isCartOpen ? "": "hidden"} bg-green-300 mt-1 max-h-[80vh] overflow-y-auto border border-green-700 border-2 rounded p-5 md:w-[calc(60%-2rem)] w-[calc(100%-2rem)] absolute right-5 top-full`}>
+          <Cart
+          cartItems={cartItems}
+          />
       </ul>
     </nav>
   );
