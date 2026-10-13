@@ -1,36 +1,114 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Gidrock Online Printing
 
-## Getting Started
+Gidrock Online Printing is a work-in-progress storefront for browsing print
+products, configuring an order, and submitting artwork and delivery details.
+The project is under active development; not all parts of the intended
+customer journey are available yet.
 
-First, run the development server:
+## Current status
+
+The application currently includes:
+
+- A landing page with service information and site navigation.
+- A product catalog with configurable print options for cards, fliers and
+  posters, banners, stickers and labels, brochures, shirt printing, and awards.
+- A browser-persisted cart that can retain selected products and artwork.
+- An order form with customer and delivery details for Nigerian states.
+- Supabase integration for saving orders and uploading artwork.
+- An interstate delivery path that saves the order and opens WhatsApp to
+  continue arranging delivery.
+
+**Not implemented yet:** online card payment (the station-delivery flow saves an
+order as pending), and a complete order-management experience. Product details,
+prices, delivery arrangements, and backend configuration should be verified
+before using the application for real orders.
+
+## Tech stack
+
+- Next.js 16 with the App Router
+- React 19 and TypeScript
+- Tailwind CSS 4
+- Supabase JavaScript client for order data and artwork storage
+- Zustand for cart state and persistence
+
+## Getting started
+
+### Requirements
+
+- Node.js compatible with Next.js 16
+- npm
+- A Supabase project for testing order submission
+
+### Install dependencies
+
+```bash
+npm ci
+```
+
+### Configure Supabase
+
+Create a `.env.local` file in the project root and add your Supabase project
+URL and anon key:
+
+```dotenv
+NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
+```
+
+Order submission also expects an `orders` table compatible with the fields used
+by the application and a Supabase Storage bucket named `order-files`. Configure
+the required database and storage policies in Supabase for your environment.
+Do not commit `.env.local` or put service-role keys in client-side environment
+variables.
+
+### Run the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Available scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Command | Description |
+| --- | --- |
+| `npm run dev` | Start the local development server |
+| `npm run build` | Create a production build |
+| `npm run start` | Serve the production build |
+| `npm run format` | Format project files with Prettier |
 
-## Learn More
+## Main routes
 
-To learn more about Next.js, take a look at the following resources:
+| Route | Description |
+| --- | --- |
+| `/` | Landing page |
+| `/products` | Product catalog and configuration |
+| `/checkout/[gid]` | Checkout flow for a cart-created order |
+| `/checkout` | Currently redirects to the landing page |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project layout
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```text
+src/
+  app/
+    Sections/       Landing-page sections and footer
+    products/       Product catalog and configuration
+    checkout/       Order details, uploads, and submission flow
+  components/       Navigation and cart components/state
+  constants/        Product and site content
+  supabase-client.ts
+public/             Images and other static assets
+```
 
-## Deploy on Vercel
+## Development notes
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Order submission uses the public Supabase URL and anon key configured above.
+- The checkout flow stores order details and uploaded artwork in Supabase.
+- The station-delivery flow currently leaves the order pending; payment is not
+  processed by the application yet.
+- The default checkout route (`/checkout`) is not the active order flow;
+  checkout sessions are created from the cart at `/checkout/[gid]`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This README describes the current implementation and will need updating as
+features and backend requirements evolve.
