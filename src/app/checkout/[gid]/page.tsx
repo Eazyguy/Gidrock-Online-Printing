@@ -71,7 +71,7 @@ const checkoutGID = () => {
 	};
 
 	return (
-		<div className="background flex flex-col justify-center justify-center items-center gap-4">
+		<div className="background flex flex-col justify-center items-center gap-4 w-full">
 			<Form
 				form={form}
 				setForm={setForm}

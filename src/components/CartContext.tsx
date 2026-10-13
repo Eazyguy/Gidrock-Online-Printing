@@ -1,5 +1,6 @@
 "use client"
 
+import { useEffect } from "react"
 import { create } from "zustand"
 import { persist } from "zustand/middleware"
 import type { CartItem } from "./cartTypes"
@@ -79,12 +80,17 @@ export const useCartStore = create<CartStore>()(
           config: item.config ? {...item.config, file: null} : null
         })),
         total: state.total
-      })
+      }),
+      skipHydration: true
     }
   )
 )  
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
+  useEffect(() => {
+    void useCartStore.persist.rehydrate()
+  }, [])
+
   return children
 }
 
