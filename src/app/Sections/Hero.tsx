@@ -9,9 +9,11 @@ import {
 import { ArrowLongRightIcon } from "@heroicons/react/24/solid";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { useCartStore } from "@/components/CartContext";
 
 const Hero = () => {
 	const router = useRouter();
+	const startNav = useCartStore((s) => s.startNav);
 	return (
 		<div id="home" className="mt-30  md:flex md:flex-row">
 			<div>
@@ -31,7 +33,10 @@ const Hero = () => {
 				<div className="mt-5 flex md:gap-10  gap-4 text-lg font-bold flex-wrap">
 					<button
 						className="py-3 px-4 bg-green-800 rounded shadow shadow-lg shadow-gray-900 text-white"
-						onClick={() => router.push("/products")}
+						onClick={() => {
+							if (window.location.pathname !== "/products") startNav;
+							router.push("/products");
+						}}
 					>
 						Order Now <ArrowLongRightIcon className="w-5 inline ml-2" />
 					</button>

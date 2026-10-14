@@ -56,7 +56,7 @@ const Cart = ({ cartItems, setIsCartOpen }: CartProps) => {
 
 	const router = useRouter();
 
-	const handleProceed = () => {
+	const handleProceed: any = () => {
 		if (cartItems.length == 0) return;
 
 		const gid = generateGID();

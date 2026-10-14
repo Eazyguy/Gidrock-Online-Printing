@@ -4,39 +4,41 @@ import "./globals.css";
 import Nav from "@/components/Nav";
 import { CartProvider } from "@/components/CartContext";
 import Footer from "./Sections/Footer";
+import GlobalPreloader from "@/components/GlobalPreloader";
 
 const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+	variable: "--font-geist-sans",
+	subsets: ["latin"],
 });
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+	variable: "--font-geist-mono",
+	subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "Gidrock Online Printing",
-  description: "Get your printed Graphic works at your door step",
+	title: "Gidrock Online Printing",
+	description: "Get your printed Graphic works at your door step",
 };
 
 export default function RootLayout({
-  children,
+	children,
 }: Readonly<{
-  children: React.ReactNode;
+	children: React.ReactNode;
 }>) {
-  return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col px-1 md:px-5">
-        <CartProvider>
-          <Nav/>
-          {children}
-          <Footer />
-        </CartProvider>
-        </body>
-    </html>
-  );
+	return (
+		<html
+			lang="en"
+			className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+		>
+			<body className="min-h-full flex flex-col px-1 md:px-5">
+				<CartProvider>
+					<Nav />
+					<GlobalPreloader />
+					{children}
+					<Footer />
+				</CartProvider>
+			</body>
+		</html>
+	);
 }
