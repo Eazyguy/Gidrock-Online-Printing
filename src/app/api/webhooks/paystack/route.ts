@@ -40,6 +40,8 @@ export async function POST(request: Request) {
 				);
 			}
 
+			console.log(`Received webhook for GID: ${gid}, Event: ${event.event}`);
+
 			const status = event.event === "charge.success" ? "completed" : "failed";
 			const { error: updateError } = await supabase
 				.from("orders")
