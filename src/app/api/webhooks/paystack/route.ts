@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import crypto from "crypto";
-import { supabase } from "@/supabase-client";
+import { createSupabaseAdmin } from "@/lib/supabase-admin";
 
 export async function POST(request: Request) {
 	try {
@@ -13,6 +13,9 @@ export async function POST(request: Request) {
 				{ error: "Webhook signature or secret is missing" },
 				{ status: 401 },
 			);
+		}
+		if (!/^[a-f0-9]{128}$/i.test(payStackSignature)) {
+			return NextResponse.json({ error: "Invalid signature" }, { status: 401 });
 		}
 
 		const hash = crypto
@@ -43,16 +46,52 @@ export async function POST(request: Request) {
 			console.log(`Received webhook for GID: ${gid}, Event: ${event.event}`);
 
 			const status = event.event === "charge.success" ? "completed" : "failed";
-			const { error: updateError } = await supabase
+			const supabase = createSupabaseAdmin();
+			const updateQuery = supabase
 				.from("orders")
-				.update({ status: "Completed" })
+				.update({ status })
 				.eq("gid", gid);
+			const { data: updatedOrder, error: updateError } =
+				status === "failed"
+					? await updateQuery
+							.neq("status", "completed")
+							.select("gid")
+							.maybeSingle()
+					: await updateQuery.select("gid").maybeSingle();
 
 			if (updateError) {
 				console.error(`Failed updating order status to ${status}:`, updateError);
 				return NextResponse.json(
 					{ error: "Could not update order status" },
 					{ status: 500 },
+				);
+			}
+
+			if (!updatedOrder) {
+				const { data: currentOrder, error: lookupError } = await supabase
+					.from("orders")
+					.select("status")
+					.eq("gid", gid)
+					.maybeSingle();
+
+				if (lookupError) {
+					console.error(
+						"Could not check order status after webhook:",
+						lookupError,
+					);
+					return NextResponse.json(
+						{ error: "Could not check order status" },
+						{ status: 500 },
+					);
+				}
+
+				if (status === "failed" && currentOrder?.status === "completed") {
+					return NextResponse.json({ received: true });
+				}
+
+				return NextResponse.json(
+					{ error: "Order was not found for this transaction" },
+					{ status: 404 },
 				);
 			}
 		}

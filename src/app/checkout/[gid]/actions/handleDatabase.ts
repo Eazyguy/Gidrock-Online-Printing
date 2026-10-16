@@ -28,7 +28,9 @@ export const handleDatabase = async (
 	if (data) {
 		if (
 			allowPaymentRetry &&
-			(data.status === "pending" || data.status === "failed")
+			(data.status === "pending" ||
+				data.status === "failed" ||
+				data.status === "cancelled")
 		) {
 			return true;
 		}

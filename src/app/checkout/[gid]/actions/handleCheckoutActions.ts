@@ -3,7 +3,10 @@
 import { handleDatabase } from "./handleDatabase";
 import { useCartStore } from "@/components/CartContext";
 import { setProgress } from "./types";
-import { initializeTransaction } from "@/app/payment/actions";
+import {
+	initializeTransaction,
+	verifyTransaction,
+} from "@/app/payment/actions";
 import PaystackPop from "@paystack/inline-js";
 
 export const handlePay = async (
@@ -46,13 +49,55 @@ export const handlePay = async (
 			try {
 				const popup = new PaystackPop();
 				popup.resumeTransaction(setup.access_code, {
-					onSuccess: (transaction: { reference: string }) => {
-						alert(`Payment successful. Reference: ${transaction.reference}`);
-						clearCart();
+					onSuccess: async (transaction: { reference: string }) => {
+						try {
+							const verification = await verifyTransaction(
+								transaction.reference,
+								gid,
+							);
+							if ("error" in verification) {
+								console.error(
+									"Could not verify Paystack payment:",
+									verification.error,
+								);
+								alert(
+									"Payment was submitted, but could not be verified yet. Please do not retry the payment.",
+								);
+								return;
+							}
+
+							alert(`Payment successful. Reference: ${transaction.reference}`);
+							clearCart();
+						} catch (error) {
+							console.error("Could not verify Paystack payment:", error);
+							alert(
+								"Payment was submitted, but could not be verified yet. Please do not retry the payment.",
+							);
+						}
 					},
-					onCancel: () => {
-						setUploadStatus("failed");
-						alert("Checkout cancelled.");
+					onCancel: async () => {
+						try {
+							const response = await fetch("/api/orders/cancel", {
+								method: "POST",
+								headers: { "Content-Type": "application/json" },
+								body: JSON.stringify({
+									gid,
+									cancelToken: setup.cancelToken,
+								}),
+							});
+							if (!response.ok) {
+								throw new Error(
+									`Cancellation update failed (${response.status}).`,
+								);
+							}
+						} catch (error) {
+							console.error("Could not mark order as cancelled:", error);
+							alert(
+								"Checkout was cancelled, but the order status could not be updated.",
+							);
+						} finally {
+							window.location.assign("/");
+						}
 					},
 					onError: (error: { message: string }) => {
 						console.error("Paystack checkout error:", error.message);

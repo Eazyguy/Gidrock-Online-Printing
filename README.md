@@ -15,13 +15,14 @@ The application currently includes:
 - A browser-persisted cart that can retain selected products and artwork.
 - An order form with customer and delivery details for Nigerian states.
 - Supabase integration for saving orders and uploading artwork.
+- Paystack checkout for station-delivery orders, with webhook and server-side
+  transaction verification updating payment status.
 - An interstate delivery path that saves the order and opens WhatsApp to
   continue arranging delivery.
 
-**Not implemented yet:** online card payment (the station-delivery flow saves an
-order as pending), and a complete order-management experience. Product details,
-prices, delivery arrangements, and backend configuration should be verified
-before using the application for real orders.
+**Not implemented yet:** a complete order-management experience. Product
+details, prices, delivery arrangements, and backend configuration should be
+verified before using the application for real orders.
 
 ## Tech stack
 
@@ -48,18 +49,22 @@ npm ci
 ### Configure Supabase
 
 Create a `.env.local` file in the project root and add your Supabase project
-URL and anon key:
+URL, anon key, Supabase service-role key, and Paystack secret key:
 
 ```dotenv
 NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
+SUPABASE_SERVICE_ROLE_KEY=your-supabase-service-role-key
+PAYSTACK_SECRET_KEY=your-paystack-secret-key
 ```
 
 Order submission also expects an `orders` table compatible with the fields used
 by the application and a Supabase Storage bucket named `order-files`. Configure
 the required database and storage policies in Supabase for your environment.
-Do not commit `.env.local` or put service-role keys in client-side environment
-variables.
+Configure the Paystack webhook to send `charge.success` and `charge.failed`
+events to `https://<your-domain>/api/webhooks/paystack`. The service-role key
+and Paystack secret key are used only by server-side code; do not add a
+`NEXT_PUBLIC_` prefix or commit `.env.local`.
 
 ### Run the development server
 
@@ -105,8 +110,10 @@ public/             Images and other static assets
 
 - Order submission uses the public Supabase URL and anon key configured above.
 - The checkout flow stores order details and uploaded artwork in Supabase.
-- The station-delivery flow currently leaves the order pending; payment is not
-  processed by the application yet.
+- Successful card payments are verified with Paystack and update the order to
+  `completed`; signed webhooks also process successful and failed payments.
+- Closing the Paystack popup marks an unpaid order `cancelled` and returns the
+  customer to the home page.
 - The default checkout route (`/checkout`) is not the active order flow;
   checkout sessions are created from the cart at `/checkout/[gid]`.
 
