@@ -1,8 +1,10 @@
 import { testimony } from "@/constants";
 import { useRouter } from "next/navigation";
+import { useCartStore } from "@/components/CartContext";
 
 const Testimony = () => {
 	const router = useRouter();
+	const startNav = useCartStore((state) => state.startNav);
 
 	return (
 		<div id="testimony" className="mt-10 bg-green-300 -mx-5 pt-5 pb-20 px-5">
@@ -36,7 +38,10 @@ const Testimony = () => {
 				<div className="flex gap-3 mt-5 w-fit flex-col md:flex-row">
 					<button
 						className="p-3 bg-gray-900 rounded-lg hover:outline hover:bg-green-800 hover:outline-white h-fit text-white"
-						onClick={() => router.push("/products")}
+						onClick={() => {
+							startNav();
+							router.push("/products");
+						}}
 					>
 						Start an order
 					</button>{" "}

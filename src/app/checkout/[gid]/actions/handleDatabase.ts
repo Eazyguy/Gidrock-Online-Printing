@@ -1,6 +1,6 @@
 import { handleUpload } from "./handleUpload";
 import { supabase } from "@/supabase-client";
-import { FormProps } from "./types";
+import { FormProps, setProgress } from "./types";
 import { CartItem } from "@/components/cartTypes";
 
 export const handleDatabase = async (
@@ -8,12 +8,14 @@ export const handleDatabase = async (
 	gid: string,
 	cartItems: CartItem[],
 	total: number,
+	setProgress: setProgress,
+	allowPaymentRetry = false,
 ): Promise<boolean> => {
 	const { name, phoneNumber, ...formData } = form;
 
 	const { data, error: lookupError } = await supabase
 		.from("orders")
-		.select("*")
+		.select("status")
 		.eq("gid", gid)
 		.maybeSingle();
 
@@ -24,11 +26,17 @@ export const handleDatabase = async (
 	}
 
 	if (data) {
+		if (
+			allowPaymentRetry &&
+			(data.status === "pending" || data.status === "failed")
+		) {
+			return true;
+		}
 		alert("Order already exists. Please check your order history.");
 		return false;
 	}
 
-	const uploadedFilePaths = await handleUpload(gid);
+	const uploadedFilePaths = await handleUpload(gid, setProgress);
 	if (!uploadedFilePaths) return false;
 
 	const orderData = {

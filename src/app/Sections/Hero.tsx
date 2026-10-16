@@ -15,7 +15,7 @@ const Hero = () => {
 	const router = useRouter();
 	const startNav = useCartStore((s) => s.startNav);
 	return (
-		<div id="home" className="mt-30  md:flex md:flex-row">
+		<div id="home" className="mt-30 flex-col md:flex lg:flex-row">
 			<div>
 				<div className="mt-10 bg-white text-black rounded-full md:text-sm  text-xs font-bold p-2 w-fit flex gap-2">
 					<SparklesIcon className="w-4" /> NATIONWIDE PRINTING ON DEMAND
@@ -34,7 +34,7 @@ const Hero = () => {
 					<button
 						className="py-3 px-4 bg-green-800 rounded shadow shadow-lg shadow-gray-900 text-white"
 						onClick={() => {
-							if (window.location.pathname !== "/products") startNav;
+							if (window.location.pathname !== "/products") startNav();
 							router.push("/products");
 						}}
 					>
@@ -42,7 +42,10 @@ const Hero = () => {
 					</button>
 					<button
 						className="py-3 px-4 bg-white text-black rounded-lg shadow shadow-xs shadow-gray-900"
-						onClick={() => router.push("/products")}
+						onClick={() => {
+							if (window.location.pathname !== "/products") startNav();
+							router.push("/products");
+						}}
 					>
 						Browse Products
 					</button>

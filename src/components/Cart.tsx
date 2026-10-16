@@ -53,6 +53,7 @@ const Cart = ({ cartItems, setIsCartOpen }: CartProps) => {
 
 	const removeItem = useCartStore((state) => state.removeItem);
 	const total = useCartStore((state) => state.total);
+	const startNav = useCartStore((state) => state.startNav);
 
 	const router = useRouter();
 
@@ -67,6 +68,7 @@ const Cart = ({ cartItems, setIsCartOpen }: CartProps) => {
 
 		setIsCartOpen(false);
 
+		startNav();
 		router.push(`/checkout/${gid}`);
 	};
 

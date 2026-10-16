@@ -29,3 +29,5 @@ export type setUploadStatus = React.Dispatch<
 >;
 
 export type handleCheckout = (e: React.MouseEvent<HTMLButtonElement>) => void;
+
+export type setProgress = React.Dispatch<React.SetStateAction<number>>;

@@ -1,14 +1,18 @@
 import { getCartImage } from "@/components/cartImageStorage";
 import { useCartStore } from "@/components/CartContext";
 import { supabase } from "@/supabase-client";
+import { setProgress } from "./types";
 
 export const handleUpload = async (
 	gid: string,
+	setProgress: setProgress,
 ): Promise<Record<string, string> | null> => {
 	const { cartItems, tempFiles } = useCartStore.getState();
 
 	try {
 		const filePaths: Record<string, string> = {};
+		let completedUploads = 0;
+
 		await Promise.all(
 			cartItems.map(async (item) => {
 				let file: File | undefined;
@@ -25,7 +29,6 @@ export const handleUpload = async (
 				const safeItemId = item.id.replace(/[^a-zA-Z0-9_-]/g, "_");
 				const safeFileName = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
 				const filePath = `${gid}/${safeItemId}-${safeFileName || "upload"}`;
-				console.log(filePath);
 				const { error } = await supabase.storage
 					.from("order-files")
 					.upload(filePath, file, { upsert: true });
@@ -35,7 +38,10 @@ export const handleUpload = async (
 						`Supabase upload failed for ${file.name}: ${error.message}`,
 					);
 				}
+
 				filePaths[item.id] = filePath;
+				completedUploads += 1;
+				setProgress(Math.round((completedUploads / cartItems.length) * 100));
 			}),
 		);
 

@@ -3,9 +3,11 @@
 import { services } from "@/constants";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useCartStore } from "@/components/CartContext";
 
 const Services = () => {
 	const router = useRouter();
+	const startNav = useCartStore((state) => state.startNav);
 
 	return (
 		<div id="services" className="mt-10">
@@ -18,7 +20,10 @@ const Services = () => {
 					<div
 						key={item.title}
 						className="border border-gray-500 rounded-lg mx-auto bg-green-200 max-w-95"
-						onClick={() => router.push("/products")}
+						onClick={() => {
+							startNav();
+							router.push("/products");
+						}}
 					>
 						<div className=" relative min-h-65 mx-auto bg-green-100 rounded">
 							<Image src={item.image} alt="card" sizes="" fill />

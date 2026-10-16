@@ -1,7 +1,10 @@
+"use client";
+
 import { handleDatabase } from "./handleDatabase";
 import { useCartStore } from "@/components/CartContext";
-
-const { total, cartItems } = useCartStore.getState();
+import { setProgress } from "./types";
+import { initializeTransaction } from "@/app/payment/actions";
+import PaystackPop from "@paystack/inline-js";
 
 export const handlePay = async (
 	e: React.MouseEvent,
@@ -12,17 +15,56 @@ export const handlePay = async (
 	) => void,
 	form: any,
 	gid: string,
+	setProgress: setProgress,
 ) => {
 	e.preventDefault();
 	if (hasMissingRequiredFields) return alert(" Fill the required fields");
 	if (uploadStatus === "uploading") return;
 
+	const { total, cartItems, clearCart } = useCartStore.getState();
 	setUploadStatus("uploading");
+	setProgress(0);
 	try {
-		const orderCreated = await handleDatabase(form, gid, cartItems, total);
+		const orderCreated = await handleDatabase(
+			form,
+			gid,
+			cartItems,
+			total,
+			setProgress,
+			true,
+		);
 		setUploadStatus(orderCreated ? "completed" : "failed");
 		if (orderCreated) {
-			alert("Order saved as pending. Paystack payment will be available soon.");
+			const setup = await initializeTransaction(form.email, total, gid);
+
+			if ("error" in setup) {
+				setUploadStatus("failed");
+				alert(setup.error);
+				return;
+			}
+
+			try {
+				const popup = new PaystackPop();
+				popup.resumeTransaction(setup.access_code, {
+					onSuccess: (transaction: { reference: string }) => {
+						alert(`Payment successful. Reference: ${transaction.reference}`);
+						clearCart();
+					},
+					onCancel: () => {
+						setUploadStatus("failed");
+						alert("Checkout cancelled.");
+					},
+					onError: (error: { message: string }) => {
+						console.error("Paystack checkout error:", error.message);
+						setUploadStatus("failed");
+						alert("Unable to open Paystack checkout. Please try again.");
+					},
+				});
+			} catch (err) {
+				console.error("Popup invocation failed", err);
+				setUploadStatus("failed");
+				alert("Unable to open Paystack checkout. Please try again.");
+			}
 		}
 	} catch (error) {
 		console.error("Error processing order:", error);
@@ -40,12 +82,13 @@ export const handleInterstateWhatsapp = async (
 	) => void,
 	form: any,
 	gid: string,
+	setProgress: setProgress,
 ) => {
 	e.preventDefault();
 	if (hasMissingRequiredFields) return alert(" Fill the required fields");
 	if (uploadStatus === "uploading") return;
 
-	const { total, cartItems } = useCartStore.getState();
+	const { total, cartItems, clearCart } = useCartStore.getState();
 
 	const whatsappWindow = window.open("about:blank", "_blank");
 	if (!whatsappWindow) {
@@ -54,8 +97,15 @@ export const handleInterstateWhatsapp = async (
 	}
 
 	setUploadStatus("uploading");
+	setProgress(0);
 	try {
-		const orderCreated = await handleDatabase(form, gid, cartItems, total);
+		const orderCreated = await handleDatabase(
+			form,
+			gid,
+			cartItems,
+			total,
+			setProgress,
+		);
 		if (!orderCreated) {
 			whatsappWindow.close();
 			setUploadStatus("failed");
@@ -78,6 +128,7 @@ export const handleInterstateWhatsapp = async (
 		const whatsappUrl = `https://wa.me/${+2347017897866}?text=${encodeURIComponent(message)}`;
 		whatsappWindow.location.href = whatsappUrl;
 		setUploadStatus("completed");
+		clearCart();
 	} catch (error) {
 		console.error("Error processing WhatsApp order:", error);
 		whatsappWindow.close();

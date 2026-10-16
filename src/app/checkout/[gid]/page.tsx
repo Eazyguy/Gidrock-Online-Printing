@@ -8,6 +8,7 @@ import {
 	handlePay,
 	handleInterstateWhatsapp,
 } from "./actions/handleCheckoutActions";
+import { useCartStore } from "@/components/CartContext";
 
 const checkoutGID = () => {
 	const [form, setForm] = useState({
@@ -23,6 +24,8 @@ const checkoutGID = () => {
 		"idle" | "uploading" | "completed" | "failed"
 	>("idle");
 
+	const [progress, setProgress] = useState<number>(0);
+
 	const lgas = nigerianStates.find((s) => s.state == form.state)?.lgas || [];
 
 	const hasMissingRequiredFields =
@@ -34,14 +37,16 @@ const checkoutGID = () => {
 	const router = useRouter();
 	const params = useParams();
 	const gid = params.gid as string;
+	const startNav = useCartStore((state) => state.startNav);
 
 	useEffect(() => {
 		const savedGid = localStorage.getItem("gidrock-checkout-id");
 		if (!savedGid || savedGid !== gid || !gid.startsWith("GID-")) {
+			startNav();
 			router.push("/");
 			return;
 		}
-	});
+	}, [gid, router, startNav]);
 
 	const handleCheckout = (e: React.MouseEvent<HTMLButtonElement>) => {
 		if (form.delivery === "station delivery") {
@@ -52,6 +57,7 @@ const checkoutGID = () => {
 				setUploadStatus,
 				form,
 				gid,
+				setProgress,
 			);
 			return;
 		}
@@ -63,6 +69,7 @@ const checkoutGID = () => {
 				setUploadStatus,
 				form,
 				gid,
+				setProgress,
 			);
 			return;
 		}
@@ -79,6 +86,7 @@ const checkoutGID = () => {
 				uploadStatus={uploadStatus}
 				setUploadStatus={setUploadStatus}
 				handleCheckout={handleCheckout}
+				progress={progress}
 			/>
 		</div>
 	);

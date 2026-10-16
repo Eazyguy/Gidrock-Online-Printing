@@ -3,16 +3,21 @@ import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import { navLinks } from "@/constants";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ShoppingCartIcon } from "@heroicons/react/24/outline";
 import Cart from "./Cart";
-import { useCart } from "./CartContext";
+import { useCart, useCartStore } from "./CartContext";
+import { useRouter } from "next/navigation";
 
 const Nav = () => {
+	const pathname = usePathname();
+	const startNav = useCartStore((state) => state.startNav);
 	const [isOpen, setIsOpen] = useState(false);
 	const [isCartOpen, setisCartOpen] = useState(false);
 	const cartRef = useRef<HTMLUListElement>(null);
 	const cartButtonRef = useRef<HTMLButtonElement>(null);
 	const { cartItems } = useCart();
+	const router = useRouter();
 
 	useEffect(() => {
 		const handleResize = () => {
@@ -95,7 +100,13 @@ const Nav = () => {
 			</button>
 
 			<div className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center px-3 py-2 md:static md:left-auto md:top-auto md:translate-x-0 md:translate-y-0">
-				<div data-info="BRAND ICON">
+				<div
+					data-info="BRAND ICON"
+					onClick={() => {
+						router.push("/");
+						startNav();
+					}}
+				>
 					{" "}
 					<Image src={"/uu.png"} width={150} height={75} alt="" />{" "}
 				</div>
@@ -113,6 +124,11 @@ const Nav = () => {
 						<Link
 							href={item.href}
 							onClick={closeMenu}
+							onNavigate={() => {
+								if (!item.href.startsWith("#") && pathname !== item.href) {
+									startNav();
+								}
+							}}
 							className="block text-[clamp(1rem,calc(2vw_+_0.1rem),1.3rem)] text-white transition hover:text-emerald-200 md:text-inherit mt-2"
 						>
 							{item.label}

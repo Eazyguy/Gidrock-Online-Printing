@@ -8,6 +8,7 @@ type FormfieldProp = {
 	lgas: string[];
 	handleCheckout: handleCheckout;
 	uploadStatus: FormProps["uploadStatus"];
+	progress: number;
 	setUploadStatus: React.Dispatch<
 		React.SetStateAction<FormProps["uploadStatus"]>
 	>;
@@ -18,6 +19,7 @@ const Form = ({
 	setForm,
 	lgas,
 	uploadStatus,
+	progress,
 	setUploadStatus,
 	handleCheckout,
 }: FormfieldProp) => {
@@ -181,6 +183,11 @@ const Form = ({
 										: "Choose a delivery option"}
 					</button>
 				</div>
+				{uploadStatus === "uploading" && (
+					<p className="mt-2 text-center text-sm" role="status">
+						Uploading files: {progress}%
+					</p>
+				)}
 			</form>
 		</>
 	);
