@@ -22,7 +22,7 @@ const checkoutGID = () => {
 		delivery: "",
 	});
 	const [uploadStatus, setUploadStatus] = useState<
-		"idle" | "uploading" | "completed" | "failed"
+		"idle" | "uploading" | "processing" | "completed" | "failed"
 	>("idle");
 
 	const [progress, setProgress] = useState<number>(0);

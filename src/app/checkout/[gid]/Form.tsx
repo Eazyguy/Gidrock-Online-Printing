@@ -168,19 +168,23 @@ const Form = ({
 				<div className="flex w-full justify-center mt-10 gap-2">
 					<button
 						type="button"
-						disabled={uploadStatus === "uploading"}
+						disabled={
+							uploadStatus === "uploading" || uploadStatus === "processing"
+						}
 						className="max-w-full rounded border-2 border-green-700 bg-green-400 p-2 text-center hover:bg-green-600"
 						onClick={handleCheckout}
 					>
 						{uploadStatus === "uploading"
 							? "Uploading order..."
-							: uploadStatus === "completed"
-								? "Completed"
-								: form.delivery == "station delivery"
-									? "Checkout and Payment"
-									: form.delivery == "interstate delivery"
-										? "Proceed to WhatsApp to complete your order"
-										: "Choose a delivery option"}
+							: uploadStatus === "processing"
+								? "Payment in progress..."
+								: uploadStatus === "completed"
+									? "Completed"
+									: form.delivery == "station delivery"
+										? "Checkout and Payment"
+										: form.delivery == "interstate delivery"
+											? "Proceed to WhatsApp to complete your order"
+											: "Choose a delivery option"}
 					</button>
 				</div>
 				{uploadStatus === "uploading" && (

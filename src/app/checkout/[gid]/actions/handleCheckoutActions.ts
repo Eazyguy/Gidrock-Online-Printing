@@ -11,9 +11,9 @@ import {
 export const handlePay = async (
 	e: React.MouseEvent,
 	hasMissingRequiredFields: boolean,
-	uploadStatus: "idle" | "uploading" | "completed" | "failed",
+	uploadStatus: "idle" | "uploading" | "processing" | "completed" | "failed",
 	setUploadStatus: (
-		status: "idle" | "uploading" | "completed" | "failed",
+		status: "idle" | "uploading" | "processing" | "completed" | "failed",
 	) => void,
 	form: any,
 	gid: string,
@@ -21,7 +21,7 @@ export const handlePay = async (
 ) => {
 	e.preventDefault();
 	if (hasMissingRequiredFields) return alert(" Fill the required fields");
-	if (uploadStatus === "uploading") return;
+	if (uploadStatus === "uploading" || uploadStatus === "processing") return;
 	if (!window.PaystackPop) {
 		alert("Paystack checkout is still loading. Please try again.");
 		return;
@@ -39,72 +39,78 @@ export const handlePay = async (
 			setProgress,
 			true,
 		);
-		setUploadStatus(orderCreated ? "completed" : "failed");
-		if (orderCreated) {
-			const setup = await initializeTransaction(form.email, total, gid);
+		if (!orderCreated) {
+			setUploadStatus("failed");
+			return;
+		}
 
-			if ("error" in setup) {
-				setUploadStatus("failed");
-				alert(setup.error);
-				return;
-			}
+		setUploadStatus("processing");
+		const setup = await initializeTransaction(form.email, total, gid);
 
-			try {
-				const popup = new window.PaystackPop();
-				popup.resumeTransaction(setup.access_code, {
-					onSuccess: async (transaction: { reference: string }) => {
-						try {
-							const verification = await verifyTransaction(transaction.reference, gid);
-							if ("error" in verification) {
-								console.error("Could not verify Paystack payment:", verification.error);
-								alert(
-									`${verification.error} If you completed payment, do not retry it until the order status is checked.`,
-								);
-								return;
-							}
+		if ("error" in setup) {
+			setUploadStatus("failed");
+			alert(setup.error);
+			return;
+		}
 
-							alert(`Payment successful. Reference: ${transaction.reference}`);
-							clearCart();
-						} catch (error) {
-							console.error("Could not verify Paystack payment:", error);
+		try {
+			const popup = new window.PaystackPop();
+			popup.resumeTransaction(setup.access_code, {
+				onSuccess: async (transaction: { reference: string }) => {
+					try {
+						const verification = await verifyTransaction(transaction.reference, gid);
+						if ("error" in verification) {
+							setUploadStatus("failed");
+							console.error("Could not verify Paystack payment:", verification.error);
 							alert(
-								"Payment was submitted, but could not be verified yet. Please do not retry the payment.",
+								`${verification.error} If you completed payment, do not retry it until the order status is checked.`,
 							);
+							return;
 						}
-					},
-					onCancel: async () => {
-						try {
-							const response = await fetch("/api/orders/cancel", {
-								method: "POST",
-								headers: { "Content-Type": "application/json" },
-								body: JSON.stringify({
-									gid,
-									cancelToken: setup.cancelToken,
-								}),
-							});
-							if (!response.ok) {
-								throw new Error(`Cancellation update failed (${response.status}).`);
-							}
-						} catch (error) {
-							console.error("Could not mark order as cancelled:", error);
-							alert(
-								"Checkout was cancelled, but the order status could not be updated.",
-							);
-						} finally {
-							window.location.assign("/");
-						}
-					},
-					onError: (error: { message: string }) => {
-						console.error("Paystack checkout error:", error.message);
+
+						setUploadStatus("completed");
+						alert(`Payment successful. Reference: ${transaction.reference}`);
+						clearCart();
+					} catch (error) {
 						setUploadStatus("failed");
-						alert("Unable to open Paystack checkout. Please try again.");
-					},
-				});
-			} catch (err) {
-				console.error("Popup invocation failed", err);
-				setUploadStatus("failed");
-				alert("Unable to open Paystack checkout. Please try again.");
-			}
+						console.error("Could not verify Paystack payment:", error);
+						alert(
+							"Payment was submitted, but could not be verified yet. Please do not retry the payment.",
+						);
+					}
+				},
+				onCancel: async () => {
+					try {
+						const response = await fetch("/api/orders/cancel", {
+							method: "POST",
+							headers: { "Content-Type": "application/json" },
+							body: JSON.stringify({
+								gid,
+								cancelToken: setup.cancelToken,
+							}),
+						});
+						if (!response.ok) {
+							throw new Error(`Cancellation update failed (${response.status}).`);
+						}
+					} catch (error) {
+						console.error("Could not mark order as cancelled:", error);
+						alert(
+							"Checkout was cancelled, but the order status could not be updated.",
+						);
+					} finally {
+						window.location.assign("/");
+					}
+				},
+				onError: (error: { message: string }) => {
+					console.error("Paystack checkout error:", error.message);
+					setUploadStatus("failed");
+					alert("Unable to open Paystack checkout. Please try again.");
+				},
+			});
+		} catch (err) {
+			console.error("Popup invocation failed", err);
+			setUploadStatus("failed");
+			alert("Unable to open Paystack checkout. Please try again.");
 		}
 	} catch (error) {
 		console.error("Error processing order:", error);
@@ -116,9 +122,9 @@ export const handlePay = async (
 export const handleInterstateWhatsapp = async (
 	e: React.MouseEvent,
 	hasMissingRequiredFields: boolean,
-	uploadStatus: "idle" | "uploading" | "completed" | "failed",
+	uploadStatus: "idle" | "uploading" | "processing" | "completed" | "failed",
 	setUploadStatus: (
-		status: "idle" | "uploading" | "completed" | "failed",
+		status: "idle" | "uploading" | "processing" | "completed" | "failed",
 	) => void,
 	form: any,
 	gid: string,
@@ -126,7 +132,7 @@ export const handleInterstateWhatsapp = async (
 ) => {
 	e.preventDefault();
 	if (hasMissingRequiredFields) return alert(" Fill the required fields");
-	if (uploadStatus === "uploading") return;
+	if (uploadStatus === "uploading" || uploadStatus === "processing") return;
 
 	const { total, cartItems, clearCart } = useCartStore.getState();
 

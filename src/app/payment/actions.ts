@@ -193,7 +193,7 @@ export const verifyTransaction = async (reference: string, gid: string) => {
 		verificationStep = "reading the order from Supabase";
 		const { data: order, error: orderError } = await supabase
 			.from("orders")
-			.select("total_price")
+			.select("total_price, status")
 			.eq("gid", gid)
 			.maybeSingle();
 
@@ -213,22 +213,38 @@ export const verifyTransaction = async (reference: string, gid: string) => {
 		}
 
 		verificationStep = "updating the order status in Supabase";
-		const { data: updatedOrder, error: updateError } = await supabase
-			.from("orders")
-			.update({ status: "completed" })
-			.eq("gid", gid)
-			.select("gid")
-			.maybeSingle();
-
-		if (updateError || !updatedOrder) {
-			console.error("Could not update the verified payment status:", updateError);
-			return {
-				error:
-					"Payment was verified, but Supabase could not update the order status. Do not pay again; contact support.",
-			};
+		if (order.status === "completed") {
+			return { success: true };
 		}
 
-		return { success: true };
+		const { error: updateError } = await supabase
+			.from("orders")
+			.update({ status: "completed" })
+			.eq("gid", gid);
+
+		if (!updateError) {
+			return { success: true };
+		}
+
+		console.error("Could not update the verified payment status:", updateError);
+		const { data: currentOrder, error: lookupError } = await supabase
+			.from("orders")
+			.select("status")
+			.eq("gid", gid)
+			.maybeSingle();
+
+		if (currentOrder?.status === "completed") {
+			return { success: true };
+		}
+
+		if (lookupError) {
+			console.error("Could not confirm payment status after update failure:", lookupError);
+		}
+
+		return {
+			error:
+				"Payment was verified, but Supabase could not update the order status. Do not pay again; contact support.",
+		};
 	} catch (error) {
 		const errorDetails =
 			error instanceof Error

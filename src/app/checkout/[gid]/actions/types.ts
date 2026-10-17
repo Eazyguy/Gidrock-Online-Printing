@@ -10,7 +10,7 @@ export type FormProps = {
 	};
 	setForm: React.Dispatch<React.SetStateAction<FormProps["form"]>>;
 	lgas: lgas;
-	uploadStatus: "idle" | "uploading" | "completed" | "failed";
+	uploadStatus: "idle" | "uploading" | "processing" | "completed" | "failed";
 	setUploadStatus: React.Dispatch<
 		React.SetStateAction<FormProps["uploadStatus"]>
 	>;
@@ -22,7 +22,12 @@ export type lgas = {
 	lgas: string[];
 };
 
-export type uploadStatus = "idle" | "uploading" | "completed" | "failed";
+export type uploadStatus =
+	| "idle"
+	| "uploading"
+	| "processing"
+	| "completed"
+	| "failed";
 
 export type setUploadStatus = React.Dispatch<
 	React.SetStateAction<uploadStatus>
