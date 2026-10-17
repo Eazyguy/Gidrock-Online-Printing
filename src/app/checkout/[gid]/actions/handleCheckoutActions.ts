@@ -7,7 +7,6 @@ import {
 	initializeTransaction,
 	verifyTransaction,
 } from "@/app/payment/actions";
-import PaystackPop from "@paystack/inline-js";
 
 export const handlePay = async (
 	e: React.MouseEvent,
@@ -23,6 +22,10 @@ export const handlePay = async (
 	e.preventDefault();
 	if (hasMissingRequiredFields) return alert(" Fill the required fields");
 	if (uploadStatus === "uploading") return;
+	if (!window.PaystackPop) {
+		alert("Paystack checkout is still loading. Please try again.");
+		return;
+	}
 
 	const { total, cartItems, clearCart } = useCartStore.getState();
 	setUploadStatus("uploading");
@@ -47,21 +50,15 @@ export const handlePay = async (
 			}
 
 			try {
-				const popup = new PaystackPop();
+				const popup = new window.PaystackPop();
 				popup.resumeTransaction(setup.access_code, {
 					onSuccess: async (transaction: { reference: string }) => {
 						try {
-							const verification = await verifyTransaction(
-								transaction.reference,
-								gid,
-							);
+							const verification = await verifyTransaction(transaction.reference, gid);
 							if ("error" in verification) {
-								console.error(
-									"Could not verify Paystack payment:",
-									verification.error,
-								);
+								console.error("Could not verify Paystack payment:", verification.error);
 								alert(
-									"Payment was submitted, but could not be verified yet. Please do not retry the payment.",
+									`${verification.error} If you completed payment, do not retry it until the order status is checked.`,
 								);
 								return;
 							}
@@ -86,9 +83,7 @@ export const handlePay = async (
 								}),
 							});
 							if (!response.ok) {
-								throw new Error(
-									`Cancellation update failed (${response.status}).`,
-								);
+								throw new Error(`Cancellation update failed (${response.status}).`);
 							}
 						} catch (error) {
 							console.error("Could not mark order as cancelled:", error);

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import crypto from "crypto";
-import { createSupabaseAdmin } from "@/lib/supabase-admin";
+import { supabase } from "@/supabase-client";
 
 export async function POST(request: Request) {
 	try {
@@ -46,7 +46,6 @@ export async function POST(request: Request) {
 			console.log(`Received webhook for GID: ${gid}, Event: ${event.event}`);
 
 			const status = event.event === "charge.success" ? "completed" : "failed";
-			const supabase = createSupabaseAdmin();
 			const updateQuery = supabase
 				.from("orders")
 				.update({ status })

@@ -49,12 +49,11 @@ npm ci
 ### Configure Supabase
 
 Create a `.env.local` file in the project root and add your Supabase project
-URL, anon key, Supabase service-role key, and Paystack secret key:
+URL, anon key, and Paystack secret key:
 
 ```dotenv
 NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
-SUPABASE_SERVICE_ROLE_KEY=your-supabase-service-role-key
 PAYSTACK_SECRET_KEY=your-paystack-secret-key
 ```
 
@@ -62,9 +61,10 @@ Order submission also expects an `orders` table compatible with the fields used
 by the application and a Supabase Storage bucket named `order-files`. Configure
 the required database and storage policies in Supabase for your environment.
 Configure the Paystack webhook to send `charge.success` and `charge.failed`
-events to `https://<your-domain>/api/webhooks/paystack`. The service-role key
-and Paystack secret key are used only by server-side code; do not add a
-`NEXT_PUBLIC_` prefix or commit `.env.local`.
+events to `https://<your-domain>/api/webhooks/paystack`. Ensure your Supabase
+RLS policies authorize the anon role for the payment order reads and status
+updates. Keep the Paystack secret key server-side and do not commit
+`.env.local`.
 
 ### Run the development server
 

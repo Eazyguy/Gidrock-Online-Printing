@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { createSupabaseAdmin } from "@/lib/supabase-admin";
+import { supabase } from "@/supabase-client";
 import { isValidCancellationToken } from "@/lib/paystack-cancellation";
 
 export async function POST(request: Request) {
@@ -42,7 +42,6 @@ export async function POST(request: Request) {
 	}
 
 	try {
-		const supabase = createSupabaseAdmin();
 		const { data: updatedOrder, error: updateError } = await supabase
 			.from("orders")
 			.update({ status: "cancelled" })
