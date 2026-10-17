@@ -61,7 +61,6 @@ const Cart = ({ cartItems, setIsCartOpen }: CartProps) => {
 		if (cartItems.length == 0) return;
 
 		const gid = generateGID();
-		console.log(gid);
 
 		localStorage.setItem("gidrock-checkout-id", gid);
 		localStorage.setItem(`order_${gid}`, JSON.stringify(cartItems));
