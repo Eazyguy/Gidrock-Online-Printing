@@ -107,10 +107,6 @@ export const verifyTransaction = async (reference: string, gid: string) => {
 		return { error: "Invalid payment details." };
 	}
 
-	console.log(
-		`Verifying Paystack transaction for GID: ${gid}, Reference: ${reference}`,
-	);
-
 	let verificationStep = "requesting Paystack verification";
 	try {
 		const response = await fetch(
@@ -238,7 +234,10 @@ export const verifyTransaction = async (reference: string, gid: string) => {
 		}
 
 		if (lookupError) {
-			console.error("Could not confirm payment status after update failure:", lookupError);
+			console.error(
+				"Could not confirm payment status after update failure:",
+				lookupError,
+			);
 		}
 
 		return {
