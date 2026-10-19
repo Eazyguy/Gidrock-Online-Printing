@@ -69,8 +69,10 @@ export const handlePay = async (
 						}
 
 						setUploadStatus("completed");
-						alert(`Payment successful. Reference: ${transaction.reference}`);
 						clearCart();
+						window.location.assign(
+							`/receipt/${encodeURIComponent(gid)}?reference=${encodeURIComponent(transaction.reference)}`,
+						);
 					} catch (error) {
 						setUploadStatus("failed");
 						console.error("Could not verify Paystack payment:", error);

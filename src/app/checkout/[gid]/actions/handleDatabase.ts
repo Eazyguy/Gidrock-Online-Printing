@@ -54,8 +54,6 @@ export const handleDatabase = async (
 		total_price: total,
 	};
 
-	console.log(orderData);
-
 	const { error } = await supabase.from("orders").insert([orderData]);
 
 	if (error) {
