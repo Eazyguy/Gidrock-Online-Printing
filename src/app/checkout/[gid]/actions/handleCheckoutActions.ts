@@ -7,6 +7,7 @@ import {
 	initializeTransaction,
 	verifyTransaction,
 } from "@/app/payment/actions";
+import { sendEmail } from "@/app/api/send-email/sendEmail";
 
 export const handlePay = async (
 	e: React.MouseEvent,
@@ -68,10 +69,13 @@ export const handlePay = async (
 							return;
 						}
 
+						const reference = transaction.reference;
+
 						setUploadStatus("completed");
 						clearCart();
+						sendEmail(form.email, gid, reference);
 						window.location.assign(
-							`/receipt/${encodeURIComponent(gid)}?reference=${encodeURIComponent(transaction.reference)}`,
+							`/receipt/${encodeURIComponent(gid)}?reference=${encodeURIComponent(reference)}`,
 						);
 					} catch (error) {
 						setUploadStatus("failed");

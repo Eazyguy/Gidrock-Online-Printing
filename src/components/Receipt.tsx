@@ -1,5 +1,4 @@
 import { CheckBadgeIcon } from "@heroicons/react/24/solid";
-import Image from "next/image";
 import { formatCurrency } from "@/app/products/configuration/formatCurrency";
 import type { ReceiptOrder } from "@/app/receipt/[gid]/actions";
 
@@ -17,7 +16,7 @@ const Receipt = ({
 		<div className="background py-40 print:py-2 flex justify-center items-center">
 			<div className="bg-white rounded-xl shadow-2xl shadow-gray-800 w-full max-w-3xl">
 				<div className="bg-green-800 p-5 rounded-xl flex justify-between items-center">
-					<Image src="/uu.png" alt="icon" width={150} height={150} />
+					<img src="/uu.webp" alt="icon" width={150} height={150} />
 					<div className=" font-bold text-white">
 						<p className="text-2xl">RECEIPT</p>
 						{receiptDate && !Number.isNaN(receiptDate.getTime()) && (
