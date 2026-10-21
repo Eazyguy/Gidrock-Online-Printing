@@ -4,6 +4,8 @@ import { ImageResponse } from "next/og";
 import { formatCurrency } from "@/app/products/configuration/formatCurrency";
 import type { ReceiptOrder } from "@/app/receipt/[gid]/actions";
 
+export const runtime = "nodejs";
+
 export const renderReceiptImage = async (
 	order: ReceiptOrder,
 	transactionReference: string,
@@ -80,7 +82,14 @@ export const renderReceiptImage = async (
 						<div style={{ display: "flex", color: "#6b7280", marginBottom: 4 }}>
 							BILL TO
 						</div>
-						<div style={{ display: "flex", color: "#111827", fontSize: 20, fontWeight: 700 }}>
+						<div
+							style={{
+								display: "flex",
+								color: "#111827",
+								fontSize: 20,
+								fontWeight: 700,
+							}}
+						>
 							{order.customer_name}
 						</div>
 						<div style={{ display: "flex", color: "#334155" }}>{order.phone}</div>
@@ -145,7 +154,9 @@ export const renderReceiptImage = async (
 						)}
 						Payment {isPaid ? "Confirmed" : order.status}
 					</div>
-					<div style={{ display: "flex", marginTop: 8, color: "#374151", fontSize: 14 }}>
+					<div
+						style={{ display: "flex", marginTop: 8, color: "#374151", fontSize: 14 }}
+					>
 						Paystack reference: {transactionReference}
 					</div>
 				</div>
@@ -257,7 +268,9 @@ export const renderReceiptImage = async (
 						borderTop: "1px solid #9ca3af",
 					}}
 				/>
-				<div style={{ display: "flex", justifyContent: "flex-end", margin: "0 20px" }}>
+				<div
+					style={{ display: "flex", justifyContent: "flex-end", margin: "0 20px" }}
+				>
 					<div
 						style={{
 							display: "flex",
@@ -269,7 +282,14 @@ export const renderReceiptImage = async (
 							backgroundColor: "#dcfce7",
 						}}
 					>
-						<div style={{ display: "flex", color: "#15803d", fontSize: 14, fontWeight: 700 }}>
+						<div
+							style={{
+								display: "flex",
+								color: "#15803d",
+								fontSize: 14,
+								fontWeight: 700,
+							}}
+						>
 							Order Total
 						</div>
 						<div
@@ -310,7 +330,9 @@ export const renderReceiptImage = async (
 						fontSize: 13,
 					}}
 				>
-					<div style={{ display: "flex", flexDirection: "column", gap: 6, width: "58%" }}>
+					<div
+						style={{ display: "flex", flexDirection: "column", gap: 6, width: "58%" }}
+					>
 						<div style={{ display: "flex" }}>
 							Order status:{" "}
 							<span style={{ color: "#166534", fontWeight: 700 }}>
@@ -329,8 +351,12 @@ export const renderReceiptImage = async (
 							gap: 4,
 						}}
 					>
-						<div style={{ display: "flex", fontWeight: 700 }}>Gidrock online print</div>
-						<div style={{ display: "flex" }}>07017897866, 09133532790, 07070647836</div>
+						<div style={{ display: "flex", fontWeight: 700 }}>
+							Gidrock online print
+						</div>
+						<div style={{ display: "flex" }}>
+							07017897866, 09133532790, 07070647836
+						</div>
 						<div style={{ display: "flex" }}>hello@gidrockprint.ng</div>
 					</div>
 				</div>
