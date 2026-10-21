@@ -20,6 +20,8 @@ export const sendEmail = async (
 		}
 
 		const image = await renderReceiptImage(order, transactionReference);
+		console.log("Image Rendered size:", image.length);
+
 		const resend = new Resend(process.env.RESEND_API_KEY);
 
 		await resend.emails.send({
