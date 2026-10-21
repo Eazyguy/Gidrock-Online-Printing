@@ -4,8 +4,6 @@ import { ImageResponse } from "next/og";
 import { formatCurrency } from "@/app/products/configuration/formatCurrency";
 import type { ReceiptOrder } from "@/app/receipt/[gid]/actions";
 
-export const runtime = "nodejs";
-
 export const renderReceiptImage = async (
 	order: ReceiptOrder,
 	transactionReference: string,

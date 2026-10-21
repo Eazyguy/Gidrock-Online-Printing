@@ -5,6 +5,9 @@ import emailReceipt from "@/app/emails/receipt";
 import { getDatabaseData } from "@/app/receipt/[gid]/actions";
 import { renderReceiptImage } from "./renderReceiptImage";
 
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+
 export const sendEmail = async (
 	userEmail: string,
 	gid: string,
