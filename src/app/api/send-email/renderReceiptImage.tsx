@@ -57,7 +57,9 @@ export const renderReceiptImage = async (
 							fontWeight: 700,
 						}}
 					>
-						<div style={{ display: "flex", fontSize: 26, fontWeight:"bold" }}>RECEIPT</div>
+						<div style={{ display: "flex", fontSize: 26, fontWeight: "bold" }}>
+							RECEIPT
+						</div>
 						{receiptDate && !Number.isNaN(receiptDate.getTime()) && (
 							<div style={{ display: "flex", fontSize: 16, marginTop: 6 }}>
 								{receiptDate.toLocaleDateString("en-NG", {
@@ -79,7 +81,14 @@ export const renderReceiptImage = async (
 					}}
 				>
 					<div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-						<div style={{ display: "flex", color: "#6b7280", marginBottom: 4 fontWeight:"bold"}}>
+						<div
+							style={{
+								display: "flex",
+								color: "#6b7280",
+								marginBottom: 4,
+								fontWeight: "800",
+							}}
+						>
 							BILL TO
 						</div>
 						<div
@@ -136,13 +145,32 @@ export const renderReceiptImage = async (
 						}}
 					>
 						{isPaid && (
-						<div style={{ display: "flex", width: 22, height: 22, marginRight: 8, backgroundColor: "#16a34a", borderRadius: 11, alignItems: "center", justifyContent: "center" }}>
-  <svg width="14" height="14" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
-    <path fillRule="evenodd" d="M19.916 4.626a.75.75 0 01.208 1.04l-9 13.5a.75.75 0 01-1.154.114l-6-6a.75.75 0 011.06-1.06l5.312 5.312 8.47-12.7a.75.75 0 011.04-.208z" clipRule="evenodd" />
-  </svg>
-</div>
-
-
+							<div
+								style={{
+									display: "flex",
+									width: 22,
+									height: 22,
+									marginRight: 8,
+									backgroundColor: "#16a34a",
+									borderRadius: 11,
+									alignItems: "center",
+									justifyContent: "center",
+								}}
+							>
+								<svg
+									width="14"
+									height="14"
+									viewBox="0 0 24 24"
+									fill="white"
+									xmlns="http://www.w3.org/2000/svg"
+								>
+									<path
+										fillRule="evenodd"
+										d="M19.916 4.626a.75.75 0 01.208 1.04l-9 13.5a.75.75 0 01-1.154.114l-6-6a.75.75 0 011.06-1.06l5.312 5.312 8.47-12.7a.75.75 0 011.04-.208z"
+										clipRule="evenodd"
+									/>
+								</svg>
+							</div>
 						)}
 						Payment {isPaid ? "Confirmed" : order.status}
 					</div>
@@ -156,10 +184,10 @@ export const renderReceiptImage = async (
 				<div
 					style={{
 						display: "flex",
-						padding: "20px 20px 12px",
+						padding: "24px 20px 10px",
 						color: "#111827",
 						fontSize: 17,
-						fontWeight: 700,
+						fontWeight: 800,
 					}}
 				>
 					ITEM DETAILS
@@ -168,7 +196,7 @@ export const renderReceiptImage = async (
 					<div
 						style={{
 							display: "flex",
-							padding: "12px",
+							padding: "12px 16px",
 							backgroundColor: "#d1d5db",
 							color: "#374151",
 							fontSize: 15,
