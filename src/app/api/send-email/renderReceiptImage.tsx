@@ -356,7 +356,7 @@ export const renderReceiptImage = async (
 		</div>,
 		{
 			width: 800,
-			height: 760 + order.cart_items.length * 76,
+			height: 900 + order.cart_items.length * 70,
 		},
 	);
 
