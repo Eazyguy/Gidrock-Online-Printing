@@ -10,6 +10,15 @@ export const renderReceiptImage = async (
 	order: ReceiptOrder,
 	transactionReference: string,
 ) => {
+	const qrData = {
+		name: order.customer_name,
+		gid: order.gid,
+		transactionReference,
+	};
+	const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(JSON.stringify(qrData))}`;
+
+	// const qrcode = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(`https://gidrockprint.ng/receipt/${order.gid}`)}`;
+
 	const logo = await readFile(join(process.cwd(), "public", "uu.png"));
 	const logoDataUri = `data:image/png;base64,${logo.toString("base64")}`;
 	const receiptDate = order.created_at ? new Date(order.created_at) : null;
@@ -117,6 +126,7 @@ export const renderReceiptImage = async (
 							gap: 6,
 						}}
 					>
+						<img src={qrCodeUrl} alt="QR Code" width={150} height={150} />
 						<div style={{ display: "flex", color: "#6b7280" }}>RECEIPT NO.</div>
 						<div style={{ display: "flex", color: "#111827", fontWeight: 700 }}>
 							{order.gid}
@@ -188,6 +198,7 @@ export const renderReceiptImage = async (
 						color: "#111827",
 						fontSize: 17,
 						fontWeight: 800,
+						marginBottom: 10,
 					}}
 				>
 					ITEM DETAILS

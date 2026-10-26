@@ -12,9 +12,16 @@ const Receipt = ({
 	const isPaid = order.status === "completed";
 	const receiptDate = order.created_at ? new Date(order.created_at) : null;
 
+	const qrData = {
+		name: order.customer_name,
+		gid: order.gid,
+		transactionReference,
+	};
+	const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(JSON.stringify(qrData))}`;
+
 	return (
 		<div className="background py-40 print:py-2 flex justify-center items-center">
-			<div className="bg-white rounded-xl shadow-2xl shadow-gray-800 w-full max-w-3xl">
+			<div className="bg-white rounded-xl -mx-20 md:mx-0 shadow-2xl shadow-gray-800 w-full max-w-3xl">
 				<div className="bg-green-800 p-5 rounded-xl flex justify-between items-center">
 					<img src="/uu.webp" alt="icon" width={150} height={150} />
 					<div className=" font-bold text-white">
@@ -43,6 +50,7 @@ const Receipt = ({
 						</p>
 					</div>
 					<div>
+						<img src={qrCodeUrl} alt="QR Code" width={150} height={150} />
 						<p className="text-gray-500">RECEIPT NO. </p>
 						<p className="font-bold text-black">{order.gid}</p>
 					</div>
