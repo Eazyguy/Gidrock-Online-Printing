@@ -1,8 +1,8 @@
-import type { Config } from "@/app/products/configuration/types"
+import type { Config } from "@/app/(main)/products/configuration/types";
 
 export type CartItem = {
-  id: string
-  product: string | null
-  config: Config | null
-  price?: number
-}
+	id: string;
+	product: string | null;
+	config: Config | null;
+	price?: number;
+};
