@@ -1,8 +1,8 @@
 "use server";
 
 import { Resend } from "resend";
-import emailReceipt from "@/app/emails/receipt";
-import { getDatabaseData } from "@/app/receipt/[gid]/actions";
+import emailReceipt from "@/app/(main)/emails/receipt";
+import { getDatabaseData } from "@/app/(main)/receipt/[gid]/actions";
 import { renderReceiptImage } from "./renderReceiptImage";
 
 export const sendEmail = async (

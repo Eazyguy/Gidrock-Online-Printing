@@ -6,8 +6,8 @@ import { setProgress } from "./types";
 import {
 	initializeTransaction,
 	verifyTransaction,
-} from "@/app/payment/actions";
-import { sendEmail } from "@/app/api/send-email/sendEmail";
+} from "@/app/(main)/payment/actions";
+import { sendEmail } from "@/app/(main)/api/send-email/sendEmail";
 
 export const handlePay = async (
 	e: React.MouseEvent,

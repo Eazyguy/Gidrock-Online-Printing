@@ -1,6 +1,6 @@
 import { CheckBadgeIcon } from "@heroicons/react/24/solid";
-import { formatCurrency } from "@/app/products/configuration/formatCurrency";
-import type { ReceiptOrder } from "@/app/receipt/[gid]/actions";
+import { formatCurrency } from "@/app/(main)/products/configuration/formatCurrency";
+import type { ReceiptOrder } from "@/app/(main)/receipt/[gid]/actions";
 
 const Receipt = ({
 	order,

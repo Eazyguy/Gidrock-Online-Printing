@@ -1,138 +1,177 @@
-import { CursorArrowRaysIcon, ArrowUpOnSquareStackIcon,
-    CreditCardIcon,
-    InboxStackIcon,
-    SparklesIcon,ClockIcon, TruckIcon, ShieldCheckIcon
- } from "@heroicons/react/24/outline"
+import {
+	CursorArrowRaysIcon,
+	ArrowUpOnSquareStackIcon,
+	CreditCardIcon,
+	InboxStackIcon,
+	SparklesIcon,
+	ClockIcon,
+	TruckIcon,
+	ShieldCheckIcon,
+} from "@heroicons/react/24/outline";
+
+import { UserIcon, UserGroupIcon, HomeIcon } from "@heroicons/react/24/solid";
+import { FaBoxOpen } from "react-icons/fa6";
 
 export const navLinks = [
-{
-    label: "Home",
-    href:"/"
-},
-{
-    label: "Services",
-    href:"#services"
-},
-{
-    label: "How it works",
-    href:"#how-it-works"
-},
-{
-    label: "Contact Us",
-    href:"#footer"
-},
-]
+	{
+		label: "Home",
+		href: "/",
+	},
+	{
+		label: "Services",
+		href: "#services",
+	},
+	{
+		label: "How it works",
+		href: "#how-it-works",
+	},
+	{
+		label: "Contact Us",
+		href: "#footer",
+	},
+];
 
 export const services = [
-    {   title: "Card", 
-        description: "Printing of Bussiness Cards, Contribution card, complimentary card, invitation cards etc",
-        image: "/business_cards.png",
-        price: "₦50"
-     }, 
+	{
+		title: "Card",
+		description:
+			"Printing of Bussiness Cards, Contribution card, complimentary card, invitation cards etc",
+		image: "/business_cards.png",
+		price: "₦50",
+	},
 
-    {   title: "Fliers and posters", 
-        description: "Printing of all kinds of fliers for churches and bussinesses",
-        image:"/fliers_and_posters.png",
-        price: "₦250"
-     }, 
+	{
+		title: "Fliers and posters",
+		description: "Printing of all kinds of fliers for churches and bussinesses",
+		image: "/fliers_and_posters.png",
+		price: "₦250",
+	},
 
-    {   title: "Banners", 
-        description: "Printing of Banners for bussinesses, bill boards and so on",
-        image: "/banners.png",
-        price: "₦1500 per ft"
-     }, 
+	{
+		title: "Banners",
+		description: "Printing of Banners for bussinesses, bill boards and so on",
+		image: "/banners.png",
+		price: "₦1500 per ft",
+	},
 
-    {   title: "Stickers & Labels",
-         description: "Printing of Church stickers, emblems, for companies etc.",
-        image:"/stickers_and_labels.png",
-        price: "₦1800 per ft"
-        }, 
+	{
+		title: "Stickers & Labels",
+		description: "Printing of Church stickers, emblems, for companies etc.",
+		image: "/stickers_and_labels.png",
+		price: "₦1800 per ft",
+	},
 
-    {   title: "Bronchures",
-        description: "Printing of Bronchure manuals for occassions and bussinesses",
-        image:"/brochures.png",
-        price: "₦500"
-    }, 
+	{
+		title: "Bronchures",
+		description: "Printing of Bronchure manuals for occassions and bussinesses",
+		image: "/brochures.png",
+		price: "₦500",
+	},
 
-    {   title: "Shirt Printing",
-        description: "We also print on shirts and school uniforms",
-        image: "/shirt_printing.png",
-        price: "₦2000"
-    }, 
+	{
+		title: "Shirt Printing",
+		description: "We also print on shirts and school uniforms",
+		image: "/shirt_printing.png",
+		price: "₦2000",
+	},
 
-    {   title: "Award", 
-        description: "We do all kinds of Awards for all occassions",
-        image:"/awards.png",
-        price: "₦5000"
-     }, 
-]
-    
+	{
+		title: "Award",
+		description: "We do all kinds of Awards for all occassions",
+		image: "/awards.png",
+		price: "₦5000",
+	},
+];
+
 export const howItWorks = [
-    {
-        title: "1. Choose",
-        description: "Pick a product and configure size, quantity and finishing",
-        icon:<CursorArrowRaysIcon className="text-green-800 h-13 w-15 mb-2"/>
-    },
+	{
+		title: "1. Choose",
+		description: "Pick a product and configure size, quantity and finishing",
+		icon: <CursorArrowRaysIcon className="text-green-800 h-13 w-15 mb-2" />,
+	},
 
-    {
-        title: "2.  Upload",
-        description: "Send us your artwork or request our free design help.",
-        icon:<ArrowUpOnSquareStackIcon className="text-green-800 h-13 w-15 mb-2"/>
-    },
+	{
+		title: "2.  Upload",
+		description: "Send us your artwork or request our free design help.",
+		icon: <ArrowUpOnSquareStackIcon className="text-green-800 h-13 w-15 mb-2" />,
+	},
 
-    {
-        title: "3. Approve & pay",
-        description: "Confirm the proof and pay securely online.",
-        icon:<CreditCardIcon className="text-green-800 h-15 w-15 mb-2"/>
-    },
+	{
+		title: "3. Approve & pay",
+		description: "Confirm the proof and pay securely online.",
+		icon: <CreditCardIcon className="text-green-800 h-15 w-15 mb-2" />,
+	},
 
-    {
-        title: "4. Delivered",
-        description: "We print, quality-check and ship to your doorstep.",
-        icon:<InboxStackIcon className="text-green-800 h-15 w-15 mb-2"/>
-    },
-]
+	{
+		title: "4. Delivered",
+		description: "We print, quality-check and ship to your doorstep.",
+		icon: <InboxStackIcon className="text-green-800 h-15 w-15 mb-2" />,
+	},
+];
 
 export const whyChooseUs = [
-    {
-        title: "Professional finishing",
-        description: "Foil, spot UV, lamination, embossing — done in-house.",
-        icon:<SparklesIcon className="text-green-800 h-13 w-15 mb-2"/>
-    },
+	{
+		title: "Professional finishing",
+		description: "Foil, spot UV, lamination, embossing — done in-house.",
+		icon: <SparklesIcon className="text-green-800 h-13 w-15 mb-2" />,
+	},
 
-    {
-        title: "Fast turnaround",
-        description: "Same-day for stickers, 48–72hr for most orders.",
-        icon:<ClockIcon className="text-green-800 h-13 w-15 mb-2"/>
-    },
+	{
+		title: "Fast turnaround",
+		description: "Same-day for stickers, 48–72hr for most orders.",
+		icon: <ClockIcon className="text-green-800 h-13 w-15 mb-2" />,
+	},
 
-    {
-        title: "Delivered nationwide",
-        description: "Reliable courier partners covering all 36 states.",
-        icon:<TruckIcon className="text-green-800 h-15 w-15 mb-2"/>
-    },
+	{
+		title: "Delivered nationwide",
+		description: "Reliable courier partners covering all 36 states.",
+		icon: <TruckIcon className="text-green-800 h-15 w-15 mb-2" />,
+	},
 
-    {
-        title: "Quality guarantee",
-        description: "Not happy with your print? We reprint free.",
-        icon:<ShieldCheckIcon className="text-green-800 h-15 w-15 mb-2"/>
-    },
-]
+	{
+		title: "Quality guarantee",
+		description: "Not happy with your print? We reprint free.",
+		icon: <ShieldCheckIcon className="text-green-800 h-15 w-15 mb-2" />,
+	},
+];
 
 export const testimony = [
-    {
-        name: "Adaeze O.",
-        Occupation: "Event planner, Lagos",
-        content: `"Our wedding invites came out stunning. The gold foil was flawless and delivery was two days early."`
-    },
-     {
-        name: "Musa I.",
-        Occupation: "Founder, Kano",
-        content: `"Ordered 500 flyers on Monday, they were at my office Wednesday. Colours were vivid — clients loved them."`
-    },
-    {
-        name: "Chidera N.",
-        Occupation: "Brand designer",
-        content: `"The upload flow is dead simple and pricing is transparent. Gidrock is now my go-to print partner."`
-    },
-]
+	{
+		name: "Adaeze O.",
+		Occupation: "Event planner, Lagos",
+		content: `"Our wedding invites came out stunning. The gold foil was flawless and delivery was two days early."`,
+	},
+	{
+		name: "Musa I.",
+		Occupation: "Founder, Kano",
+		content: `"Ordered 500 flyers on Monday, they were at my office Wednesday. Colours were vivid — clients loved them."`,
+	},
+	{
+		name: "Chidera N.",
+		Occupation: "Brand designer",
+		content: `"The upload flow is dead simple and pricing is transparent. Gidrock is now my go-to print partner."`,
+	},
+];
+
+export const dashNavLinks = [
+	{
+		label: "Overview",
+		href: "/",
+		icon: <HomeIcon width={25} className="inline me-1" />,
+	},
+	{
+		label: "Orders",
+		href: "#",
+		icon: <FaBoxOpen className="inline me-1 text-xl" />,
+	},
+	{
+		label: "Customers",
+		href: "#",
+		icon: <UserGroupIcon width={25} className="inline me-1" />,
+	},
+	{
+		label: "Users",
+		href: "#",
+		icon: <UserIcon width={25} className="inline me-1" />,
+	},
+];

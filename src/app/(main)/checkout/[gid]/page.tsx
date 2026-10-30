@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter, useParams } from "next/navigation";
 import Script from "next/script";
 import { nigerianStates } from "@/constants/nigerianStates";
-import Form from "@/app/checkout/[gid]/Form";
+import Form from "@/app/(main)/checkout/[gid]/Form";
 import {
 	handlePay,
 	handleInterstateWhatsapp,
@@ -83,7 +83,9 @@ const checkoutGID = () => {
 			<Script
 				src="https://js.paystack.co/v2/inline.js"
 				strategy="afterInteractive"
-				onError={() => console.error("Could not load the Paystack checkout script.")}
+				onError={() =>
+					console.error("Could not load the Paystack checkout script.")
+				}
 			/>
 			<div className="background flex flex-col justify-center items-center gap-4 w-full">
 				<Form

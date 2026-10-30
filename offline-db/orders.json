@@ -1,0 +1,1332 @@
+[
+  {
+    "id": "7a431403-4d76-4672-afcf-5d88a626e9b6",
+    "gid": "GID-F6RLCS5251",
+    "customer_name": "Israel Johnson",
+    "phone": "07045620164",
+    "email": "israeljhn0@gmail.com",
+    "delivery": "station delivery",
+    "cart_items": [
+      {
+        "id": "Fliers and posters-1792191441429",
+        "price": 60,
+        "config": {
+          "qty": 3,
+          "file": null,
+          "size": "A6",
+          "widthFt": 2,
+          "fileName": "Screenshot 2025-06-16 213503.png",
+          "heightFt": 2,
+          "extraNote": "",
+          "shirtType": null,
+          "thickness": "ArtPaper",
+          "customNote": "",
+          "lamination": null
+        },
+        "product": "Fliers and posters",
+        "file_path": "GID-F6RLCS5251/Fliers_and_posters-1792191441429-Screenshot_2025-06-16_213503.png"
+      }
+    ],
+    "total_price": 60,
+    "created_at": "2026-10-16T22:57:41.464823+00:00",
+    "status": "completed",
+    "address": "Umuagwo",
+    "localGovernment": "Irepodun/Ifelodun",
+    "state": "Ekiti"
+  },
+  {
+    "id": "c04c394d-762a-4680-81a1-a7d144dc4fc2",
+    "gid": "GID-GXOF208595",
+    "customer_name": "Israel Johnson",
+    "phone": "07045620164",
+    "email": "israeljhn0@gmail.com",
+    "delivery": "station delivery",
+    "cart_items": [
+      {
+        "id": "Fliers and posters-1792191535290",
+        "price": 10,
+        "config": {
+          "qty": 1,
+          "file": null,
+          "size": "BussinessCard",
+          "widthFt": 0,
+          "fileName": "Screenshot 2025-06-16 213503.png",
+          "heightFt": 0,
+          "extraNote": "",
+          "shirtType": null,
+          "thickness": "200gsm",
+          "customNote": "",
+          "lamination": null
+        },
+        "product": "Fliers and posters",
+        "file_path": "GID-GXOF208595/Fliers_and_posters-1792191535290-Screenshot_2025-06-16_213503.png"
+      }
+    ],
+    "total_price": 10,
+    "created_at": "2026-10-16T22:59:07.977817+00:00",
+    "status": "cancelled",
+    "address": "Umuagwo",
+    "localGovernment": "Ikole",
+    "state": "Ekiti"
+  },
+  {
+    "id": "8423f0eb-3808-4a33-8c76-f433acbc17ad",
+    "gid": "GID-6WY1444892",
+    "customer_name": "Israel Johnson",
+    "phone": "07045620164",
+    "email": "israeljhn0@gmail.com",
+    "delivery": "station delivery",
+    "cart_items": [
+      {
+        "id": "Fliers and posters-1792191911797",
+        "price": 80,
+        "config": {
+          "qty": 1,
+          "file": null,
+          "size": "A4",
+          "widthFt": 0,
+          "fileName": "Screenshot 2025-06-16 213503.png",
+          "heightFt": 0,
+          "extraNote": "",
+          "shirtType": null,
+          "thickness": "ArtPaper",
+          "customNote": "",
+          "lamination": null
+        },
+        "product": "Fliers and posters",
+        "file_path": "GID-6WY1444892/Fliers_and_posters-1792191911797-Screenshot_2025-06-16_213503.png"
+      }
+    ],
+    "total_price": 80,
+    "created_at": "2026-10-16T23:05:32.121338+00:00",
+    "status": "completed",
+    "address": "Umuagwo",
+    "localGovernment": "Ilejemeje",
+    "state": "Ekiti"
+  },
+  {
+    "id": "7e416f42-0f7a-4a7f-b242-45bdd2cb2d2f",
+    "gid": "GID-JHN1338745",
+    "customer_name": "Israel Johnson",
+    "phone": "07045620164",
+    "email": "israeljhn0@gmail.com",
+    "delivery": "station delivery",
+    "cart_items": [
+      {
+        "id": "Card-1792192015491",
+        "price": 60,
+        "config": {
+          "qty": 1,
+          "file": null,
+          "size": "BussinessCard",
+          "widthFt": 0,
+          "fileName": "Screenshot 2025-01-22 085719.png",
+          "heightFt": 0,
+          "extraNote": "",
+          "shirtType": null,
+          "thickness": "200gsm",
+          "customNote": "",
+          "lamination": "stone"
+        },
+        "product": "Card",
+        "file_path": "GID-JHN1338745/Card-1792192015491-Screenshot_2025-01-22_085719.png"
+      }
+    ],
+    "total_price": 60,
+    "created_at": "2026-10-16T23:07:13.748358+00:00",
+    "status": "completed",
+    "address": "Umuagwo",
+    "localGovernment": "Ikere",
+    "state": "Ekiti"
+  },
+  {
+    "id": "026ebc8b-f087-4e78-8983-0058d4e2c493",
+    "gid": "GID-3R6GE54817",
+    "customer_name": "Israel Johnson",
+    "phone": "07045620164",
+    "email": "israeljhn0@gmail.com",
+    "delivery": "station delivery",
+    "cart_items": [
+      {
+        "id": "Fliers and posters-1792192081141",
+        "price": 20,
+        "config": {
+          "qty": 1,
+          "file": null,
+          "size": "A6",
+          "widthFt": 0,
+          "fileName": "Screenshot 2025-01-22 085719.png",
+          "heightFt": 0,
+          "extraNote": "",
+          "shirtType": null,
+          "thickness": "ArtPaper",
+          "customNote": "",
+          "lamination": null
+        },
+        "product": "Fliers and posters",
+        "file_path": "GID-3R6GE54817/Fliers_and_posters-1792192081141-Screenshot_2025-01-22_085719.png"
+      }
+    ],
+    "total_price": 20,
+    "created_at": "2026-10-16T23:08:18.929529+00:00",
+    "status": "cancelled",
+    "address": "Umuagwo",
+    "localGovernment": "Ekiti East",
+    "state": "Ekiti"
+  },
+  {
+    "id": "b94b93aa-7f91-465e-aa42-34867d361ea4",
+    "gid": "GID-RNRHJ64506",
+    "customer_name": "Israel Johnson",
+    "phone": "07045620164",
+    "email": "israeljhn0@gmail.com",
+    "delivery": "station delivery",
+    "cart_items": [
+      {
+        "id": "Card-1792192181341",
+        "price": 240,
+        "config": {
+          "qty": 4,
+          "file": null,
+          "size": "BussinessCard",
+          "widthFt": 0,
+          "fileName": "Screenshot 2025-06-16 213503.png",
+          "heightFt": 0,
+          "extraNote": "",
+          "shirtType": null,
+          "thickness": "200gsm",
+          "customNote": "",
+          "lamination": "stone"
+        },
+        "product": "Card",
+        "file_path": "GID-RNRHJ64506/Card-1792192181341-Screenshot_2025-06-16_213503.png"
+      }
+    ],
+    "total_price": 240,
+    "created_at": "2026-10-16T23:09:56.638199+00:00",
+    "status": "completed",
+    "address": "Umuagwo",
+    "localGovernment": "Ikole",
+    "state": "Ekiti"
+  },
+  {
+    "id": "c3b721ea-b507-4a34-a98d-e841f3f2893a",
+    "gid": "GID-YBY0BX1596",
+    "customer_name": "Israel",
+    "phone": "07045620164",
+    "email": "israeljhn0@gmail.com",
+    "delivery": "station delivery",
+    "cart_items": [
+      {
+        "id": "Card-1792216578801",
+        "price": 20,
+        "config": {
+          "qty": 1,
+          "file": null,
+          "size": "BussinessCard",
+          "widthFt": 0,
+          "fileName": "—Pngtree—buns lunch burger yellow_6525207 (1).png",
+          "heightFt": 0,
+          "extraNote": "",
+          "shirtType": null,
+          "thickness": "200gsm",
+          "customNote": "",
+          "lamination": "gloss"
+        },
+        "product": "Card",
+        "file_path": "GID-YBY0BX1596/Card-1792216578801-_Pngtree_buns_lunch_burger_yellow_6525207__1_.png"
+      }
+    ],
+    "total_price": 20,
+    "created_at": "2026-10-17T05:58:30.023782+00:00",
+    "status": "pending",
+    "address": "Nekede ",
+    "localGovernment": "Esit Eket",
+    "state": "Akwa Ibom"
+  },
+  {
+    "id": "d4f619ef-e698-4016-8c9b-36fed61f8af4",
+    "gid": "GID-L0HBLE4287",
+    "customer_name": "Jane Jones",
+    "phone": "08102626602",
+    "email": "israeljhn0@gmail.com",
+    "delivery": "station delivery",
+    "cart_items": [
+      {
+        "id": "Card-1792225730735",
+        "price": 60,
+        "config": {
+          "qty": 1,
+          "file": null,
+          "size": "BussinessCard",
+          "widthFt": 0,
+          "fileName": "—Pngtree—blue water bubble background_1171288.png",
+          "heightFt": 0,
+          "extraNote": "",
+          "shirtType": null,
+          "thickness": "200gsm",
+          "customNote": "",
+          "lamination": "stone"
+        },
+        "product": "Card",
+        "file_path": "GID-L0HBLE4287/Card-1792225730735-_Pngtree_blue_water_bubble_background_1171288.png"
+      }
+    ],
+    "total_price": 60,
+    "created_at": "2026-10-17T08:31:52.019853+00:00",
+    "status": "completed",
+    "address": "Nekede ",
+    "localGovernment": "Sagbama",
+    "state": "Bayelsa"
+  },
+  {
+    "id": "79d6f312-d1af-419f-8dcc-fcf584cefaf8",
+    "gid": "GID-BVNSWX7728",
+    "customer_name": "Israel Johnson",
+    "phone": "07045620164",
+    "email": "israeljhn0@gmail.com",
+    "delivery": "station delivery",
+    "cart_items": [
+      {
+        "id": "Card-1792226494077",
+        "price": 60,
+        "config": {
+          "qty": 1,
+          "file": null,
+          "size": "BussinessCard",
+          "widthFt": 0,
+          "fileName": "Screenshot (1).png",
+          "heightFt": 0,
+          "extraNote": "",
+          "shirtType": null,
+          "thickness": "200gsm",
+          "customNote": "",
+          "lamination": "star-gloss"
+        },
+        "product": "Card",
+        "file_path": "GID-BVNSWX7728/Card-1792226494077-Screenshot__1_.png"
+      }
+    ],
+    "total_price": 60,
+    "created_at": "2026-10-17T08:42:18.594913+00:00",
+    "status": "completed",
+    "address": "Umuagwo",
+    "localGovernment": "Ido Osi",
+    "state": "Ekiti"
+  },
+  {
+    "id": "14b39412-0123-4ebc-bda5-7507017b4648",
+    "gid": "GID-IE7TSJ3488",
+    "customer_name": "israel johnson",
+    "phone": "0810284804",
+    "email": "israeljhn0@gmail.com",
+    "delivery": "station delivery",
+    "cart_items": [
+      {
+        "id": "Card-1792225730735",
+        "price": 60,
+        "config": {
+          "qty": 1,
+          "file": null,
+          "size": "BussinessCard",
+          "widthFt": 0,
+          "fileName": "—Pngtree—blue water bubble background_1171288.png",
+          "heightFt": 0,
+          "extraNote": "",
+          "shirtType": null,
+          "thickness": "200gsm",
+          "customNote": "",
+          "lamination": "stone"
+        },
+        "product": "Card",
+        "file_path": "GID-IE7TSJ3488/Card-1792225730735-_Pngtree_blue_water_bubble_background_1171288.png"
+      }
+    ],
+    "total_price": 60,
+    "created_at": "2026-10-17T08:48:17.803678+00:00",
+    "status": "completed",
+    "address": "Nekede",
+    "localGovernment": "Dass",
+    "state": "Bauchi"
+  },
+  {
+    "id": "1ffc24eb-94f5-45a8-9e5b-f3c1ae3495a0",
+    "gid": "GID-A9IK7Z2262",
+    "customer_name": "Israel Johnson",
+    "phone": "07045620164",
+    "email": "israeljhn0@gmail.com",
+    "delivery": "station delivery",
+    "cart_items": [
+      {
+        "id": "Fliers and posters-1792227919461",
+        "price": 160,
+        "config": {
+          "qty": 1,
+          "file": null,
+          "size": "A3",
+          "widthFt": 2,
+          "fileName": "Screenshot 2026-04-03 001625.png",
+          "heightFt": 4,
+          "extraNote": "",
+          "shirtType": null,
+          "thickness": "ArtPaper",
+          "customNote": "",
+          "lamination": null
+        },
+        "product": "Fliers and posters",
+        "file_path": "GID-A9IK7Z2262/Fliers_and_posters-1792227919461-Screenshot_2026-04-03_001625.png"
+      }
+    ],
+    "total_price": 160,
+    "created_at": "2026-10-17T09:05:32.311008+00:00",
+    "status": "completed",
+    "address": "Umuagwo",
+    "localGovernment": "Ise/Orun",
+    "state": "Ekiti"
+  },
+  {
+    "id": "d895e059-2cb3-45e6-81e1-4a7c46a5bee7",
+    "gid": "GID-4INRKI9469",
+    "customer_name": "Israel",
+    "phone": "08102626605",
+    "email": "israeljhn0@gmail.com",
+    "delivery": "station delivery",
+    "cart_items": [
+      {
+        "id": "Card-1792351126385",
+        "price": 60,
+        "config": {
+          "qty": 1,
+          "file": null,
+          "size": "BussinessCard",
+          "widthFt": 0,
+          "fileName": "—Pngtree—abstract polygonal space low poly_1178266.jpg",
+          "heightFt": 0,
+          "extraNote": "",
+          "shirtType": null,
+          "thickness": "200gsm",
+          "customNote": "",
+          "lamination": "star-gloss"
+        },
+        "product": "Card",
+        "file_path": "GID-4INRKI9469/Card-1792351126385-_Pngtree_abstract_polygonal_space_low_poly_1178266.jpg"
+      }
+    ],
+    "total_price": 60,
+    "created_at": "2026-10-18T19:19:54.846452+00:00",
+    "status": "completed",
+    "address": "Nekede",
+    "localGovernment": "Awka North",
+    "state": "Anambra"
+  },
+  {
+    "id": "0fd44bea-d564-41ce-bea3-518acbaaaa60",
+    "gid": "GID-54U4YM2044",
+    "customer_name": "Israel Johnson",
+    "phone": "07045620164",
+    "email": "israeljhn0@gmail.com",
+    "delivery": "station delivery",
+    "cart_items": [
+      {
+        "id": "Card-1792395098436",
+        "price": 600,
+        "config": {
+          "qty": 10,
+          "file": null,
+          "size": "BussinessCard",
+          "widthFt": 0,
+          "fileName": "Screenshot 2025-06-16 213503.png",
+          "heightFt": 0,
+          "extraNote": "",
+          "shirtType": null,
+          "thickness": "300gsm",
+          "customNote": "",
+          "lamination": "stone"
+        },
+        "product": "Card",
+        "file_path": "GID-54U4YM2044/Card-1792395098436-Screenshot_2025-06-16_213503.png"
+      }
+    ],
+    "total_price": 600,
+    "created_at": "2026-10-19T07:32:21.111845+00:00",
+    "status": "completed",
+    "address": "Umuagwo",
+    "localGovernment": "Gbonyin",
+    "state": "Ekiti"
+  },
+  {
+    "id": "333396bc-0ad0-4d55-a625-bc65174581fc",
+    "gid": "GID-M236I26951",
+    "customer_name": "Israel Johnson",
+    "phone": "07045620164",
+    "email": "israeljhn0@gmail.com",
+    "delivery": "station delivery",
+    "cart_items": [
+      {
+        "id": "Card-1792451474095",
+        "price": 60,
+        "config": {
+          "qty": 1,
+          "file": null,
+          "size": "BussinessCard",
+          "widthFt": 0,
+          "fileName": "Screenshot 2026-04-09 173823.png",
+          "heightFt": 0,
+          "extraNote": "",
+          "shirtType": null,
+          "thickness": "200gsm",
+          "customNote": "",
+          "lamination": "stone"
+        },
+        "product": "Card",
+        "file_path": "GID-M236I26951/Card-1792451474095-Screenshot_2026-04-09_173823.png"
+      }
+    ],
+    "total_price": 60,
+    "created_at": "2026-10-19T23:11:40.799335+00:00",
+    "status": "completed",
+    "address": "Umuagwo",
+    "localGovernment": "Ido Osi",
+    "state": "Ekiti"
+  },
+  {
+    "id": "9da26e21-c6ff-4c45-8a62-b8c4b6bf4bd5",
+    "gid": "GID-SP7M3I6901",
+    "customer_name": "Israel Johnson",
+    "phone": "07045620164",
+    "email": "israeljhn0@gmail.com",
+    "delivery": "station delivery",
+    "cart_items": [
+      {
+        "id": "Card-1792451683528",
+        "price": 60,
+        "config": {
+          "qty": 1,
+          "file": null,
+          "size": "BussinessCard",
+          "widthFt": 0,
+          "fileName": "Screenshot 2025-01-22 085719.png",
+          "heightFt": 0,
+          "extraNote": "",
+          "shirtType": null,
+          "thickness": "200gsm",
+          "customNote": "",
+          "lamination": "stone"
+        },
+        "product": "Card",
+        "file_path": "GID-SP7M3I6901/Card-1792451683528-Screenshot_2025-01-22_085719.png"
+      }
+    ],
+    "total_price": 60,
+    "created_at": "2026-10-19T23:15:30.619198+00:00",
+    "status": "completed",
+    "address": "Umuagwo",
+    "localGovernment": "Ikere",
+    "state": "Ekiti"
+  },
+  {
+    "id": "79f1b7f5-e45b-421f-8d87-e0141219b6d5",
+    "gid": "GID-2WU85X2959",
+    "customer_name": "Israel Johnson",
+    "phone": "07045620164",
+    "email": "israeljhn0@gmail.com",
+    "delivery": "station delivery",
+    "cart_items": [
+      {
+        "id": "Banners-1792452139596",
+        "price": 10000,
+        "config": {
+          "qty": 1,
+          "file": null,
+          "size": null,
+          "widthFt": 4,
+          "fileName": "Screenshot 2025-01-22 085719.png",
+          "heightFt": 5,
+          "extraNote": "",
+          "shirtType": null,
+          "thickness": null,
+          "customNote": "",
+          "lamination": null
+        },
+        "product": "Banners",
+        "file_path": "GID-2WU85X2959/Banners-1792452139596-Screenshot_2025-01-22_085719.png"
+      }
+    ],
+    "total_price": 10000,
+    "created_at": "2026-10-19T23:23:16.038932+00:00",
+    "status": "completed",
+    "address": "Umuagwo",
+    "localGovernment": "Ikere",
+    "state": "Ekiti"
+  },
+  {
+    "id": "3843b769-a2a4-4251-a126-e443b7ec0d13",
+    "gid": "GID-27H0WC6860",
+    "customer_name": "Israel Johnson",
+    "phone": "07045620164",
+    "email": "israeljhn0@gmail.com",
+    "delivery": "station delivery",
+    "cart_items": [
+      {
+        "id": "Banners-1792452452642",
+        "price": 4020,
+        "config": {
+          "qty": 1,
+          "file": null,
+          "size": "A6",
+          "widthFt": 4,
+          "fileName": "Screenshot 2025-01-22 085719.png",
+          "heightFt": 2,
+          "extraNote": "",
+          "shirtType": null,
+          "thickness": null,
+          "customNote": "",
+          "lamination": null
+        },
+        "product": "Banners",
+        "file_path": "GID-27H0WC6860/Banners-1792452452642-Screenshot_2025-01-22_085719.png"
+      }
+    ],
+    "total_price": 4020,
+    "created_at": "2026-10-19T23:28:30.57133+00:00",
+    "status": "completed",
+    "address": "Umuagwo",
+    "localGovernment": "Ikole",
+    "state": "Ekiti"
+  },
+  {
+    "id": "50c6ce11-22bd-4a10-8fc8-e72e16e1f92b",
+    "gid": "GID-MKHDM44368",
+    "customer_name": "Israel Johnson",
+    "phone": "07045620164",
+    "email": "israeljhn0@gmail.com",
+    "delivery": "station delivery",
+    "cart_items": [
+      {
+        "id": "Stickers & Labels-1792452670990",
+        "price": 8000,
+        "config": {
+          "qty": 1,
+          "file": null,
+          "size": null,
+          "widthFt": 4,
+          "fileName": "Screenshot 2025-06-16 213503.png",
+          "heightFt": 4,
+          "extraNote": "",
+          "shirtType": null,
+          "thickness": null,
+          "customNote": "",
+          "lamination": null
+        },
+        "product": "Stickers & Labels",
+        "file_path": "GID-MKHDM44368/Stickers___Labels-1792452670990-Screenshot_2025-06-16_213503.png"
+      }
+    ],
+    "total_price": 8000,
+    "created_at": "2026-10-19T23:31:46.004219+00:00",
+    "status": "completed",
+    "address": "Umuagwo",
+    "localGovernment": "Ilejemeje",
+    "state": "Ekiti"
+  },
+  {
+    "id": "617518fb-b618-4109-9667-ef4a41db5557",
+    "gid": "GID-U27ACA5812",
+    "customer_name": "Israel Johnson",
+    "phone": "07045620164",
+    "email": "israeljhn0@gmail.com",
+    "delivery": "station delivery",
+    "cart_items": [
+      {
+        "id": "Fliers and posters-1792453371179",
+        "price": 400,
+        "config": {
+          "qty": 5,
+          "file": null,
+          "size": "A4",
+          "widthFt": 0,
+          "fileName": "Screenshot 2026-04-03 001417.png",
+          "heightFt": 0,
+          "extraNote": "",
+          "shirtType": null,
+          "thickness": "ArtPaper",
+          "customNote": "",
+          "lamination": null
+        },
+        "product": "Fliers and posters",
+        "file_path": "GID-U27ACA5812/Fliers_and_posters-1792453371179-Screenshot_2026-04-03_001417.png"
+      }
+    ],
+    "total_price": 400,
+    "created_at": "2026-10-19T23:43:04.847341+00:00",
+    "status": "completed",
+    "address": "Umuagwo",
+    "localGovernment": "Ikere",
+    "state": "Ekiti"
+  },
+  {
+    "id": "04cbf1e3-dc95-47b5-8a94-15740abaaadf",
+    "gid": "GID-CYJI4E9067",
+    "customer_name": "Israel Johnson",
+    "phone": "07045620164",
+    "email": "israeljhn0@gmail.com",
+    "delivery": "station delivery",
+    "cart_items": [
+      {
+        "id": "Fliers and posters-1792454215571",
+        "price": 480,
+        "config": {
+          "qty": 12,
+          "file": null,
+          "size": "A5",
+          "widthFt": 0,
+          "fileName": "Screenshot 2026-05-11 193812.png",
+          "heightFt": 0,
+          "extraNote": "",
+          "shirtType": null,
+          "thickness": "ArtPaper",
+          "customNote": "",
+          "lamination": null
+        },
+        "product": "Fliers and posters",
+        "file_path": "GID-CYJI4E9067/Fliers_and_posters-1792454215571-Screenshot_2026-05-11_193812.png"
+      }
+    ],
+    "total_price": 480,
+    "created_at": "2026-10-19T23:57:12.99886+00:00",
+    "status": "completed",
+    "address": "Umuagwo",
+    "localGovernment": "Ijero",
+    "state": "Ekiti"
+  },
+  {
+    "id": "4387cc91-254c-46c0-b8ae-3c22bfceadfd",
+    "gid": "GID-TZJ7S22971",
+    "customer_name": "Israel Johnson",
+    "phone": "07045620164",
+    "email": "israeljhn0@gmail.com",
+    "delivery": "station delivery",
+    "cart_items": [
+      {
+        "id": "Card-1792455568877",
+        "price": 660,
+        "config": {
+          "qty": 11,
+          "file": null,
+          "size": "BussinessCard",
+          "widthFt": 0,
+          "fileName": "Screenshot 2024-10-03 172329.png",
+          "heightFt": 0,
+          "extraNote": "",
+          "shirtType": null,
+          "thickness": "200gsm",
+          "customNote": "",
+          "lamination": "stone"
+        },
+        "product": "Card",
+        "file_path": "GID-TZJ7S22971/Card-1792455568877-Screenshot_2024-10-03_172329.png"
+      }
+    ],
+    "total_price": 660,
+    "created_at": "2026-10-20T00:19:59.027474+00:00",
+    "status": "completed",
+    "address": "Umuagwo",
+    "localGovernment": "Moba",
+    "state": "Ekiti"
+  },
+  {
+    "id": "6984f497-c2fc-4520-b8d6-80e821187162",
+    "gid": "GID-IY514E3044",
+    "customer_name": "Gideon",
+    "phone": "08102626602",
+    "email": "israeljhn0@gmail.com",
+    "delivery": "station delivery",
+    "cart_items": [
+      {
+        "id": "Card-1792524959739",
+        "price": 400,
+        "config": {
+          "qty": 1,
+          "file": null,
+          "size": "A3",
+          "widthFt": 0,
+          "fileName": "—Pngtree—abstract polygonal space low poly_1178266.jpg",
+          "heightFt": 0,
+          "extraNote": "",
+          "shirtType": null,
+          "thickness": "200gsm",
+          "customNote": "",
+          "lamination": "stone"
+        },
+        "product": "Card",
+        "file_path": "GID-IY514E3044/Card-1792524959739-_Pngtree_abstract_polygonal_space_low_poly_1178266.jpg"
+      }
+    ],
+    "total_price": 400,
+    "created_at": "2026-10-20T19:37:25.030861+00:00",
+    "status": "completed",
+    "address": "Nekede",
+    "localGovernment": "Idah",
+    "state": "Kogi"
+  },
+  {
+    "id": "168efead-b6a1-4f8e-848d-df8b879e21b3",
+    "gid": "GID-OYRNJF1920",
+    "customer_name": "Israel Johnson",
+    "phone": "07045620164",
+    "email": "israeljhn0@gmail.com",
+    "delivery": "station delivery",
+    "cart_items": [
+      {
+        "id": "Banners-1792534638709",
+        "price": 6000,
+        "config": {
+          "qty": 1,
+          "file": null,
+          "size": null,
+          "widthFt": 3,
+          "fileName": "Screenshot 2025-06-16 213503.png",
+          "heightFt": 4,
+          "extraNote": "",
+          "shirtType": null,
+          "thickness": null,
+          "customNote": "",
+          "lamination": null
+        },
+        "product": "Banners",
+        "file_path": "GID-OYRNJF1920/Banners-1792534638709-Screenshot_2025-06-16_213503.png"
+      }
+    ],
+    "total_price": 6000,
+    "created_at": "2026-10-20T22:17:53.26728+00:00",
+    "status": "completed",
+    "address": "Umuagwo",
+    "localGovernment": "Ijero",
+    "state": "Ekiti"
+  },
+  {
+    "id": "2ef9782a-f205-4f6e-bce5-3ebcdbf76b90",
+    "gid": "GID-CMAAEL1343",
+    "customer_name": "Israel Johnson",
+    "phone": "07045620164",
+    "email": "israeljhn0@gmail.com",
+    "delivery": "station delivery",
+    "cart_items": [
+      {
+        "id": "Fliers and posters-1792535258331",
+        "price": 10,
+        "config": {
+          "qty": 1,
+          "file": null,
+          "size": "BussinessCard",
+          "widthFt": 0,
+          "fileName": "Screenshot 2025-06-19 013005.png",
+          "heightFt": 0,
+          "extraNote": "",
+          "shirtType": null,
+          "thickness": "200gsm",
+          "customNote": "",
+          "lamination": null
+        },
+        "product": "Fliers and posters",
+        "file_path": "GID-CMAAEL1343/Fliers_and_posters-1792535258331-Screenshot_2025-06-19_013005.png"
+      }
+    ],
+    "total_price": 10,
+    "created_at": "2026-10-20T22:28:09.902332+00:00",
+    "status": "completed",
+    "address": "Umuagwo",
+    "localGovernment": "Ikere",
+    "state": "Ekiti"
+  },
+  {
+    "id": "1e92493c-cfe1-4252-a408-dd0f4294318e",
+    "gid": "GID-8DAJU63733",
+    "customer_name": "Israel Johnson",
+    "phone": "07045620164",
+    "email": "israeljhn0@gmail.com",
+    "delivery": "station delivery",
+    "cart_items": [
+      {
+        "id": "Banners-1792535390779",
+        "price": 4500,
+        "config": {
+          "qty": 1,
+          "file": null,
+          "size": null,
+          "widthFt": 3,
+          "fileName": "Nke map.png",
+          "heightFt": 3,
+          "extraNote": "",
+          "shirtType": null,
+          "thickness": null,
+          "customNote": "",
+          "lamination": null
+        },
+        "product": "Banners",
+        "file_path": "GID-8DAJU63733/Banners-1792535390779-Nke_map.png"
+      }
+    ],
+    "total_price": 4500,
+    "created_at": "2026-10-20T22:30:46.076179+00:00",
+    "status": "completed",
+    "address": "Umuagwo",
+    "localGovernment": "Oji River",
+    "state": "Enugu"
+  },
+  {
+    "id": "2e87bee5-6df3-4a4a-ac32-e480f5cc18cc",
+    "gid": "GID-3HD77J4681",
+    "customer_name": "Jane",
+    "phone": "08102626602",
+    "email": "israeljhn0@gmail.com",
+    "delivery": "station delivery",
+    "cart_items": [
+      {
+        "id": "Card-1792537401860",
+        "price": 60,
+        "config": {
+          "qty": 1,
+          "file": null,
+          "size": "BussinessCard",
+          "widthFt": 0,
+          "fileName": "—Pngtree—abstract polygonal space low poly_1178266.jpg",
+          "heightFt": 0,
+          "extraNote": "",
+          "shirtType": null,
+          "thickness": "200gsm",
+          "customNote": "",
+          "lamination": "stone"
+        },
+        "product": "Card",
+        "file_path": "GID-3HD77J4681/Card-1792537401860-_Pngtree_abstract_polygonal_space_low_poly_1178266.jpg"
+      }
+    ],
+    "total_price": 60,
+    "created_at": "2026-10-20T23:04:06.735332+00:00",
+    "status": "completed",
+    "address": "Nekede Rd",
+    "localGovernment": "Ideato North",
+    "state": "Imo"
+  },
+  {
+    "id": "ef875b67-cb95-48c4-8c49-28a56a1de30f",
+    "gid": "GID-DNC5V82366",
+    "customer_name": "Israel Johnson",
+    "phone": "07045620164",
+    "email": "israeljhn0@gmail.com",
+    "delivery": "station delivery",
+    "cart_items": [
+      {
+        "id": "Card-1792537708288",
+        "price": 2400,
+        "config": {
+          "qty": 40,
+          "file": null,
+          "size": "BussinessCard",
+          "widthFt": 0,
+          "fileName": "Screenshot 2025-06-16 213503.png",
+          "heightFt": 0,
+          "extraNote": "",
+          "shirtType": null,
+          "thickness": "200gsm",
+          "customNote": "",
+          "lamination": "stone"
+        },
+        "product": "Card",
+        "file_path": "GID-DNC5V82366/Card-1792537708288-Screenshot_2025-06-16_213503.png"
+      }
+    ],
+    "total_price": 2400,
+    "created_at": "2026-10-20T23:09:08.054561+00:00",
+    "status": "completed",
+    "address": "Umuagwo",
+    "localGovernment": "Igbo Eze North",
+    "state": "Enugu"
+  },
+  {
+    "id": "a9b66bfc-3f7d-426b-a674-d1fd537250ce",
+    "gid": "GID-I6T2K11030",
+    "customer_name": "Israel Johnson",
+    "phone": "07045620164",
+    "email": "israeljhn0@gmail.com",
+    "delivery": "station delivery",
+    "cart_items": [
+      {
+        "id": "Fliers and posters-1792540327734",
+        "price": 2200,
+        "config": {
+          "qty": 11,
+          "file": null,
+          "size": "A3",
+          "widthFt": 0,
+          "fileName": "Screenshot 2026-04-09 173823.png",
+          "heightFt": 0,
+          "extraNote": "",
+          "shirtType": null,
+          "thickness": "200gsm",
+          "customNote": "",
+          "lamination": null
+        },
+        "product": "Fliers and posters",
+        "file_path": "GID-I6T2K11030/Fliers_and_posters-1792540327734-Screenshot_2026-04-09_173823.png"
+      }
+    ],
+    "total_price": 2200,
+    "created_at": "2026-10-20T23:52:19.418165+00:00",
+    "status": "completed",
+    "address": "Umuagwo",
+    "localGovernment": "Igbo Eze South",
+    "state": "Enugu"
+  },
+  {
+    "id": "9994b6f4-3a1a-4776-b751-01107c0181bb",
+    "gid": "GID-BCPIPR9940",
+    "customer_name": "Israel Johnson",
+    "phone": "07045620164",
+    "email": "israeljhn0@gmail.com",
+    "delivery": "station delivery",
+    "cart_items": [
+      {
+        "id": "Card-1792540675432",
+        "price": 200,
+        "config": {
+          "qty": 10,
+          "file": null,
+          "size": "BussinessCard",
+          "widthFt": 0,
+          "fileName": "Screenshot 2026-03-02 092927.png",
+          "heightFt": 0,
+          "extraNote": "",
+          "shirtType": null,
+          "thickness": "200gsm",
+          "customNote": "",
+          "lamination": "gloss"
+        },
+        "product": "Card",
+        "file_path": "GID-BCPIPR9940/Card-1792540675432-Screenshot_2026-03-02_092927.png"
+      }
+    ],
+    "total_price": 200,
+    "created_at": "2026-10-20T23:58:16.442527+00:00",
+    "status": "completed",
+    "address": "Umuagwo",
+    "localGovernment": "Nsukka",
+    "state": "Enugu"
+  },
+  {
+    "id": "827a6296-a08c-414e-8df9-79cf31e2e3f1",
+    "gid": "GID-1URDIU9512",
+    "customer_name": "Jane",
+    "phone": "08102626602",
+    "email": "israeljhn0@gmail.com",
+    "delivery": "station delivery",
+    "cart_items": [
+      {
+        "id": "Banners-1792541305199",
+        "price": 8000,
+        "config": {
+          "qty": 1,
+          "file": null,
+          "size": null,
+          "widthFt": 4,
+          "fileName": "—Pngtree—blue splash water flower cosmetic_1071178.jpg",
+          "heightFt": 4,
+          "extraNote": "",
+          "shirtType": null,
+          "thickness": null,
+          "customNote": "",
+          "lamination": null
+        },
+        "product": "Banners",
+        "file_path": "GID-1URDIU9512/Banners-1792541305199-_Pngtree_blue_splash_water_flower_cosmetic_1071178.jpg"
+      }
+    ],
+    "total_price": 8000,
+    "created_at": "2026-10-21T00:09:28.722495+00:00",
+    "status": "completed",
+    "address": "Nekede",
+    "localGovernment": "Sagbama",
+    "state": "Bayelsa"
+  },
+  {
+    "id": "d416958e-a458-4641-9cc2-0eb8fdb1e3ec",
+    "gid": "GID-X1P12X3914",
+    "customer_name": "Johnson",
+    "phone": "08123423456",
+    "email": "israeljhn0@gmail.com",
+    "delivery": "station delivery",
+    "cart_items": [
+      {
+        "id": "Card-1792624186838",
+        "price": 2000,
+        "config": {
+          "qty": 5,
+          "file": null,
+          "size": "A3",
+          "widthFt": 0,
+          "fileName": "—Pngtree—black and white photocopier machine_19845434.png",
+          "heightFt": 0,
+          "extraNote": "",
+          "shirtType": null,
+          "thickness": "200gsm",
+          "customNote": "",
+          "lamination": "stone"
+        },
+        "product": "Card",
+        "file_path": "GID-X1P12X3914/Card-1792624186838-_Pngtree_black_and_white_photocopier_machine_19845434.png"
+      }
+    ],
+    "total_price": 2000,
+    "created_at": "2026-10-21T23:11:02.211368+00:00",
+    "status": "completed",
+    "address": "Nekede",
+    "localGovernment": "Gamawa",
+    "state": "Bauchi"
+  },
+  {
+    "id": "ef702f40-9a59-484b-9537-f0dd6ee44c90",
+    "gid": "GID-XLKDP39875",
+    "customer_name": "Israel Johnson",
+    "phone": "08102626602",
+    "email": "israeljhn0@gmail.com",
+    "delivery": "station delivery",
+    "cart_items": [
+      {
+        "id": "Card-1792624565509",
+        "price": 400,
+        "config": {
+          "qty": 1,
+          "file": null,
+          "size": "A3",
+          "widthFt": 0,
+          "fileName": "—Pngtree—blue splash water flower cosmetic_1071178.jpg",
+          "heightFt": 0,
+          "extraNote": "",
+          "shirtType": null,
+          "thickness": "200gsm",
+          "customNote": "",
+          "lamination": "stone"
+        },
+        "product": "Card",
+        "file_path": "GID-XLKDP39875/Card-1792624565509-_Pngtree_blue_splash_water_flower_cosmetic_1071178.jpg"
+      }
+    ],
+    "total_price": 400,
+    "created_at": "2026-10-21T23:17:11.770051+00:00",
+    "status": "completed",
+    "address": "Nekede",
+    "localGovernment": "Dass",
+    "state": "Bauchi"
+  },
+  {
+    "id": "273c926c-129f-4bb0-b905-af17509a95fc",
+    "gid": "GID-L4EKAD0405",
+    "customer_name": "Israel",
+    "phone": "08102626602",
+    "email": "israeljhn0@gmail.com",
+    "delivery": "station delivery",
+    "cart_items": [
+      {
+        "id": "Card-1792625367923",
+        "price": 400,
+        "config": {
+          "qty": 1,
+          "file": null,
+          "size": "A3",
+          "widthFt": 0,
+          "fileName": "—Pngtree—3d ribbon promotional decorative texture_7354289.png",
+          "heightFt": 0,
+          "extraNote": "",
+          "shirtType": null,
+          "thickness": "200gsm",
+          "customNote": "",
+          "lamination": "stone"
+        },
+        "product": "Card",
+        "file_path": "GID-L4EKAD0405/Card-1792625367923-_Pngtree_3d_ribbon_promotional_decorative_texture_7354289.png"
+      }
+    ],
+    "total_price": 400,
+    "created_at": "2026-10-21T23:30:29.376236+00:00",
+    "status": "completed",
+    "address": "Nekede",
+    "localGovernment": "Southern Ijaw",
+    "state": "Bayelsa"
+  },
+  {
+    "id": "97d5269d-97a4-413a-bfcc-599c08174f8e",
+    "gid": "GID-2Y8B9A8218",
+    "customer_name": "Israel",
+    "phone": "08182626602",
+    "email": "israeljhn0@gmail.com",
+    "delivery": "station delivery",
+    "cart_items": [
+      {
+        "id": "Card-1792703810398",
+        "price": 400,
+        "config": {
+          "qty": 1,
+          "file": null,
+          "size": "A3",
+          "widthFt": 0,
+          "fileName": "—Pngtree—buns lunch burger yellow_6525207 (1).png",
+          "heightFt": 0,
+          "extraNote": "",
+          "shirtType": null,
+          "thickness": "200gsm",
+          "customNote": "",
+          "lamination": "stone"
+        },
+        "product": "Card",
+        "file_path": "GID-2Y8B9A8218/Card-1792703810398-_Pngtree_buns_lunch_burger_yellow_6525207__1_.png"
+      }
+    ],
+    "total_price": 400,
+    "created_at": "2026-10-22T21:18:13.862302+00:00",
+    "status": "completed",
+    "address": "Nekede",
+    "localGovernment": "Guma",
+    "state": "Benue"
+  },
+  {
+    "id": "203f5754-9d48-4c1a-a368-5f819cd1e77d",
+    "gid": "GID-62H7YT9542",
+    "customer_name": "Israel",
+    "phone": "08102626602",
+    "email": "israeljhn0@gmail.com",
+    "delivery": "station delivery",
+    "cart_items": [
+      {
+        "id": "Card-1792711104863",
+        "price": 400,
+        "config": {
+          "qty": 1,
+          "file": null,
+          "size": "A3",
+          "widthFt": 0,
+          "fileName": "—Pngtree—black water element_7063905.png",
+          "heightFt": 0,
+          "extraNote": "",
+          "shirtType": null,
+          "thickness": "200gsm",
+          "customNote": "",
+          "lamination": "stone"
+        },
+        "product": "Card",
+        "file_path": "GID-62H7YT9542/Card-1792711104863-_Pngtree_black_water_element_7063905.png"
+      }
+    ],
+    "total_price": 400,
+    "created_at": "2026-10-22T23:19:27.57239+00:00",
+    "status": "completed",
+    "address": "Nekede",
+    "localGovernment": "Sagbama",
+    "state": "Bayelsa"
+  },
+  {
+    "id": "57f06d66-ed73-4bfd-af0a-3217f6ad613d",
+    "gid": "GID-HIT4PA7018",
+    "customer_name": "Amayn Consult",
+    "phone": "07045620164",
+    "email": "amaynconsultancy91@gmail.com",
+    "delivery": "station delivery",
+    "cart_items": [
+      {
+        "id": "Card-1792938343017",
+        "price": 400,
+        "config": {
+          "qty": 1,
+          "file": null,
+          "size": "A3",
+          "widthFt": 0,
+          "fileName": "Screenshot 2025-01-22 085719.png",
+          "heightFt": 0,
+          "extraNote": "",
+          "shirtType": null,
+          "thickness": "200gsm",
+          "customNote": "",
+          "lamination": "stone"
+        },
+        "product": "Card",
+        "file_path": "GID-HIT4PA7018/Card-1792938343017-Screenshot_2025-01-22_085719.png"
+      }
+    ],
+    "total_price": 400,
+    "created_at": "2026-10-25T14:47:24.582472+00:00",
+    "status": "completed",
+    "address": "Umuagwo",
+    "localGovernment": "Ovia North-East",
+    "state": "Edo"
+  },
+  {
+    "id": "75cb5a9f-4dd5-44f1-ac21-f590f1758975",
+    "gid": "GID-MJP9BF2686",
+    "customer_name": "Israel Johnson",
+    "phone": "07045620164",
+    "email": "israeljhn0@gmail.com",
+    "delivery": "station delivery",
+    "cart_items": [
+      {
+        "id": "Banners-1792939759220",
+        "price": 4000,
+        "config": {
+          "qty": 1,
+          "file": null,
+          "size": null,
+          "widthFt": 2,
+          "fileName": "Screenshot 2025-06-16 213503.png",
+          "heightFt": 4,
+          "extraNote": "",
+          "shirtType": null,
+          "thickness": null,
+          "customNote": "",
+          "lamination": null
+        },
+        "product": "Banners",
+        "file_path": "GID-MJP9BF2686/Banners-1792939759220-Screenshot_2025-06-16_213503.png"
+      }
+    ],
+    "total_price": 4000,
+    "created_at": "2026-10-25T14:49:47.395153+00:00",
+    "status": "completed",
+    "address": "Umuagwo",
+    "localGovernment": "Udenu",
+    "state": "Enugu"
+  },
+  {
+    "id": "f62c76b8-b95c-4b43-8dfe-fb0febe631dc",
+    "gid": "GID-Q1PB433898",
+    "customer_name": "Israel Johnson",
+    "phone": "07045620164",
+    "email": "israeljhn0@gmail.com",
+    "delivery": "station delivery",
+    "cart_items": [
+      {
+        "id": "Card-1792940031041",
+        "price": 60,
+        "config": {
+          "qty": 1,
+          "file": null,
+          "size": "BussinessCard",
+          "widthFt": 0,
+          "fileName": "Screenshot 2026-03-02 092927.png",
+          "heightFt": 0,
+          "extraNote": "",
+          "shirtType": null,
+          "thickness": "200gsm",
+          "customNote": "",
+          "lamination": "stone"
+        },
+        "product": "Card",
+        "file_path": "GID-Q1PB433898/Card-1792940031041-Screenshot_2026-03-02_092927.png"
+      }
+    ],
+    "total_price": 60,
+    "created_at": "2026-10-25T14:54:12.70442+00:00",
+    "status": "completed",
+    "address": "Umuagwo",
+    "localGovernment": "Udenu",
+    "state": "Enugu"
+  }
+]

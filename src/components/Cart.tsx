@@ -4,10 +4,10 @@ import { useEffect, useState } from "react";
 import { useCartStore } from "./CartContext";
 import type { CartItem } from "./cartTypes";
 import Image from "next/image";
-import { formatCurrency } from "@/app/products/configuration/formatCurrency";
+import { formatCurrency } from "@/app/(main)/products/configuration/formatCurrency";
 import { getCartImage } from "./cartImageStorage";
 import { useRouter } from "next/navigation";
-import { generateGID } from "@/app/lib/generateGID";
+import { generateGID } from "@/app/(main)/lib/generateGID";
 
 type CartProps = {
 	cartItems: CartItem[];

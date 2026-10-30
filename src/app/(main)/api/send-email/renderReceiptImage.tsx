@@ -3,8 +3,8 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
-import { formatCurrency } from "@/app/products/configuration/formatCurrency";
-import type { ReceiptOrder } from "@/app/receipt/[gid]/actions";
+import { formatCurrency } from "@/app/(main)/products/configuration/formatCurrency";
+import type { ReceiptOrder } from "@/app/(main)/receipt/[gid]/actions";
 
 export const renderReceiptImage = async (
 	order: ReceiptOrder,
