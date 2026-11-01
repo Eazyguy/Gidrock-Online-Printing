@@ -15,7 +15,7 @@ const MobileNav = ({
 	return (
 		<>
 			<aside
-				className={`${mobileNav ? "w-0 overflow-hidden" : " h-[calc(100vh-60px)] w-60 mt-2 rounded"} border-gray-800 h-[calc(100vh-60px)] border-y-0 bg-linear-to-t from-green-50 via-white to-green-900 xs:hidden lg:block shadow-lg shadow-gray-900 relative transition-all duration-200`}
+				className={`${mobileNav ? "w-0 " : " h-[calc(100vh-60px)] w-60 mt-2 rounded"} border-gray-800 h-[calc(100vh-60px)] border-y-0 bg-linear-to-t overflow-hidden from-green-50 via-white to-green-900 xs:hidden lg:block shadow-lg shadow-gray-900 relative transition-all duration-200`}
 			>
 				<Image
 					src={"/uu.png"}

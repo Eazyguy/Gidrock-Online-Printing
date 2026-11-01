@@ -14,9 +14,7 @@ const AsideNav = ({
 
 	return (
 		<>
-			<aside
-				className={`${collapseNav ? "md:w-12 min-h-screen pt-5 mt-0 rounded-none" : " h-[calc(100vh-60px)] w-60 mt-2 rounded"} border-gray-800 h-[calc(100vh-60px)] border-y-0 bg-linear-to-t from-green-50 via-white to-green-900 xs:hidden lg:block shadow-lg shadow-gray-900 relative transition-all duration-200 `}
-			>
+			<aside className={``}>
 				{collapseNav ? (
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
