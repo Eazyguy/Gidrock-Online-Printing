@@ -10,8 +10,6 @@ const layout = ({ children }: { children: React.ReactNode }) => {
 	const [isMobile, setIsMobile] = useState<boolean>(false);
 	const [mobileNav, setMobileNav] = useState<boolean>(true);
 
-	console.log(isMobile);
-
 	useEffect(() => {
 		const checkMobile = () => setIsMobile(window.innerWidth < 768);
 
@@ -42,7 +40,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
 					</div>
 				)}
 
-				<main className="w-full min-h-screen border flex-1 border-black">
+				<main className="w-full min-h-screen flex-1 px-5 mb-20 md:mt-25">
 					{children}
 				</main>
 			</div>

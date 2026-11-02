@@ -13,8 +13,6 @@ const Header = ({
 	setMobileNav: React.Dispatch<React.SetStateAction<boolean>>;
 	collapseNav: boolean;
 }) => {
-	console.log(collapseNav);
-
 	return (
 		<div>
 			{isMobile ? (
@@ -54,7 +52,7 @@ const Header = ({
 					height={150}
 					className={
 						collapseNav
-							? "ms-15 absolute bg-linear-60 from-green-500 via-green-900 to-green-600 rounded-full shadow-lg shadow-gray-900 mt-10"
+							? "ms-15 absolute bg-linear-60 from-green-500 via-green-900 to-green-600 rounded-full shadow-lg shadow-gray-900 mt-3"
 							: "hidden"
 					}
 				/>

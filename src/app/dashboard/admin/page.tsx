@@ -1,10 +1,13 @@
 "use client";
+import orders from "../../../../offline-db/orders.json";
+import OverviewCards from "./sections/overviewCards";
 
 const admin = () => {
+	console.log(orders);
 	return (
-		<>
-			<h1 className="text-black">Hi</h1>
-		</>
+		<div>
+			<OverviewCards orders={orders} />
+		</div>
 	);
 };
 
