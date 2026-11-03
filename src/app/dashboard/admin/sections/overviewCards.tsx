@@ -8,7 +8,7 @@ import { formatDate } from "../../middleware/formatDate";
 import { filterOrdersByStatus } from "../../middleware/filterOrdersByStatus";
 import { orders } from "../types/ordersTypes";
 
-const overviewCards = ({ orders }: { orders: orders }) => {
+const overviewCards = ({ orders }: { orders: orders[] }) => {
 	return (
 		<>
 			<h2 className="text-black text-2xl font-bold">Dashboard</h2>
