@@ -1,96 +1,25 @@
 import { useMemo, useState, useEffect } from "react";
 import DataTable, { TableColumn } from "react-data-table-component";
 import { type orders } from "../types/ordersTypes";
-import { formatCurrency } from "@/app/(main)/products/configuration/formatCurrency";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 dayjs.extend(relativeTime);
-import { EyeIcon } from "@heroicons/react/24/solid";
+import { columns } from "../../components/TableColumns";
+
 import { FaDownload, FaPlus } from "react-icons/fa6";
 import { AiOutlineSearch, AiOutlineFilter } from "react-icons/ai";
-
-function SkeletonRow() {
-	return (
-		<div className="flex items-center gap-4 px-4 py-3 border-b last:border-0">
-			<div className="h-4 w-[110px] bg-gray-100 rounded animate-pulse" />
-			<div className="h-4 flex-1 bg-gray-100 rounded animate-pulse" />
-			<div className="h-6 W-[90px] bg-gray-100 rounded-full animate-pulse" />
-			<div className="h-4 W-[90px] bg-gray-100 rounded animate-pulse" />
-		</div>
-	);
-}
-
-function TableSkeleton() {
-	return (
-		<div className="min-w-[600px] w-full">
-			<div className="flex items-center gap-4 px-4 py-3 bg-gray-50 border-b">
-				<div className="h-4 W-[110px] bg-gray-200 rounded animate-pulse" />
-				<div className="h-4 flex-1 bg-gray-200 rounded animate-pulse" />
-				<div className="h-4 W-[90px] bg-gray-200 rounded animate-pulse" />
-				<div className="h-4 W-[90px] bg-gray-200 rounded animate-pulse" />
-			</div>
-			{Array.from({ length: 6 }).map((_, i) => (
-				<SkeletonRow key={1} />
-			))}
-		</div>
-	);
-}
-
-const columns = [
-	{ name: "Order ID", selector: (row: orders) => row.gid },
-	{ name: "Customer", selector: (row: orders) => row.customer_name },
-	{
-		name: "product",
-		selector: (row: orders) => row.cart_items.map((items) => items.product),
-	},
-	{
-		name: "Status",
-		selector: (row: orders) => row.status,
-		sortable: true,
-		cell: (i: orders) => {
-			const colors: any = {
-				completed: "bg-green-500",
-				pending: "bg-yellow-500",
-				failed: "bg-red-500",
-				cancelled: "bg-gray-500",
-			};
-			return (
-				<span
-					className={`text-sm font-medium text-black rounded-2xl p-1 ${colors[i.status]}`}
-				>
-					{i.status}
-				</span>
-			);
-		},
-	},
-	{
-		name: "Amount",
-		selector: (row: orders) => formatCurrency(row.total_price),
-	},
-	{
-		name: "Date",
-		selector: (row: orders) => row.created_at,
-		sortable: true,
-		cell: (row: orders) => (
-			<span>{dayjs(row.created_at).format("MMM D, YYYY")}</span>
-		),
-	},
-	{
-		name: "Actions",
-		sortable: false,
-		cell: () => (
-			<button className="p-2 rounded hover:bg-gray-100">
-				<EyeIcon width={20} />
-			</button>
-		),
-	},
-];
+import { CartItem } from "@/components/cartTypes";
+import { formatDate } from "../../middleware/formatDate";
+import { TableSkeleton } from "../../components/TableSkeleton";
+import { FaFileCsv, FaFilePdf, FaFileExcel } from "react-icons/fa6";
+import { handleExportCSV, handleExportXLSX } from "../../actions/handleExport";
 
 const RecentOrders = ({ orders }: { orders: orders[] }) => {
 	const [ordersData, setOrdersData] = useState<orders[]>([]);
 	const [search, setSearch] = useState<string>("");
 	const [filterStatus, setFilterStatus] = useState<string>("All");
 	const [loading, setLoading] = useState<boolean>(true);
+	const [openExport, setOpenExport] = useState<boolean>(false);
 
 	useEffect(() => {
 		setLoading(true);
@@ -118,9 +47,36 @@ const RecentOrders = ({ orders }: { orders: orders[] }) => {
 			<h2 className="text-2xl text-black font-bold">Recent Orders</h2>
 
 			<div className="flex gap-2 justify-end mb-5">
-				<button className="border rounded-lg px-4 py-2 text-sm flex items-center gap-2 text-black hover:bg-gray-300">
-					<FaDownload /> Export
-				</button>
+				<div className="relative">
+					<button
+						className="border rounded-lg px-4 py-2 text-sm flex items-center gap-2 text-black hover:bg-gray-300"
+						onClick={() => setOpenExport(!openExport)}
+					>
+						<FaDownload /> Export
+					</button>
+					{openExport && (
+						<div className="absolute right-0 text-black bg-gray-200 border border-gray-100 rounded-lg shadow-lg overflow-hidden z-50">
+							<button
+								className="w-full p-3 text-sm border border-white"
+								onClick={() => handleExportCSV(filter)}
+							>
+								<FaFileCsv className="inline" /> as CSV
+							</button>
+
+							<button className="w-full p-3 text-sm border border-white">
+								<FaFilePdf className="inline" /> as PDF
+							</button>
+
+							<button
+								className="w-full p-3 text-sm border border-white"
+								onClick={() => handleExportXLSX(filter)}
+							>
+								<FaFileExcel className="inline" /> as Excel
+							</button>
+						</div>
+					)}
+				</div>
+
 				<button className="bg-green-800 text-white rounded-lg px-4 py-2 text-sm flex items-center gap-2 hover:bg-gray-100 hover:text-black">
 					<FaPlus /> New Order
 				</button>
@@ -153,25 +109,27 @@ const RecentOrders = ({ orders }: { orders: orders[] }) => {
 					</select>
 				</div>
 			</div>
-
-			<DataTable
-				columns={columns}
-				data={filter}
-				highlightOnHover
-				resizable
-				responsive
-				progressPending={loading}
-				progressComponent={<TableSkeleton />}
-				customStyles={{
-					headCells: {
-						style: {
-							fontWeight: "600",
-							fontSize: "14px",
-							background: "#fafafb",
+			{loading ? (
+				<TableSkeleton />
+			) : (
+				<DataTable
+					columns={columns}
+					data={filter}
+					highlightOnHover
+					resizable
+					responsive
+					fixedHeader
+					customStyles={{
+						headCells: {
+							style: {
+								fontWeight: "600",
+								fontSize: "14px",
+								background: "#fafafb",
+							},
 						},
-					},
-				}}
-			/>
+					}}
+				/>
+			)}
 		</div>
 	);
 };
