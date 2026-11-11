@@ -14,7 +14,7 @@ const AsideNav = ({
 
 	return (
 		<>
-			<aside className={``}>
+			<aside className="">
 				{collapseNav ? (
 					<svg
 						xmlns="http://www.w3.org/2000/svg"

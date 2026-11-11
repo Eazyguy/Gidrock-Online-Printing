@@ -136,6 +136,7 @@ const ConfigurationModal = ({
 				onFinishingChange={handleFinishing}
 				onQuantityChange={handleQuantity}
 				onFileChange={handleFileChange}
+				selectedProduct={selectedProduct}
 			/>
 
 			<p className="text-2xl text-black mt-5">Summary</p>

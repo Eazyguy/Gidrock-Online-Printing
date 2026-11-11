@@ -7,7 +7,7 @@ const admin = () => {
 	return (
 		<div>
 			<OverviewCards orders={orders} />
-			<RecentOrders orders={orders.slice(0, 10)} />
+			<RecentOrders orders={orders} />
 		</div>
 	);
 };

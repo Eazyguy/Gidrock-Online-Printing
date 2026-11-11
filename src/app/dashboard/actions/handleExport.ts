@@ -3,9 +3,20 @@ import { type CartItem } from "@/components/cartTypes";
 import dayjs from "dayjs";
 import { type orders } from "../admin/types/ordersTypes";
 import { jsPDF } from "jspdf";
+import autoTable from "jspdf-autotable";
 import writeXlsxFile from "write-excel-file/browser";
 import { formatCurrency } from "@/app/(main)/products/configuration/formatCurrency";
 import { columns } from "../components/TableColumns";
+
+const loadFont = async () => {
+	const res = await fetch("/DejaVuSansCondensed-Oblique.ttf");
+	const buf = await res.arrayBuffer();
+
+	let binary = "";
+	const bytes = new Uint8Array(buf);
+	bytes.forEach((b) => (binary += String.fromCharCode(b)));
+	return btoa(binary);
+};
 
 export const handleExportCSV = (filter: orders[]) => {
 	if (filter.length == 0) return;
@@ -106,4 +117,58 @@ export const handleExportXLSX = async (filter: orders[]) => {
 		],
 		sheet: "Orders",
 	}).toFile(`orders as of ${formatDate()}`);
+};
+
+export const handleExportPDF = async (filter: orders[]) => {
+	if (filter.length == 0) return;
+	const doc = new jsPDF();
+	const fontBase64 = await loadFont();
+	console.log(fontBase64);
+	doc.addFileToVFS("DejaVuSansCondensed-Oblique.ttf", fontBase64);
+	console.log(doc.getFileFromVFS("DejaVuSansCondensed-Oblique.ttf"));
+	doc.addFont(
+		"DejaVuSansCondensed-Oblique.ttf",
+		"DejaVuSansCondensed-Oblique",
+		"normal",
+	);
+	doc.setFont("DejaVuSansCondensed-Oblique", "normal");
+	console.log(doc.getFont());
+
+	console.log(doc.getFontList());
+
+	doc.text("Gidrock Orders", 14, 15);
+	const formatCurrencyforPDF = (c: number | string) =>
+		`₦${c.toLocaleString("en-NG", { maximumFractionDigits: 2 })}`;
+	autoTable(doc, {
+		startY: 28,
+		head: [["Order ID", "Customer", "Product", "Status", "Amount", "Date"]],
+		body: filter.map((o) => [
+			o.gid,
+			o.customer_name,
+			o.cart_items.map((p) => p.product).join(", \n"),
+			o.status,
+			formatCurrency(o.total_price),
+			dayjs(o.created_at).format("MMM DD YYYY"),
+		]),
+		styles: {
+			fontSize: 10,
+			valign: "middle",
+			cellPadding: 2.5,
+			overflow: "linebreak",
+		},
+		headStyles: { fillColor: [22, 101, 52] },
+		columnStyles: {
+			0: { cellWidth: 35, halign: "left" },
+			1: { cellWidth: 30, halign: "left" },
+			2: { cellWidth: 35, halign: "left", overflow: "linebreak" },
+			3: { cellWidth: 28, halign: "left" },
+			4: { cellWidth: 28, halign: "left" },
+			5: { cellWidth: 32, halign: "left" },
+		},
+		didParseCell: (data) => {
+			data.cell.styles.font = "DejaVuSansCondensed-Oblique";
+			data.cell.styles.fontStyle = "normal";
+		},
+	});
+	doc.save(`orders as of ${formatDate()}`);
 };

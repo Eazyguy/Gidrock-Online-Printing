@@ -4,7 +4,10 @@ import { EyeIcon } from "@heroicons/react/24/solid";
 import dayjs from "dayjs";
 
 export const columns = [
-	{ name: "Order ID", selector: (row: orders) => row.gid },
+	{
+		name: "Order ID",
+		selector: (row: orders) => row.gid,
+	},
 	{ name: "Customer", selector: (row: orders) => row.customer_name },
 	{
 		name: "product",

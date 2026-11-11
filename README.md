@@ -49,12 +49,13 @@ npm ci
 ### Configure Supabase
 
 Create a `.env.local` file in the project root and add your Supabase project
-URL, anon key, and Paystack secret key:
+URL, anon key, Paystack secret key, and Resend API key for receipt emails:
 
 ```dotenv
 NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
 PAYSTACK_SECRET_KEY=your-paystack-secret-key
+RESEND_API_KEY=re_your-resend-api-key
 ```
 
 Order submission also expects an `orders` table compatible with the fields used
@@ -63,8 +64,8 @@ the required database and storage policies in Supabase for your environment.
 Configure the Paystack webhook to send `charge.success` and `charge.failed`
 events to `https://<your-domain>/api/webhooks/paystack`. Ensure your Supabase
 RLS policies authorize the anon role for the payment order reads and status
-updates. Keep the Paystack secret key server-side and do not commit
-`.env.local`.
+updates. `RESEND_API_KEY` is used to send payment receipt emails. Keep the
+Paystack and Resend secret keys server-side and do not commit `.env.local`.
 
 ### Run the development server
 
@@ -76,21 +77,21 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Available scripts
 
-| Command | Description |
-| --- | --- |
-| `npm run dev` | Start the local development server |
-| `npm run build` | Create a production build |
-| `npm run start` | Serve the production build |
+| Command          | Description                        |
+| ---------------- | ---------------------------------- |
+| `npm run dev`    | Start the local development server |
+| `npm run build`  | Create a production build          |
+| `npm run start`  | Serve the production build         |
 | `npm run format` | Format project files with Prettier |
 
 ## Main routes
 
-| Route | Description |
-| --- | --- |
-| `/` | Landing page |
-| `/products` | Product catalog and configuration |
-| `/checkout/[gid]` | Checkout flow for a cart-created order |
-| `/checkout` | Currently redirects to the landing page |
+| Route             | Description                             |
+| ----------------- | --------------------------------------- |
+| `/`               | Landing page                            |
+| `/products`       | Product catalog and configuration       |
+| `/checkout/[gid]` | Checkout flow for a cart-created order  |
+| `/checkout`       | Currently redirects to the landing page |
 
 ## Project layout
 
