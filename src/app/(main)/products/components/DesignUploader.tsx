@@ -131,14 +131,14 @@ const DesignUploader = ({
 						: "select size for correct preview"}
 			</p>
 
-			<p className="text-[10px] font-bold text-center">
+			<p className="text-[10px] font-bold text-center text-green-900">
 				{activeFile ? `${activeFile.side.toUpperCase()} SIDE` : "FRONT SIDE"}
 				<br />
 				Preview
 			</p>
 
 			<div
-				className={`w-full relative bg-gray-50 border-2 border-dashed flex items-center justify-center cursor-pointer overflow-hidden`}
+				className={`w-70 mx-auto relative bg-green-300 border-2 border-green-800 border-dashed flex items-center justify-center cursor-pointer overflow-hidden`}
 				style={{ aspectRatio: `${ratio[0]} / ${ratio[1]}` }}
 				onClick={() => inputRef.current?.click()}
 			>
@@ -149,14 +149,14 @@ const DesignUploader = ({
 						alt={`${activeFile.side} design preview`}
 					/>
 				) : activeFile ? (
-					<div className="text-center text-gray-600">
+					<div className="text-center  mx-auto">
 						<p className="text-4xl">
 							<AiFillFile />
 						</p>
-						<p className="text-sm">{activeFile.file.name}</p>
+						<p className="text-sm text-green-900">{activeFile.file.name}</p>
 					</div>
 				) : (
-					<div className="text-center">
+					<div className="text-center text-green-900 flex flex-col justify-center items-center">
 						<p className="text-4xl">
 							<AiFillFile />
 						</p>
@@ -167,14 +167,14 @@ const DesignUploader = ({
 
 			{/** Thumbnails */}
 
-			<div className="flex gap-2 mt-3 flex-wrap items-start">
+			<div className="flex gap-2 mt-3 flex-wrap items-start ">
 				{files.map((f) => (
 					<div
 						key={f.id}
 						onClick={() => setActiveId(f.id)}
-						className={`relative w-20 border-2 rounded-lg overflow-hidden cursor-pointer bg-white ${f.id === activeId ? "border-green-800" : "border-gray-200"}`}
+						className={`relative w-20 border-2 rounded-lg overflow-hidden cursor-pointer bg-green-300 ${f.id === activeId ? "border-green-800" : "border-green-400"}`}
 					>
-						<span className="block text-[9px] font-bold text-center capitalize">
+						<span className="block text-[9px] font-bold text-center capitalize text-green-800">
 							{f.side}
 						</span>
 						{f.file.type.startsWith("image/") ? (
@@ -208,14 +208,14 @@ const DesignUploader = ({
 				<button
 					type="button"
 					onClick={() => inputRef.current?.click()}
-					className="border px-3 py-1 text-xs rounded bg-white"
+					className="border px-3 py-1 text-xs rounded bg-green-500 text-green-900"
 				>
 					+ Add more +
 				</button>
 			</div>
 
 			{/** File names */}
-			<div className="text-[11px] mt-2 space-y-1">
+			<div className="text-[11px] mt-2 space-y-1 text-green-700">
 				{files.map((f) => (
 					<p key={f.id}>
 						{f.side.toUpperCase()}:{f.file.name}

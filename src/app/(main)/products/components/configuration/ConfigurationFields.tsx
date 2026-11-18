@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { defaultConfig } from "../../configuration/defaultConfig";
 import type { Config, ProductConfiguration } from "../../configuration/types";
@@ -15,6 +16,46 @@ type ConfigurationFieldsProps = {
 	onQuantityChange: (quantity: number) => void;
 	onFileChange: (file: File) => void;
 	selectedProduct: string | null;
+};
+
+const QuantityInput = ({
+	quantity,
+	onQuantityChange,
+}: {
+	quantity: number;
+	onQuantityChange: (quantity: number) => void;
+}) => {
+	const [value, setValue] = useState(String(quantity));
+
+	useEffect(() => {
+		setValue(String(quantity));
+	}, [quantity]);
+
+	return (
+		<input
+			type="text"
+			inputMode="numeric"
+			name="quantity"
+			aria-label="Quantity"
+			className="mt-2 ms-2 rounded border-green-800 border-2 focus:ring-green-500 focus:ring-2 focus:outline-none w-20 p-1 text-center"
+			value={value}
+			onChange={(event) => {
+				const nextValue = event.target.value.replace(/\D/g, "");
+				setValue(nextValue);
+				const nextQuantity = Number(nextValue);
+				if (Number.isSafeInteger(nextQuantity) && nextQuantity > 0) {
+					onQuantityChange(nextQuantity);
+				}
+			}}
+			onBlur={() => {
+				const nextQuantity = Number(value);
+				const normalizedQuantity =
+					Number.isSafeInteger(nextQuantity) && nextQuantity > 0 ? nextQuantity : 1;
+				setValue(String(normalizedQuantity));
+				onQuantityChange(normalizedQuantity);
+			}}
+		/>
+	);
 };
 
 const ConfigurationFields = ({
@@ -147,13 +188,9 @@ const ConfigurationFields = ({
 		<div className="flex justify-center mt-6">
 			<label className="text-black font-bold flex flex-col items-center">
 				Quantity:
-				<input
-					type="number"
-					name="quantity"
-					className="border mt-2 ms-2 rounded border-green-800 border-2 focus:ring-green-500 focus:ring-2 focus:outline-none w-20 p-1 text-center"
-					min={1}
-					value={config?.qty ?? 1}
-					onChange={(event) => onQuantityChange(Number(event.target.value))}
+				<QuantityInput
+					quantity={config?.qty ?? 1}
+					onQuantityChange={onQuantityChange}
 				/>
 			</label>
 		</div>
