@@ -1,4 +1,4 @@
-import type { Config } from "./types"
+import type { Config } from "./types";
 
 export const defaultConfig = (): Config => ({
   thickness: null,
@@ -10,6 +10,7 @@ export const defaultConfig = (): Config => ({
   qty: 1,
   file: null,
   fileName: "",
+  designs: [],
   extraNote: "",
   customNote: "",
-})
+});

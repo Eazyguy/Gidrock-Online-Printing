@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Logout from "../../components/Logout";
 
 const Header = ({
 	isMobile,
@@ -43,19 +44,23 @@ const Header = ({
 							"bg-linear-60 from-green-500 via-green-900 to-green-600 rounded-full shadow-lg shadow-gray-900"
 						}
 					/>
+					<Logout />
 				</div>
 			) : (
-				<Image
-					src={"/uu.png"}
-					alt="Gidrock online printing"
-					width={150}
-					height={150}
-					className={
-						collapseNav
-							? "ms-15 absolute bg-linear-60 from-green-500 via-green-900 to-green-600 rounded-full shadow-lg shadow-gray-900 mt-3"
-							: "hidden"
-					}
-				/>
+				<div>
+					<Image
+						src={"/uu.png"}
+						alt="Gidrock online printing"
+						width={150}
+						height={150}
+						className={
+							collapseNav
+								? "ms-15 absolute bg-linear-60 from-green-500 via-green-900 to-green-600 rounded-full shadow-lg shadow-gray-900 mt-3"
+								: "hidden"
+						}
+					/>
+					<Logout />
+				</div>
 			)}
 		</div>
 	);

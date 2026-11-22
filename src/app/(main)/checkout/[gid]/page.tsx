@@ -20,6 +20,8 @@ const checkoutGID = () => {
 		localGovernment: "",
 		state: "",
 		delivery: "",
+		substation: "",
+		collectionDate: "",
 	});
 	const [uploadStatus, setUploadStatus] = useState<
 		"idle" | "uploading" | "processing" | "completed" | "failed"
@@ -31,9 +33,13 @@ const checkoutGID = () => {
 
 	const hasMissingRequiredFields =
 		!form.name.trim() ||
-		!form.address.trim() ||
 		!form.email.trim() ||
-		!form.state;
+		!form.phoneNumber.trim() ||
+		!form.delivery ||
+		(form.delivery === "station delivery" &&
+			(!form.substation || !form.collectionDate)) ||
+		(form.delivery === "interstate delivery" &&
+			(!form.address.trim() || !form.state));
 
 	const router = useRouter();
 	const params = useParams();

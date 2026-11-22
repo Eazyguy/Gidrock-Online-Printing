@@ -2,6 +2,7 @@ import { dashNavLinks } from "@/constants";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { useCartStore } from "@/components/CartContext";
 
 const MobileNav = ({
 	mobileNav,
@@ -11,6 +12,8 @@ const MobileNav = ({
 	setMobileNav: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
 	const pathName = usePathname();
+
+	const startNav = useCartStore((f) => f.startNav);
 
 	return (
 		<>
@@ -34,6 +37,11 @@ const MobileNav = ({
 									className={`text-lg py-2 hover:scale-105 hover:transition group relative ${isActive || item.label == "Overview" ? "bg-green-700 text-white hover:text-gray-300" : "hover:text-green-700"} ${mobileNav ? "ps-2" : "ps-5"}`}
 									href={item.href}
 									key={item.label}
+									onNavigate={() => {
+										if (!item.href.startsWith("#") && pathName !== item.href) {
+											startNav();
+										}
+									}}
 								>
 									<span>{item.icon}</span>
 									<span

@@ -6,398 +6,507 @@ import { ImageResponse } from "next/og";
 import { formatCurrency } from "@/app/(main)/products/configuration/formatCurrency";
 import type { ReceiptOrder } from "@/app/(main)/receipt/[gid]/actions";
 
+const getReceiptFileName = (fileName: string) => {
+  const cleanName = fileName.replace(/^\.trashed-\d+-/i, "");
+  if (cleanName.length <= 48) return cleanName;
+
+  const extensionIndex = cleanName.lastIndexOf(".");
+  const extension =
+    extensionIndex > 0 && cleanName.length - extensionIndex <= 10
+      ? cleanName.slice(extensionIndex)
+      : "";
+  const name = extension ? cleanName.slice(0, extensionIndex) : cleanName;
+  return `${name.slice(0, 44 - extension.length)}...${extension}`;
+};
+
 export const renderReceiptImage = async (
-	order: ReceiptOrder,
-	transactionReference: string,
+  order: ReceiptOrder,
+  transactionReference: string,
 ) => {
-	const qrData = {
-		name: order.customer_name,
-		gid: order.gid,
-		transactionReference,
-	};
-	const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(JSON.stringify(qrData))}`;
+  const font = await readFile(
+    join(process.cwd(), "public", "NotoSans-Regular.ttf"),
+  );
+  const qrData = {
+    name: order.customer_name,
+    gid: order.gid,
+    transactionReference,
+  };
+  const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(JSON.stringify(qrData))}`;
 
-	// const qrcode = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(`https://gidrockprint.ng/receipt/${order.gid}`)}`;
+  // const qrcode = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(`https://gidrockprint.ng/receipt/${order.gid}`)}`;
 
-	const logo = await readFile(join(process.cwd(), "public", "uu.png"));
-	const logoDataUri = `data:image/png;base64,${logo.toString("base64")}`;
-	const receiptDate = order.created_at ? new Date(order.created_at) : null;
-	const isPaid = order.status === "completed";
-	const imageResponse = new ImageResponse(
-		<div
-			style={{
-				width: "100%",
-				height: "100%",
-				display: "flex",
-				justifyContent: "center",
-				padding: 24,
-				backgroundColor: "#f3f4f6",
-				color: "#111827",
-				fontFamily: "Arial, sans-serif",
-			}}
-		>
-			<div
-				style={{
-					width: "100%",
-					display: "flex",
-					flexDirection: "column",
-					padding: 20,
-					backgroundColor: "#ffffff",
-					borderRadius: 12,
-				}}
-			>
-				<div
-					style={{
-						display: "flex",
-						justifyContent: "space-between",
-						alignItems: "center",
-						padding: 20,
-						backgroundColor: "#166534",
-						borderRadius: 12,
-					}}
-				>
-					<img src={logoDataUri} alt="Gidrock" width={150} height={100} />
-					<div
-						style={{
-							display: "flex",
-							flexDirection: "column",
-							alignItems: "flex-end",
-							color: "#ffffff",
-							fontWeight: 700,
-						}}
-					>
-						<div style={{ display: "flex", fontSize: 26, fontWeight: "bold" }}>
-							RECEIPT
-						</div>
-						{receiptDate && !Number.isNaN(receiptDate.getTime()) && (
-							<div style={{ display: "flex", fontSize: 16, marginTop: 6 }}>
-								{receiptDate.toLocaleDateString("en-NG", {
-									day: "numeric",
-									month: "long",
-									year: "numeric",
-								})}
-							</div>
-						)}
-					</div>
-				</div>
+  const logo = await readFile(join(process.cwd(), "public", "uu.png"));
+  const logoDataUri = `data:image/png;base64,${logo.toString("base64")}`;
+  const receiptDate = order.created_at ? new Date(order.created_at) : null;
+  const collectionDate = order.collection_date
+    ? new Date(`${order.collection_date}T00:00:00`)
+    : null;
+  const isPaid = ["completed", "delivered"].includes(order.status);
+  const imageResponse = new ImageResponse(
+    <div
+      style={{
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        justifyContent: "center",
+        padding: 24,
+        backgroundColor: "#f3f4f6",
+        color: "#111827",
+        fontFamily: "Noto Sans",
+      }}
+    >
+      <div
+        style={{
+          width: "100%",
+          display: "flex",
+          flexDirection: "column",
+          padding: 20,
+          backgroundColor: "#ffffff",
+          borderRadius: 12,
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            padding: 20,
+            backgroundColor: "#166534",
+            borderRadius: 12,
+          }}
+        >
+          <img src={logoDataUri} alt="Gidrock" width={150} height={100} />
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-end",
+              color: "#ffffff",
+              fontWeight: 700,
+            }}
+          >
+            <div style={{ display: "flex", fontSize: 26, fontWeight: "bold" }}>
+              RECEIPT
+            </div>
+            {receiptDate && !Number.isNaN(receiptDate.getTime()) && (
+              <div style={{ display: "flex", fontSize: 16, marginTop: 6 }}>
+                {receiptDate.toLocaleDateString("en-NG", {
+                  day: "numeric",
+                  month: "long",
+                  year: "numeric",
+                })}
+              </div>
+            )}
+          </div>
+        </div>
 
-				<div
-					style={{
-						display: "flex",
-						justifyContent: "space-between",
-						padding: "24px 20px",
-						fontSize: 16,
-					}}
-				>
-					<div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-						<div
-							style={{
-								display: "flex",
-								color: "#6b7280",
-								marginBottom: 4,
-								fontWeight: "800",
-							}}
-						>
-							BILL TO
-						</div>
-						<div
-							style={{
-								display: "flex",
-								color: "#111827",
-								fontSize: 20,
-								fontWeight: 700,
-							}}
-						>
-							{order.customer_name}
-						</div>
-						<div style={{ display: "flex", color: "#334155" }}>{order.phone}</div>
-						<div style={{ display: "flex", color: "#334155" }}>{order.email}</div>
-						<div style={{ display: "flex", color: "#334155" }}>
-							{[order.address, order.localGovernment, order.state]
-								.filter(Boolean)
-								.join(", ")}
-						</div>
-					</div>
-					<div
-						style={{
-							display: "flex",
-							flexDirection: "column",
-							alignItems: "flex-end",
-							gap: 6,
-						}}
-					>
-						<img src={qrCodeUrl} alt="QR Code" width={150} height={150} />
-						<div style={{ display: "flex", color: "#6b7280" }}>RECEIPT NO.</div>
-						<div style={{ display: "flex", color: "#111827", fontWeight: 700 }}>
-							{order.gid}
-						</div>
-					</div>
-				</div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            padding: "24px 20px",
+            fontSize: 16,
+          }}
+        >
+          <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+            <div
+              style={{
+                display: "flex",
+                color: "#6b7280",
+                marginBottom: 4,
+                fontWeight: "800",
+              }}
+            >
+              BILL TO
+            </div>
+            <div
+              style={{
+                display: "flex",
+                color: "#111827",
+                fontSize: 20,
+                fontWeight: 700,
+              }}
+            >
+              {order.customer_name}
+            </div>
+            <div style={{ display: "flex", color: "#334155" }}>
+              {order.phone}
+            </div>
+            <div style={{ display: "flex", color: "#334155" }}>
+              {order.email}
+            </div>
+            <div style={{ display: "flex", color: "#334155" }}>
+              {[order.address, order.localGovernment, order.state]
+                .filter(Boolean)
+                .join(", ")}
+            </div>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-end",
+              gap: 6,
+            }}
+          >
+            <img src={qrCodeUrl} alt="QR Code" width={150} height={150} />
+            <div style={{ display: "flex", color: "#6b7280" }}>RECEIPT NO.</div>
+            <div style={{ display: "flex", color: "#111827", fontWeight: 700 }}>
+              {order.gid}
+            </div>
+          </div>
+        </div>
 
-				<div
-					style={{
-						display: "flex",
-						flexDirection: "column",
-						margin: "0 20px",
-						padding: 18,
-						border: `1px solid ${isPaid ? "#16a34a" : "#f59e0b"}`,
-						borderRadius: 10,
-						backgroundColor: isPaid ? "#dcfce7" : "#fef3c7",
-					}}
-				>
-					<div
-						style={{
-							display: "flex",
-							alignItems: "center",
-							color: isPaid ? "#16a34a" : "#b45309",
-							fontSize: 19,
-							fontWeight: 700,
-						}}
-					>
-						{isPaid && (
-							<div
-								style={{
-									display: "flex",
-									width: 22,
-									height: 22,
-									marginRight: 8,
-									backgroundColor: "#16a34a",
-									borderRadius: 11,
-									alignItems: "center",
-									justifyContent: "center",
-								}}
-							>
-								<svg
-									width="14"
-									height="14"
-									viewBox="0 0 24 24"
-									fill="white"
-									xmlns="http://www.w3.org/2000/svg"
-								>
-									<path
-										fillRule="evenodd"
-										d="M19.916 4.626a.75.75 0 01.208 1.04l-9 13.5a.75.75 0 01-1.154.114l-6-6a.75.75 0 011.06-1.06l5.312 5.312 8.47-12.7a.75.75 0 011.04-.208z"
-										clipRule="evenodd"
-									/>
-								</svg>
-							</div>
-						)}
-						Payment {isPaid ? "Confirmed" : order.status}
-					</div>
-					<div
-						style={{ display: "flex", marginTop: 8, color: "#374151", fontSize: 14 }}
-					>
-						Paystack reference: {transactionReference}
-					</div>
-				</div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            margin: "0 20px",
+            padding: 18,
+            border: `1px solid ${isPaid ? "#16a34a" : "#f59e0b"}`,
+            borderRadius: 10,
+            backgroundColor: isPaid ? "#dcfce7" : "#fef3c7",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              color: isPaid ? "#16a34a" : "#b45309",
+              fontSize: 19,
+              fontWeight: 700,
+            }}
+          >
+            {isPaid && (
+              <div
+                style={{
+                  display: "flex",
+                  width: 22,
+                  height: 22,
+                  marginRight: 8,
+                  backgroundColor: "#16a34a",
+                  borderRadius: 11,
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="white"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M19.916 4.626a.75.75 0 01.208 1.04l-9 13.5a.75.75 0 01-1.154.114l-6-6a.75.75 0 011.06-1.06l5.312 5.312 8.47-12.7a.75.75 0 011.04-.208z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </div>
+            )}
+            Payment {isPaid ? "Confirmed" : order.status}
+          </div>
+          <div
+            style={{
+              display: "flex",
+              marginTop: 8,
+              color: "#374151",
+              fontSize: 14,
+            }}
+          >
+            {order.payment_method === "manual"
+              ? `Manual payment reference: ${order.payment_reference || "Recorded by cashier"}`
+              : `Paystack reference: ${transactionReference}`}
+          </div>
+        </div>
 
-				<div
-					style={{
-						display: "flex",
-						padding: "24px 20px 10px",
-						color: "#111827",
-						fontSize: 17,
-						fontWeight: 800,
-						marginBottom: 10,
-					}}
-				>
-					ITEM DETAILS
-				</div>
-				<div style={{ display: "flex", flexDirection: "column", margin: "0 20px" }}>
-					<div
-						style={{
-							display: "flex",
-							padding: "12px 16px",
-							backgroundColor: "#d1d5db",
-							color: "#374151",
-							fontSize: 15,
-							fontWeight: 700,
-						}}
-					>
-						<div style={{ display: "flex", width: "64%" }}>Item</div>
-						<div
-							style={{
-								display: "flex",
-								justifyContent: "center",
-								width: "12%",
-							}}
-						>
-							Qty
-						</div>
-						<div
-							style={{
-								display: "flex",
-								justifyContent: "flex-end",
-								width: "24%",
-							}}
-						>
-							Price
-						</div>
-					</div>
-					{order.cart_items.map((item) => (
-						<div
-							key={item.id}
-							style={{
-								display: "flex",
-								alignItems: "center",
-								padding: "14px 12px",
-								borderBottom: "1px solid #e5e7eb",
-								color: "#111827",
-								fontSize: 15,
-							}}
-						>
-							<div
-								style={{
-									display: "flex",
-									flexDirection: "column",
-									width: "64%",
-									gap: 4,
-								}}
-							>
-								<div style={{ display: "flex", fontWeight: 700 }}>
-									{item.product || "Product"}
-								</div>
-								<div style={{ display: "flex", color: "#4b5563", fontSize: 13 }}>
-									{[
-										item.config?.size,
-										item.config?.thickness,
-										item.config?.lamination,
-										item.config?.widthFt && item.config?.heightFt
-											? `${item.config.widthFt} × ${item.config.heightFt} ft`
-											: null,
-									]
-										.filter(Boolean)
-										.join(" · ")}
-								</div>
-							</div>
-							<div
-								style={{
-									display: "flex",
-									justifyContent: "center",
-									width: "12%",
-								}}
-							>
-								{item.config?.qty ?? "—"}
-							</div>
-							<div
-								style={{
-									display: "flex",
-									justifyContent: "flex-end",
-									width: "24%",
-								}}
-							>
-								{formatCurrency(item.price)}
-							</div>
-						</div>
-					))}
-				</div>
+        <div
+          style={{
+            display: "flex",
+            padding: "24px 20px 10px",
+            color: "#111827",
+            fontSize: 17,
+            fontWeight: 800,
+            marginBottom: 10,
+          }}
+        >
+          ITEM DETAILS
+        </div>
+        <div
+          style={{ display: "flex", flexDirection: "column", margin: "0 20px" }}
+        >
+          <div
+            style={{
+              display: "flex",
+              padding: "12px 16px",
+              backgroundColor: "#d1d5db",
+              color: "#374151",
+              fontSize: 15,
+              fontWeight: 700,
+            }}
+          >
+            <div style={{ display: "flex", width: "64%" }}>Item</div>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                width: "12%",
+              }}
+            >
+              Qty
+            </div>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "flex-end",
+                width: "24%",
+              }}
+            >
+              Price
+            </div>
+          </div>
+          {order.cart_items.map((item) => (
+            <div
+              key={item.id}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                padding: "14px 12px",
+                borderBottom: "1px solid #e5e7eb",
+                color: "#111827",
+                fontSize: 15,
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  width: "64%",
+                  gap: 4,
+                }}
+              >
+                <div style={{ display: "flex", fontWeight: 700 }}>
+                  {item.product || "Product"}
+                </div>
+                <div
+                  style={{ display: "flex", color: "#4b5563", fontSize: 13 }}
+                >
+                  {[
+                    item.config?.size,
+                    item.config?.thickness,
+                    item.config?.lamination,
+                    item.config?.widthFt && item.config?.heightFt
+                      ? `${item.config.widthFt} × ${item.config.heightFt} ft`
+                      : null,
+                  ]
+                    .filter(Boolean)
+                    .join(" · ")}
+                </div>
+                {item.config?.designs?.map((design) => (
+                  <div
+                    key={design.id}
+                    style={{
+                      display: "flex",
+                      width: "100%",
+                      color: "#4b5563",
+                      fontSize: 12,
+                      lineHeight: 1.4,
+                    }}
+                  >
+                    {design.side}: {getReceiptFileName(design.fileName)}
+                    {design.lamination ? ` · ${design.lamination}` : ""}
+                  </div>
+                ))}
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  width: "12%",
+                }}
+              >
+                {item.config?.qty ?? "—"}
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  width: "24%",
+                }}
+              >
+                {formatCurrency(item.price)}
+              </div>
+            </div>
+          ))}
+        </div>
 
-				<div
-					style={{
-						display: "flex",
-						margin: "16px 20px",
-						borderTop: "1px solid #9ca3af",
-					}}
-				/>
-				<div
-					style={{ display: "flex", justifyContent: "flex-end", margin: "0 20px" }}
-				>
-					<div
-						style={{
-							display: "flex",
-							flexDirection: "column",
-							alignItems: "flex-end",
-							padding: "14px 18px",
-							border: "1px solid #16a34a",
-							borderRadius: 8,
-							backgroundColor: "#dcfce7",
-						}}
-					>
-						<div
-							style={{
-								display: "flex",
-								color: "#15803d",
-								fontSize: 14,
-								fontWeight: 700,
-							}}
-						>
-							Order Total
-						</div>
-						<div
-							style={{
-								display: "flex",
-								marginTop: 4,
-								color: "#166534",
-								fontSize: 28,
-								fontWeight: 700,
-							}}
-						>
-							{formatCurrency(order.total_price)}
-						</div>
-						<div
-							style={{
-								display: "flex",
-								marginTop: 4,
-								color: "#111827",
-								fontSize: 12,
-								fontWeight: 700,
-							}}
-						>
-							{order.delivery}
-						</div>
-					</div>
-				</div>
+        <div
+          style={{
+            display: "flex",
+            margin: "16px 20px",
+            borderTop: "1px solid #9ca3af",
+          }}
+        />
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "flex-end",
+            margin: "0 20px",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-end",
+              padding: "14px 18px",
+              border: "1px solid #16a34a",
+              borderRadius: 8,
+              backgroundColor: "#dcfce7",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                color: "#15803d",
+                fontSize: 14,
+                fontWeight: 700,
+              }}
+            >
+              Order Total
+            </div>
+            <div
+              style={{
+                display: "flex",
+                marginTop: 4,
+                color: "#166534",
+                fontSize: 28,
+                fontWeight: 700,
+              }}
+            >
+              {formatCurrency(order.total_price)}
+            </div>
+            <div
+              style={{
+                display: "flex",
+                marginTop: 4,
+                color: "#111827",
+                fontSize: 12,
+                fontWeight: 700,
+              }}
+            >
+              {order.delivery}
+            </div>
+            {order.substation && (
+              <div
+                style={{
+                  display: "flex",
+                  marginTop: 4,
+                  color: "#166534",
+                  fontSize: 12,
+                }}
+              >
+                Pickup: {order.substation}
+              </div>
+            )}
+            {collectionDate && (
+              <div
+                style={{
+                  display: "flex",
+                  marginTop: 4,
+                  color: "#166534",
+                  fontSize: 12,
+                }}
+              >
+                Collection: {collectionDate.toLocaleDateString("en-NG", {
+                  weekday: "long",
+                  day: "numeric",
+                  month: "long",
+                  year: "numeric",
+                })}
+              </div>
+            )}
+          </div>
+        </div>
 
-				<div
-					style={{
-						display: "flex",
-						justifyContent: "space-between",
-						gap: 20,
-						marginTop: 20,
-						padding: 18,
-						borderRadius: 10,
-						backgroundColor: "#9ca3af",
-						color: "#111827",
-						fontSize: 13,
-					}}
-				>
-					<div
-						style={{ display: "flex", flexDirection: "column", gap: 6, width: "58%" }}
-					>
-						<div style={{ display: "flex" }}>
-							Order status:{" "}
-							<span style={{ color: "#166534", fontWeight: 700 }}>
-								{order.status.toUpperCase()}
-							</span>
-						</div>
-						<div style={{ display: "flex" }}>
-							Your order is being processed and will be delivered within 48 hours.
-						</div>
-					</div>
-					<div
-						style={{
-							display: "flex",
-							flexDirection: "column",
-							alignItems: "flex-end",
-							gap: 4,
-						}}
-					>
-						<div style={{ display: "flex", fontWeight: 700 }}>
-							Gidrock online print
-						</div>
-						<div style={{ display: "flex" }}>
-							07017897866, 09133532790, 07070647836
-						</div>
-						<div style={{ display: "flex" }}>hello@gidrockprint.ng</div>
-					</div>
-				</div>
-			</div>
-		</div>,
-		{
-			width: 800,
-			height: 900 + order.cart_items.length * 70,
-		},
-	);
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "flex-start",
+            gap: 20,
+            marginTop: 20,
+            padding: 18,
+            borderRadius: 10,
+            backgroundColor: "#9ca3af",
+            color: "#111827",
+            fontSize: 13,
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: 8,
+              width: "55%",
+            }}
+          >
+            <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
+              <div style={{ display: "flex", color: "#4b5563" }}>ORDER STATUS</div>
+              <div style={{ display: "flex", color: "#166534", fontWeight: 700 }}>
+                {order.status.toUpperCase()}
+              </div>
+            </div>
+            <div style={{ display: "flex", lineHeight: 1.4 }}>
+              {order.substation && collectionDate
+                ? `Collection at ${order.substation} on ${collectionDate.toLocaleDateString("en-NG", {
+                    weekday: "long",
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric",
+                  })}.`
+                : "Your order is being processed. Delivery arrangement will be confirmed with you."}
+            </div>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-end",
+              gap: 4,
+            }}
+          >
+            <div style={{ display: "flex", fontWeight: 700 }}>
+              Gidrock online print
+            </div>
+            <div style={{ display: "flex" }}>
+              07017897866, 09133532790, 07070647836
+            </div>
+            <div style={{ display: "flex" }}>hello@gidrockprint.ng</div>
+          </div>
+        </div>
+      </div>
+    </div>,
+    {
+      width: 800,
+      height:
+        900 +
+        order.cart_items.length * 70 +
+        order.cart_items.reduce(
+          (total, item) => total + (item.config?.designs?.length ?? 0) * 20,
+          0,
+        ),
+      fonts: [
+        {
+          name: "Noto Sans",
+          data: font,
+          weight: 400,
+          style: "normal",
+        },
+      ],
+    },
+  );
 
-	return Buffer.from(await imageResponse.arrayBuffer());
+  return Buffer.from(await imageResponse.arrayBuffer());
 };

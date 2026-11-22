@@ -3,7 +3,7 @@ import { formatCurrency } from "@/app/(main)/products/configuration/formatCurren
 import { EyeIcon } from "@heroicons/react/24/solid";
 import dayjs from "dayjs";
 
-export const columns = [
+export const createOrderColumns = (onPreview: (row: orders) => void) => [
 	{
 		name: "Order ID",
 		selector: (row: orders) => row.gid,
@@ -23,6 +23,7 @@ export const columns = [
 				pending: "bg-yellow-500",
 				failed: "bg-red-500",
 				cancelled: "bg-gray-500",
+				delivered: "bg-blue-500",
 			};
 			return (
 				<span
@@ -48,8 +49,13 @@ export const columns = [
 	{
 		name: "Actions",
 		sortable: false,
-		cell: () => (
-			<button className="p-2 rounded hover:bg-gray-100">
+		cell: (row: orders) => (
+			<button
+				type="button"
+				title={`Preview ${row.gid}`}
+				onClick={() => onPreview(row)}
+				className="p-2 rounded hover:bg-gray-100"
+			>
 				<EyeIcon width={20} />
 			</button>
 		),

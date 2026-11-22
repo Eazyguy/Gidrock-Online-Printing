@@ -7,6 +7,8 @@ export type FormProps = {
 		state: string;
 		localGovernment: string;
 		delivery: string;
+		substation: string;
+		collectionDate: string;
 	};
 	setForm: React.Dispatch<React.SetStateAction<FormProps["form"]>>;
 	lgas: lgas;

@@ -67,6 +67,17 @@ RLS policies authorize the anon role for the payment order reads and status
 updates. `RESEND_API_KEY` is used to send payment receipt emails. Keep the
 Paystack and Resend secret keys server-side and do not commit `.env.local`.
 
+### Product prices and dashboard settings
+
+Apply `supabase/migrations/20261122000000_product_pricing.sql` to the Supabase
+project in the SQL Editor before using the product configurator or the admin
+Settings page. It creates the public-readable product pricing table, seeds the
+current product rates, and restricts price changes to dashboard admins.
+
+The dashboard Settings page sends password-reset emails to the selected user.
+Add `https://<your-domain>/dashboard/reset-password` (and the local development
+URL when testing) to Supabase Authentication's allowed redirect URLs.
+
 ### Run the development server
 
 ```bash
@@ -86,12 +97,13 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Main routes
 
-| Route             | Description                             |
-| ----------------- | --------------------------------------- |
-| `/`               | Landing page                            |
-| `/products`       | Product catalog and configuration       |
-| `/checkout/[gid]` | Checkout flow for a cart-created order  |
-| `/checkout`       | Currently redirects to the landing page |
+| Route                 | Description                                   |
+| --------------------- | --------------------------------------------- |
+| `/`                   | Landing page                                  |
+| `/products`           | Product catalog and configuration             |
+| `/checkout/[gid]`     | Checkout flow for a cart-created order        |
+| `/checkout`           | Currently redirects to the landing page       |
+| `/dashboard/settings` | Admin product prices and password-reset tools |
 
 ## Project layout
 

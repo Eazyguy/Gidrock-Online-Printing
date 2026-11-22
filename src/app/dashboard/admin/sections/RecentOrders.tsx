@@ -1,10 +1,13 @@
+"use client";
+
 import { useMemo, useState, useEffect } from "react";
 import DataTable from "react-data-table-component";
 import { type orders } from "../types/ordersTypes";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 dayjs.extend(relativeTime);
-import { columns } from "../../components/TableColumns";
+import { createOrderColumns } from "../../components/TableColumns";
+import OrderModal from "./OrderModal";
 import { FaDownload, FaPlus } from "react-icons/fa6";
 import { AiOutlineSearch, AiOutlineFilter } from "react-icons/ai";
 import { TableSkeleton } from "../../components/TableSkeleton";
@@ -23,6 +26,7 @@ const RecentOrders = ({ orders }: { orders: orders[] }) => {
 	const [filterStatus, setFilterStatus] = useState<string>("All");
 	const [loading, setLoading] = useState<boolean>(true);
 	const [openExport, setOpenExport] = useState<boolean>(false);
+	const [selectedOrder, setSelectedOrder] = useState<orders | null>(null);
 
 	useEffect(() => {
 		setLoading(true);
@@ -130,6 +134,7 @@ const RecentOrders = ({ orders }: { orders: orders[] }) => {
 						<option value={"completed"}>Completed</option>
 						<option value={"failed"}>Failed</option>
 						<option value={"cancelled"}>Cancelled</option>
+						<option value={"delivered"}>Delivered</option>
 					</select>
 				</div>
 			</div>
@@ -137,7 +142,7 @@ const RecentOrders = ({ orders }: { orders: orders[] }) => {
 				<TableSkeleton />
 			) : (
 				<DataTable
-					columns={columns}
+					columns={createOrderColumns(setSelectedOrder)}
 					data={filter}
 					highlightOnHover
 					pointerOnHover
@@ -181,6 +186,7 @@ const RecentOrders = ({ orders }: { orders: orders[] }) => {
 					}}
 				/>
 			)}
+			<OrderModal order={selectedOrder} onClose={() => setSelectedOrder(null)} />
 		</div>
 	);
 };

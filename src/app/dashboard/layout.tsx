@@ -1,23 +1,31 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import Header from "./admin/sections/Header";
 import AsideNav from "./components/AsideNav";
 import MobileNav from "./components/MobileNav";
 
 const layout = ({ children }: { children: React.ReactNode }) => {
+	const pathname = usePathname();
+	const isLoginPage = pathname === "/dashboard/login";
 	const [collapseNav, setCollapseNav] = useState<boolean>(false);
 	const [isMobile, setIsMobile] = useState<boolean>(false);
 	const [mobileNav, setMobileNav] = useState<boolean>(true);
 
 	useEffect(() => {
+		if (isLoginPage) return;
 		const checkMobile = () => setIsMobile(window.innerWidth < 768);
 
 		checkMobile();
 
 		window.addEventListener("resize", checkMobile);
 		return () => window.removeEventListener("resize", checkMobile);
-	}, []);
+	}, [isLoginPage]);
+
+	if (isLoginPage) {
+		return <>{children}</>;
+	}
 
 	return (
 		<div className="min-h-screen bg-linear-60 from-green-100 to-green-200">

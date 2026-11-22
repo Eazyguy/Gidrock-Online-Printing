@@ -4,6 +4,7 @@ export type orders = {
 	id: string;
 	gid: string;
 	customer_name: string;
+	email?: string;
 	phone: string;
 	delivery: string;
 	cart_items: CartItem[];
@@ -13,4 +14,9 @@ export type orders = {
 	address: string;
 	localGovernment: string;
 	state: string;
+	substation?: string | null;
+	collection_date?: string | null;
+	delivery_ready_at?: string | null;
+	payment_method?: string | null;
+	payment_reference?: string | null;
 };

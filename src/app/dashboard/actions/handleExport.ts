@@ -6,7 +6,6 @@ import { jsPDF } from "jspdf";
 import autoTable from "jspdf-autotable";
 import writeXlsxFile from "write-excel-file/browser";
 import { formatCurrency } from "@/app/(main)/products/configuration/formatCurrency";
-import { columns } from "../components/TableColumns";
 
 const loadFont = async () => {
 	const res = await fetch("/DejaVuSansCondensed-Oblique.ttf");

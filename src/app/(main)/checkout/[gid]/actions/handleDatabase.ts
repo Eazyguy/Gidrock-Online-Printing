@@ -4,63 +4,82 @@ import { FormProps, setProgress } from "./types";
 import { CartItem } from "@/components/cartTypes";
 
 export const handleDatabase = async (
-	form: FormProps["form"],
-	gid: string,
-	cartItems: CartItem[],
-	total: number,
-	setProgress: setProgress,
-	allowPaymentRetry = false,
+  form: FormProps["form"],
+  gid: string,
+  cartItems: CartItem[],
+  total: number,
+  setProgress: setProgress,
+  allowPaymentRetry = false,
 ): Promise<boolean> => {
-	const { name, phoneNumber, ...formData } = form;
+  const {
+    name,
+    phoneNumber,
+    substation,
+    collectionDate,
+    ...formData
+  } = form;
 
-	const { data, error: lookupError } = await supabase
-		.from("orders")
-		.select("status")
-		.eq("gid", gid)
-		.maybeSingle();
+  const { data, error: lookupError } = await supabase
+    .from("orders")
+    .select("status")
+    .eq("gid", gid)
+    .maybeSingle();
 
-	if (lookupError) {
-		console.error("Error checking existing order:", lookupError);
-		alert("There was an error checking your order. Please try again.");
-		return false;
-	}
+  if (lookupError) {
+    console.error("Error checking existing order:", lookupError);
+    alert("There was an error checking your order. Please try again.");
+    return false;
+  }
 
-	if (data) {
-		if (
-			allowPaymentRetry &&
-			(data.status === "pending" ||
-				data.status === "failed" ||
-				data.status === "cancelled")
-		) {
-			return true;
-		}
-		alert("Order already exists. Please check your order history.");
-		return false;
-	}
+  if (data) {
+    if (
+      allowPaymentRetry &&
+      (data.status === "pending" ||
+        data.status === "failed" ||
+        data.status === "cancelled")
+    ) {
+      return true;
+    }
+    alert("Order already exists. Please check your order history.");
+    return false;
+  }
 
-	const uploadedFilePaths = await handleUpload(gid, setProgress);
-	if (!uploadedFilePaths) return false;
+  const uploadedFilePaths = await handleUpload(gid, setProgress);
+  if (!uploadedFilePaths) return false;
 
-	const orderData = {
-		gid,
-		...formData,
-		customer_name: name.trim(),
-		phone: phoneNumber,
-		status: "pending",
-		cart_items: cartItems.map((item) => ({
-			...item,
-			file_path: uploadedFilePaths[item.id] ?? null,
-		})),
-		total_price: total,
-	};
+  const orderData = {
+    gid,
+    ...formData,
+    customer_name: name.trim(),
+    phone: phoneNumber,
+    status: "pending",
+    substation: substation || null,
+    collection_date: collectionDate || null,
+    delivery_ready_at: new Date(Date.now() + 48 * 60 * 60 * 1000).toISOString(),
+    cart_items: cartItems.map((item) => {
+      const itemPaths = uploadedFilePaths[item.id] ?? {};
+      const designs = (item.config?.designs ?? []).map((design) => ({
+        ...design,
+        file: null,
+        file_path: itemPaths[design.id] ?? null,
+      }));
 
-	const { error } = await supabase.from("orders").insert([orderData]);
+      return {
+        ...item,
+        config: item.config ? { ...item.config, designs } : null,
+        file_path: itemPaths.legacy ?? designs[0]?.file_path ?? null,
+      };
+    }),
+    total_price: total,
+  };
 
-	if (error) {
-		console.error("Error inserting order:", error);
-		alert("There was an error processing your order. Please try again.");
-		return false;
-	}
+  const { error } = await supabase.from("orders").insert([orderData]);
 
-	return true;
+  if (error) {
+    console.error("Error inserting order:", error);
+    alert("There was an error processing your order. Please try again.");
+    return false;
+  }
+
+  return true;
 };
