@@ -19,12 +19,31 @@ const getReceiptFileName = (fileName: string) => {
   return `${name.slice(0, 44 - extension.length)}...${extension}`;
 };
 
+const CurrencyAmount = ({
+  value,
+}: {
+  value: Parameters<typeof formatCurrency>[0];
+}) => {
+  const formatted = formatCurrency(value);
+  const symbolIndex = formatted.indexOf("₦");
+
+  if (symbolIndex === -1) return <>{formatted}</>;
+
+  return (
+    <span style={{ display: "flex" }}>
+      {formatted.slice(0, symbolIndex)}
+      <span style={{ fontFamily: "DejaVu Sans" }}>₦</span>
+      {formatted.slice(symbolIndex + 1)}
+    </span>
+  );
+};
+
 export const renderReceiptImage = async (
   order: ReceiptOrder,
   transactionReference: string,
 ) => {
-  const font = await readFile(
-    join(process.cwd(), "public", "NotoSans-Regular.ttf"),
+  const currencyFont = await readFile(
+    join(process.cwd(), "public", "DejaVuSansCondensed-Oblique.ttf"),
   );
   const qrData = {
     name: order.customer_name,
@@ -335,7 +354,7 @@ export const renderReceiptImage = async (
                   width: "24%",
                 }}
               >
-                {formatCurrency(item.price)}
+                <CurrencyAmount value={item.price} />
               </div>
             </div>
           ))}
@@ -385,7 +404,7 @@ export const renderReceiptImage = async (
                 fontWeight: 700,
               }}
             >
-              {formatCurrency(order.total_price)}
+              <CurrencyAmount value={order.total_price} />
             </div>
             <div
               style={{
@@ -499,8 +518,8 @@ export const renderReceiptImage = async (
         ),
       fonts: [
         {
-          name: "Noto Sans",
-          data: font,
+          name: "DejaVu Sans",
+          data: currencyFont,
           weight: 400,
           style: "normal",
         },
