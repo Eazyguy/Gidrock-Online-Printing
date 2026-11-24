@@ -1,134 +1,213 @@
 # Gidrock Online Printing
 
-Gidrock Online Printing is a work-in-progress storefront for browsing print
-products, configuring an order, and submitting artwork and delivery details.
-The project is under active development; not all parts of the intended
-customer journey are available yet.
+Gidrock Online Printing is a full-stack printing storefront built for configuring print products, collecting artwork and delivery details, accepting Paystack payments, and managing orders through a role-based dashboard.
 
-## Current status
+## Features
 
-The application currently includes:
+### Storefront
 
-- A landing page with service information and site navigation.
-- A product catalog with configurable print options for cards, fliers and
-  posters, banners, stickers and labels, brochures, shirt printing, and awards.
-- A browser-persisted cart that can retain selected products and artwork.
-- An order form with customer and delivery details for Nigerian states.
-- Supabase integration for saving orders and uploading artwork.
-- Paystack checkout for station-delivery orders, with webhook and server-side
-  transaction verification updating payment status.
-- An interstate delivery path that saves the order and opens WhatsApp to
-  continue arranging delivery.
+- Landing page with services, process, benefits, statistics, and testimonials
+- Product catalog for cards, fliers and posters, banners, stickers and labels, brochures, shirt printing, and awards
+- Product-specific configuration for size, quantity, thickness, finishing, and artwork
+- Persistent browser cart with artwork stored in IndexedDB
+- Station and interstate delivery options
+- Collection-date selection with availability and capacity checks
+- Supabase artwork uploads and order creation
+- Paystack checkout, server-side transaction verification, signed webhooks, cancellation handling, and receipt pages
+- Receipt email delivery through Resend
 
-**Not implemented yet:** a complete order-management experience. Product
-details, prices, delivery arrangements, and backend configuration should be
-verified before using the application for real orders.
+### Dashboard
+
+- Supabase authentication with separate admin and cashier roles
+- Admin overview with date filtering and order analytics
+- Cashier order management view
+- Customer summary derived from order records
+- Admin user creation for admin and cashier accounts
+- Product-pricing management
+- Password-reset email support
+- CSV, Excel, and PDF exports for order data
 
 ## Tech stack
 
-- Next.js 16 with the App Router
-- React 19 and TypeScript
-- Tailwind CSS 4
-- Supabase JavaScript client for order data and artwork storage
-- Zustand for cart state and persistence
+- Next.js 16 App Router
+- React 19
+- TypeScript
+- Tailwind CSS 4 and DaisyUI
+- Supabase Auth, Postgres, and Storage
+- Paystack
+- Resend
+- Zustand
+- IndexedDB
+- Recharts
+- jsPDF and Excel export utilities
 
-## Getting started
+## Requirements
 
-### Requirements
-
-- Node.js compatible with Next.js 16
+- Node.js 20 or newer
 - npm
-- A Supabase project for testing order submission
+- A Supabase project
+- A Paystack account and secret key
+- A Resend account and API key
 
-### Install dependencies
+## Local setup
+
+### 1. Install dependencies
 
 ```bash
 npm ci
 ```
 
-### Configure Supabase
+### 2. Configure environment variables
 
-Create a `.env.local` file in the project root and add your Supabase project
-URL, anon key, Paystack secret key, and Resend API key for receipt emails:
+Create `.env.local` in the project root:
 
 ```dotenv
 NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
-PAYSTACK_SECRET_KEY=your-paystack-secret-key
+PAYSTACK_SECRET_KEY=sk_test_your-paystack-secret-key
 RESEND_API_KEY=re_your-resend-api-key
 ```
 
-Order submission also expects an `orders` table compatible with the fields used
-by the application and a Supabase Storage bucket named `order-files`. Configure
-the required database and storage policies in Supabase for your environment.
-Configure the Paystack webhook to send `charge.success` and `charge.failed`
-events to `https://<your-domain>/api/webhooks/paystack`. Ensure your Supabase
-RLS policies authorize the anon role for the payment order reads and status
-updates. `RESEND_API_KEY` is used to send payment receipt emails. Keep the
-Paystack and Resend secret keys server-side and do not commit `.env.local`.
+Keep `PAYSTACK_SECRET_KEY` and `RESEND_API_KEY` server-side. Never use a Paystack or Resend secret key as a public `NEXT_PUBLIC_*` variable.
 
-### Product prices and dashboard settings
+### 3. Apply Supabase migrations
 
-Apply `supabase/migrations/20261122000000_product_pricing.sql` to the Supabase
-project in the SQL Editor before using the product configurator or the admin
-Settings page. It creates the public-readable product pricing table, seeds the
-current product rates, and restricts price changes to dashboard admins.
+Run the migrations with the Supabase CLI:
 
-The dashboard Settings page sends password-reset emails to the selected user.
-Add `https://<your-domain>/dashboard/reset-password` (and the local development
-URL when testing) to Supabase Authentication's allowed redirect URLs.
+```bash
+supabase db push
+```
 
-### Run the development server
+The migrations add:
+
+- Dynamic product-pricing settings and public read policies
+- Admin-only product-pricing updates
+- Collection dates, substations, payment fields, and payment references on orders
+- Collection capacity controls for dashboard staff
+- Order and collection-capacity update policies
+
+If you do not use the Supabase CLI locally, run both SQL files from `supabase/migrations/` in the SQL Editor in chronological filename order.
+
+The application also expects existing `profiles` and `orders` tables with the fields used by the dashboard and checkout pages.
+
+### 4. Configure Supabase Storage
+
+Create a Storage bucket named:
+
+```text
+order-files
+```
+
+Grant it the upload and read policies required by your Supabase environment. Checkout uploads files through the Supabase Storage API using the public Supabase URL and anon key.
+
+### 5. Configure authentication redirects
+
+Add these URLs to Supabase Auth redirect allowlists:
+
+```text
+http://localhost:3000/dashboard/reset-password
+https://<your-domain>/dashboard/reset-password
+```
+
+The reset-password page is used when an administrator sends a password-reset email from dashboard Settings.
+
+### 6. Configure the Paystack webhook
+
+Add this webhook endpoint to the Paystack dashboard:
+
+```text
+https://<your-domain>/api/webhooks/paystack
+```
+
+The webhook expects signed `charge.success` and `charge.failed` events. Successful payments are also verified server-side before the order is marked completed.
+
+### 7. Start the app
 
 ```bash
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+Open [http://localhost:3000](http://localhost:3000).
+
+## Supabase local development
+
+The repository includes `supabase/config.toml` for the Supabase CLI. To start the local stack:
+
+```bash
+supabase start
+```
+
+Then use the local API URL and anon key printed by the CLI in `.env.local`.
+
+To stop the local stack:
+
+```bash
+supabase stop
+```
 
 ## Available scripts
 
-| Command          | Description                        |
-| ---------------- | ---------------------------------- |
-| `npm run dev`    | Start the local development server |
-| `npm run build`  | Create a production build          |
-| `npm run start`  | Serve the production build         |
-| `npm run format` | Format project files with Prettier |
+| Command          | Description                                         |
+| ---------------- | --------------------------------------------------- |
+| `npm run dev`    | Start the Next.js development server with Turbopack |
+| `npm run build`  | Create a production build                           |
+| `npm run start`  | Serve the production build                          |
+| `npm run format` | Format project files with Prettier                  |
 
-## Main routes
+## Routes
 
-| Route                 | Description                                   |
-| --------------------- | --------------------------------------------- |
-| `/`                   | Landing page                                  |
-| `/products`           | Product catalog and configuration             |
-| `/checkout/[gid]`     | Checkout flow for a cart-created order        |
-| `/checkout`           | Currently redirects to the landing page       |
-| `/dashboard/settings` | Admin product prices and password-reset tools |
+| Route                       | Description                              |
+| --------------------------- | ---------------------------------------- |
+| `/`                         | Storefront landing page                  |
+| `/products`                 | Product selection and configuration      |
+| `/checkout/[gid]`           | Checkout and order submission            |
+| `/receipt/[gid]`            | Order receipt                            |
+| `/dashboard/login`          | Dashboard login                          |
+| `/dashboard`                | Redirects to the role-specific dashboard |
+| `/dashboard/admin`          | Admin overview and analytics             |
+| `/dashboard/cashier`        | Cashier order view                       |
+| `/dashboard/customers`      | Aggregated customer records              |
+| `/dashboard/users`          | Dashboard user creation                  |
+| `/dashboard/settings`       | Product pricing and password resets      |
+| `/dashboard/reset-password` | Password reset form                      |
 
-## Project layout
+`/checkout` redirects to the landing page. Active checkout sessions are created from the cart at `/checkout/[gid]`.
+
+## Main API and server routes
+
+| Route                         | Purpose                                                         |
+| ----------------------------- | --------------------------------------------------------------- |
+| `POST /api/orders/cancel`     | Cancel an unpaid order and validate a signed cancellation token |
+| `POST /api/webhooks/paystack` | Process signed Paystack payment events                          |
+
+Receipt emails are generated and sent by the `sendEmail` server action after successful payment verification.
+
+## Project structure
 
 ```text
 src/
   app/
-    Sections/       Landing-page sections and footer
-    products/       Product catalog and configuration
-    checkout/       Order details, uploads, and submission flow
-  components/       Navigation and cart components/state
-  constants/        Product and site content
-  supabase-client.ts
-public/             Images and other static assets
+    (main)/             Storefront, checkout, receipts, and APIs
+    dashboard/          Authentication and role-based management UI
+  components/           Shared navigation, cart, receipt, and preload components
+  constants/            Navigation, service, and Nigeria location data
+  lib/                  Supabase server client and Paystack utilities
+  utills/               Browser storage helpers
+  supabase-client.ts    Browser Supabase client
+supabase/
+  migrations/           Database migrations
+  config.toml           Supabase local project configuration
+public/                 Product images and static assets
+offline-db/             Local order export or offline-data assets
 ```
 
-## Development notes
+## Dashboard roles
 
-- Order submission uses the public Supabase URL and anon key configured above.
-- The checkout flow stores order details and uploaded artwork in Supabase.
-- Successful card payments are verified with Paystack and update the order to
-  `completed`; signed webhooks also process successful and failed payments.
-- Closing the Paystack popup marks an unpaid order `cancelled` and returns the
-  customer to the home page.
-- The default checkout route (`/checkout`) is not the active order flow;
-  checkout sessions are created from the cart at `/checkout/[gid]`.
+The dashboard expects a `profiles` row linked to the authenticated Supabase user.
 
-This README describes the current implementation and will need updating as
-features and backend requirements evolve.
+```text
+role = "admin"    # Full dashboard, settings, and user management
+role = "cashier"  # Order review and cashier operations
+```
+
+Route protection is enforced in both the Next.js proxy and dashboard server pages. Database policies should continue to restrict writes to the appropriate role.
